@@ -26,6 +26,8 @@ Syntax highlighted code block
 [Link](https://www.wolframalpha.com) and ![Image](https://github.com/smailliwniloc/smailliwniloc.github.io/blob/e0f0f78b1bf16f730d37d277db17e90addb1eafe/Periodic%20Green's%20Function%20(Improved).jpg) <img src="Periodic Green's Function (Improved).jpg">
 ```
 
+[Link](https://www.wolframalpha.com) and ![Image](https://github.com/smailliwniloc/smailliwniloc.github.io/blob/e0f0f78b1bf16f730d37d277db17e90addb1eafe/Periodic%20Green's%20Function%20(Improved).jpg) <img src="Periodic Green's Function (Improved).jpg">
+
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
 ### Jekyll Themes
