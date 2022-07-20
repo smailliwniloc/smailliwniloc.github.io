@@ -1,4 +1,4 @@
-# This is a list of games I have played
+# This is a list of games I have played *IN PROGRESS*
 
 ## Nintendo Switch
 
@@ -18,3 +18,8 @@
 * [Super Mario Odyssey](https://www.nintendo.com/store/products/super-mario-odyssey-switch/)
 * [Mario Kart 8 Deluxe](https://www.nintendo.com/store/products/mario-kart-8-deluxe-switch/)
 * [The Legend of Zelda: Breath of the Wild](https://www.nintendo.com/store/products/the-legend-of-zelda-breath-of-the-wild-switch/)
+
+## Tabletop Games
+
+* [Dungeons & Dragons 5^th^ edition](https://dnd.wizards.com/products/starter-set)
+* [Munchkin](https://munchkin.game/)
