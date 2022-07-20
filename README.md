@@ -3,6 +3,7 @@
 [gaming]: /gaming "My game collection"
 [newPage]: /newPage "Some random page"
 [ksuMath]: https://www.math.ksu.edu/ "K-State Math Homepage"
+[github]: https://github.com/smailliwniloc "My GitHub Page"
 
 [Comment]: # (Here is the start of the actual page content)
 
@@ -10,12 +11,13 @@
 
 ## About Me
 I'm currently finishing my Master's in Mathematics at [Kansas State University][ksuMath]. My areas of interest are: 
+* Scattering Theory
+* Geometric Analysis
+* Harmonic Analysis
+* Functional Analysis
+* Machine Learning
 
-[New page...][newPage]
-[Check out my gaming library][gaming]
+Outside of math, I have started working on several programming projects as well. Most of these are available on my [GitHub Homepage][github], and include some Python game development, coding challenges, and my work on this page. I'm not much of an athlete, but I do run from time to time. At some point, I plan on adding a collection of my races and times on a [page][newPage] here. I'm also a pretty big Nintendo and tabletop gaming fan so you can [check out my gaming library][gaming] on here as well. 
 
 
-<a class="block mt-4 border rounded p-3 border-brand-interface-primary hover:border-brand transition" href="/gaming">
-  <h3 class="text-xl font-bold text-brand-text-secondary mb-1">Athena</h3>
-  <p class="text-brand-text-primary">A place for encrypted notes, lists and reminders.</p>
-</a>
+
