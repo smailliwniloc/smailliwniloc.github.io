@@ -21,5 +21,5 @@
 
 ## Tabletop Games
 
-* [Dungeons & Dragons 5^th^ edition](https://dnd.wizards.com/products/starter-set)
+* [Dungeons & Dragons 5<sup>th</sup> edition](https://dnd.wizards.com/products/starter-set)
 * [Munchkin](https://munchkin.game/)
