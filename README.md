@@ -19,4 +19,4 @@ This site will use the layout and styles from the Jekyll theme I have selected i
 Having trouble with Pages? Check out [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
 
 
-[ref]: /newPage.md "This can also use hover text"
+[ref]: /newPage "This can also use hover text"
