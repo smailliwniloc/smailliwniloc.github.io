@@ -5,7 +5,7 @@
 
 
 
-[New page...](/newPage.md "Here is a new page you go to")
+[New page...](./newPage "Here is a new page you go to")
 [This time I am referencing it later in the .md file][ref]
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
