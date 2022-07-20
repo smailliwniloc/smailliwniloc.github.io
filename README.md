@@ -1,7 +1,7 @@
 [Comment]: # (Below is a list of reference links to be used in the markdown file)
 
 [gaming]: /gaming "My game collection"
-[newPage]: /newPage "Some random page"
+[running]: /running "This is currently empty"
 [ksuMath]: https://www.math.ksu.edu/ "K-State Math Homepage"
 [github]: https://github.com/smailliwniloc "My GitHub Page"
 
