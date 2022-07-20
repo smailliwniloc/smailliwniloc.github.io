@@ -1,23 +1,8 @@
-# Hi Emily <3
+# Welcome to my page
 
-## Welcome to the page
 
-### Code Stuff
 
-Here are some code snippets
-
-```python
-# Syntax highlighted code block
-
-def fib(n):
-	if(n == 0 or n == 1):
-		return n
-	else:
-		return fib(n-2) + fib(n-1)
-
-```
-
-[Link](https://www.wolframalpha.com)
+[New page](./newPage)
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
