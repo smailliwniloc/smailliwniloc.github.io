@@ -1,0 +1,218 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Analysis HW 7}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let $f_n: \mathbb{R} \to \mathbb{R}$ be defined by 
+\begin{align*}
+f_n(x) = \begin{cases}
+\sin^2\left(\frac{\pi}{x}\right), &\frac{1}{n + 1} \leq x \leq \frac{1}{n}\\
+0, &\text{otherwise.}
+\end{cases}
+\end{align*}
+Prove that the sequence $f_n(x)$ converges pointwise, but not uniformly, to a continuous function. Prove that the series $\sum_{n = 1}^\infty f_n(x)$ converges absolutely, but not uniformly. 
+
+\begin{proof}$ $
+\\I claim that $f_n(x) \to 0$ as $n \to \infty$ for all $x \in \mathbb{R}$. If $x \leq 0$, then $f_n(x)$ is the constant zero sequence. If $x > 1$, then $f_n(x)$ is also the constant zero sequence. If $x \in (0, 1]$, then by taking $N = \lceil 1/x \rceil + 1$, we have
+\begin{align*}
+f_N(x) = \begin{cases}
+\sin^2\left(\frac{\pi}{x}\right), & \frac{1}{\lceil 1/x \rceil + 2} \leq x \leq \frac{1}{\lceil 1/x \rceil + 1}\\
+0,  &\text{otherwise}
+\end{cases}
+\end{align*}
+Notice the first case never occurs so we have that $f_N(x) = 0$. This also holds true for all $n \geq N$. Therefore, if we fix some $r > 0$, we can see that $|f_n(x) - 0| = 0 < r$ for all $n \geq N$. Since this can be done for all $x \in (0, 1]$ (and trivially for all $x \leq 0$ and all $x > 1$), then we have that $f_n$ converges pointwise to the zero function which is trivially continuous. However, for uniform convergence, we need to examine the difference
+\begin{align*}
+||f_n - 0|| = ||f_n|| = \sup_{x \in \mathbb{R}} \{|f_n(x)|\}
+\end{align*}
+Notice that this supremum is equal to 1, since $\sin^2\left(\frac{\pi}{x}\right)$ is equal to 1 for at least one $x \in \left[\frac{1}{n + 1}, \frac{1}{n}\right]$, namely choosing $x$ of the form $\frac{2}{2n + 1}$ which is easily seen to be inside the desired interval and makes $f_n$ evaluate to one. Therefore, 
+\begin{align*}
+\lim_{n \to \infty} ||f_n - 0|| = \lim_{n \to \infty} 1 = 1
+\end{align*}
+Since this limit does not converge to zero, we can say that $f_n$ does NOT converge to zero uniformly. 
+\\
+\\Next, notice that $f_n$ is a sequence of non-negative functions. Therefore, if we can simply show that the series of $f_n$'s converges, then it automatically converges absolutely. Consider the partial sum
+\begin{align*}
+S_N(x) = \sum_{n = 1}^N f_n(x)
+\end{align*}
+Notice that each $f_n$ is not identically zero in distinct open intervals since $\left(\frac{1}{n + 1}, \frac{1}{n}\right) \cap \left(\frac{1}{m + 1}, \frac{1}{m}\right) \neq \emptyset$ if and only if $n = m$. Furthermore, the endpoints of these intervals agree only if $n$ and $m$ are adjacent to one another. However, notice that at any point $x$ which could be the endpoint of an interval, we have
+\begin{align*}
+f_n(x) = f_n\left(\frac{1}{n}\right) = \sin^2\left(\frac{\pi}{1/n}\right) = \sin^2(n\pi) = 0
+\end{align*}
+and similarly for $x = 1/(n+1)$. Therefore, when taking the summation of the $f_n$'s, there is at most one function who is non-zero for each distinct $x \in \mathbb{R}$. Therefore, we can explicitly write the partial sum as 
+\begin{align*}
+S_N(x) = \begin{cases}
+\sin^2\left(\frac{\pi}{x}\right), & \frac{1}{N + 1} \leq x \leq 1\\
+0, &\text{otherwise.}
+\end{cases}
+\end{align*}
+It is clear that as $N \to \infty$ we have
+\begin{align*}
+\lim_{N \to \infty} S_N(x) = S(x) := \begin{cases}
+\sin^2\left(\frac{\pi}{x}\right), &0 < x \leq 1\\
+0, &\text{otherwise}.
+\end{cases}
+\end{align*}
+This is clear for any $x \not \in (0, 1]$. For $x \in (0, 1]$, let us fix some $r > 0$, then for $M = \lfloor 1/x \rfloor$, we have for any $N \geq M$: 
+\begin{align*}
+|S_N(x) - S(x)| = \left|\sin^2\left(\frac{\pi}{x}\right) - \sin^2\left(\frac{\pi}{x}\right)\right| = 0 < r
+\end{align*}
+This shows that $S_N$ converges to $S$ pointwise which in turns means that $\sum_{n = 1}^\infty f_n(x)$ converges absolutely when considering the earlier comments. However, for uniform convergence, consider the difference
+\begin{align*}
+||S_N - S|| = \sup_{x \in \mathbb{R}} |S_N(x) - S(x)|
+\end{align*}
+Notice this supremum is attained when $S_N(x) = 0$ and when $S(x) = 1$. A point where this occurs is at $x = \frac{2}{2N + 3}$ since this $x$ is less than $\frac{1}{N + 1}$ and $\sin^2\left(\frac{\pi}{x}\right)$ is equal to one at this $x$. Therefore, 
+\begin{align*}
+\lim_{N \to \infty} ||S_N - S|| = \lim_{N \to \infty} 1 = 1
+\end{align*}
+Since this limit does not converge to zero, we can say that $S_N$ does NOT converge to $S$ uniformly. 
+\end{proof}
+
+\section*{Question 2}
+Let $(X, d)$ be a compact metric space, and let $f_n: X \to \mathbb{R}$ be a sequence of continuous functions such that the series $\sum_{n = 1}^\infty f_n(x)$ is absolutely convergent. Prove that if $\sum_{n = 1}^\infty |f_n(x)|$ is continuous, then so is $\sum_{n = 1}^\infty f_n(x)$. 
+
+\begin{proof}$ $
+\\Define $S_N: X \to \mathbb{R}$ as 
+\begin{align*}
+S_N(x) = \sum_{n = 1}^N |f_n(x)|.
+\end{align*}
+Note that each $f_n$ is continuous, so each $|f_n|$ is also continuous. Thus, since $S_N$ is the finite sum of continuous functions, each $S_N$ is continuous on $X$. Furthermore, each $|f_n|$ is a non-negative function, so $S_N(x)$ is clearly a monotonic sequence. By assumption $S := \lim_{N \to \infty} S_N$, is a continuous function on $X$. Therefore, by using that $X$ is compact, then by a Theorem proved in class, this means that $S_N$ converges to $S$ uniformly. We have also shown that this is equivalent to the sequence $S_N$ being a Cauchy Sequence, i.e. given some $r > 0$, we have some $K$ such that 
+\begin{align*}
+|S_M - S_N| < r
+\end{align*}
+for all $M \geq N \geq K$. Using this, we have
+\begin{align*}
+\left| \sum_{n = 1}^M f_n(x) - \sum_{n = 1}^N f_n(x) \right| &= \left| \sum_{n = N + 1}^M f_n(x) \right|\\
+&\leq \sum_{n = N + 1}^M |f_n(x)|\\
+&= \sum_{n = 1}^M |f_n(x)| - \sum_{n = 1}^N |f_n(x)|\\
+&= \left| \sum_{n = 1}^M |f_n(x)| - \sum_{n = 1}^N |f_n(x)| \right|\\
+&= |S_M - S_N|\\
+&< r
+\end{align*}
+Therefore, we have that $\sum_{n = 1}^\infty f_n(x)$ is a Cauchy sequence; thus, uniformly convergent. Thus, by defining 
+\begin{align*}
+T_N = \sum_{n = 1}^N f_n(x)
+\end{align*}
+we have that each $T_N$ is a continuous function as it is the finite sum of continuous functions. Furthermore, we have shown that $T_N$ is a Cauchy sequence. Therefore, by a Theorem proven in class, we know that
+\begin{align*}
+\lim_{N \to \infty} T_N = \sum_{n = 1}^\infty f_n(x)
+\end{align*}
+is a continuous function, finishing the proof. 
+\end{proof}
+
+\section*{Question 3}
+Let $f: \mathbb{R} \to \mathbb{R}$ be given. Assume that the sequence $f_n(x) = f(nx)$ is equicontinuous. What can you say about $f(x)$?
+
+\begin{answer*}$ $
+\\By definition of equicontinuity, we have that for $x \in \mathbb{R}$ and every $r > 0$, there exists some $s > 0$ such that $|x - y| < s$ implies that $|f_n(x) - f_n(y)| < r$ for all $n \in \mathbb{N}$. I claim that this means $f$ is a constant function. 
+\end{answer*}
+
+\begin{proof}$ $
+\\Assume that $f$ is not a constant function. This means that there exist some $x \neq y \in \mathbb{R}$ such that $f(x) \neq f(y)$, i.e. that $|f(x) - f(y)| = r > 0$. However, by equicontinuity, we can say that there exists some $s > 0$ such that $|x_0 - y_0| < s$ implies $|f_n(x_0) - f_n(y_0)| < r$ for all $n$. In particular, choose 
+\begin{align*}
+x_0 = \frac{x}{n} \qquad \qquad \qquad  y_0 = \frac{y}{n}\\
+\implies |x_0 - y_0| = \frac{1}{n}|x - y|
+\end{align*}
+Thus, choosing $n = \lceil |x - y|/s \rceil$, we have that this particular choice of $x_0$ and $y_0$ satisfies $|x_0 - y_0| < s$ which then gives
+\begin{align*}
+r > |f_n(x_0) - f_n(y_0)| &= \left| f_n\left(\frac{x}{n}\right) - f_n\left(\frac{y}{n}\right) \right|\\
+&= |f(x) - f(y)|.
+\end{align*}
+We just obtained that $|f(x) - f(y)| < r$, but $r$ was defined to be equal to $|f(x) - f(y)|$ and a quantity can't be strictly less than itself, so we have a contradiction. Therefore, our assumption that $f$ was non-constant was incorrect. Therefore, $f$ is a constant function. 
+\end{proof}
+
+\section*{Question 4}
+Let $P_n(x)$ be a sequence of polynomials: $P_n(x) = a_n + b_nx + c_nx^2 + d_nx^3$, where $\sup\{|a_n|, |b_n|, |c_n|, |d_n| : n \in \mathbb{N}\} \leq 1$. Prove that if the sequence $P_n(x)$ converges pointwise on $[0, 1]$, then it converges uniformly on $[0, 1]$.
+
+\begin{proof}$ $
+\\Assume that $P_n \to P$ pointwise as $n \to \infty$. This means that 
+\begin{align*}
+\lim_{n \to \infty} |P_n(x) - P(x)| = 0
+\end{align*}
+for every $x \in [0, 1]$. In particular, for $x = 0$, we have that 
+\begin{align*}
+P_n(0) = a_n
+\end{align*}
+is a convergent sequence. Therefore, $a_n$ is a convergent sequence. Next, consider $x = 1$ which gives
+\begin{align*}
+P_n(1) &= a_n + b_n + c_n + d_n\\
+\implies P_n(1) - P_n(0) &= b_n + c_n + d_n
+\end{align*}
+Therefore, $B_n := b_n + c_n + d_n$ is a convergent sequence since linear combinations of convergent sequences are convergent. Next, consider $x = \frac{1}{2}$ which gives
+\begin{align*}
+P_n\left(\frac{1}{2}\right) &= a_n + \frac{b_n}{2} + \frac{c_n}{4} + \frac{d_n}{8}\\
+\implies P_n\left(\frac{1}{2}\right) - a_n - \frac{1}{8}B_n &= \frac{3}{8}b_n + \frac{1}{8}c_n
+\end{align*}
+Thus, $C_n := \frac{3}{8}b_n + \frac{1}{8}c_n$ is a convergent sequence. Lastly, consider $x = \frac{1}{3}$ which gives
+\begin{align*}
+P_n\left(\frac{1}{3}\right) &= a_n + \frac{b_n}{3} + \frac{c_n}{9} + \frac{d_n}{27}\\
+\implies P_n\left(\frac{1}{3}\right) - a_n - \frac{1}{27}B_n &= \frac{8}{27}b_n + \frac{2}{27}c_n
+\end{align*}
+Thus, $D_n := \frac{8}{27}b_n + \frac{2}{27}c_n$ is a convergent sequence. Using this, we can get
+\begin{align*}
+12 \bigg[\frac{8}{3}C_n - \frac{27}{8}D_n\bigg] = 12 \bigg[ b_n + \frac{1}{3}c_n - b_n - \frac{1}{4}c_n \bigg] = c_n
+\end{align*}
+which means that $c_n$ is a convergent sequence. Also, 
+\begin{align*}
+\frac{8}{3}\bigg[ C_n - \frac{1}{8}c_n \bigg] = \frac{8}{3} \cdot \frac{3}{8}b_n = b_n
+\end{align*}
+so that $b_n$ is also a convergent sequence. Lastly, 
+\begin{align*}
+B_n - b_n - c_n = d_n
+\end{align*}
+so we get that $d_n$ is a convergent sequence. Let us say that $a_n \to A, b_n \to B, c_n \to C, d_n \to D$ as $n \to \infty$. Therefore, if we fix some $r > 0$, then there exists some $N_1, N_2, N_3$ and $N_4 \in \mathbb{N}$ such that
+\begin{align*}
+|a_n - A| < \frac{r}{4} &\text{ for all } n \geq N_1 & |b_n - B| < \frac{r}{4} &\text{ for all } n \geq N_2\\
+|c_n - C| < \frac{r}{4} &\text{ for all } n \geq N_3 & |d_n - D| < \frac{r}{4} &\text{ for all } n \geq N_4
+\end{align*}
+which also gives
+\begin{align*}
+\lim_{n \to \infty} P_n(x) = \lim_{n \to \infty} a_n + b_n x + c_n x^2 + d_n x^3 = A + Bx + Cx^2 + Dx^3 = P(x)
+\end{align*}
+Therefore if we note that $||x|| = ||x^2|| = ||x^3|| = 1$ over the domain $[0, 1]$, we get that for all $n \geq \max\{N_1, N_2, N_3, N_4\}$:
+\begin{align*}
+||P_n(x) - P(x)|| &= ||(a_n - A) + (b_n - B)x + (c_n -  C)x^2 + (d_n - D)x^3||\\
+&\leq |a_n - A| + |b_n - B| \; ||x|| + |c_n - C| \; ||x^2|| + |d_n - D| \; ||x^3||\\
+&= |a_n - A| + |b_n - B| + |c_n - C| + |d_n - D|\\
+&< \frac{r}{4} + \frac{r}{4} + \frac{r}{4} + \frac{r}{4}\\
+&= r.
+\end{align*}
+Thus, we get that $P_n \to P$ uniformly on $[0, 1]$ as $n \to \infty$. 
+\end{proof} 
+
+Note that this proof was a bit clunky with tedious calculations and never in fact used that the coefficients $a_n, b_n, c_n, d_n$ were bounded. A more elegant, albeit less constructive, way of approaching this problem would be as was done in class where we first show that $P_n$ is equicontinuous for each $n$ (which does use the boundedness of the coefficients), then apply the so-called ``Adaptation" of the Arzela-Ascoli Theorem which says if we have a sequence of equicontinuous functions which converge pointwise on a compact space (which $[0, 1]$ is compact), then we have that this sequence converges uniformly to a uniformly continuous function. The meat of this proof would simply be showing that a sequence of polynomials with bounded coefficients is equicontinuous which was done for degree 2 polynomials in class and would generalize to degree 3 polynomials with only slight modification. 
+
+
+
+\end{document}

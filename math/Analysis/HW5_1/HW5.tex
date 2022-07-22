@@ -1,0 +1,301 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Analysis HW 5}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Give an example of a function $f: \mathbb{R} \to \mathbb{R}$ which is twice differentiable and such that 
+\begin{enumerate}[label = (\alph*)]
+\item $f''$ is not continuous.
+	\begin{itemize}
+	\item Consider the function
+	\begin{align*}
+	f(x) = \begin{cases}
+	x^4 \sin\left(\frac{1}{x}\right), & x \neq 0\\
+	0, & x = 0
+	\end{cases}
+	\end{align*}
+	\item We can evaluate the derivative for all $x \neq 0$ using a series of chain rules and product rules to get
+	\begin{align*}
+	f'(x) = 4x^3 \sin\left(\frac{1}{x}\right) - x^2 \cos\left(\frac{1}{x}\right) \qquad x \neq 0
+	\end{align*}
+	When $x = 0$, we can evaluate the derivative by looking at the limit
+	\begin{align*}
+	\lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{x^4 \sin\left(\frac{1}{x}\right)}{x} = \lim_{x \to 0} x^3 \sin\left(\frac{1}{x}\right) \leq \lim_{x \to 0} \left| x^3 \sin\left(\frac{1}{x}\right)\right| \leq \lim_{x \to 0} |x^3| = 0
+	\end{align*}
+	In particular, we get that the absolute value of our derivative is zero, which means that the derivative itself is $f'(0) = 0$. Comparing this with $f'(x)$ for $x \neq 0$ we see that the function
+	\begin{align*}
+	f'(x) = \begin{cases}
+	4x^3 \sin\left(\frac{1}{x}\right) - x^2 \cos\left(\frac{1}{x}\right) & x \neq 0\\
+	0 & x =0
+	\end{cases}
+	\end{align*}
+	is continuous since $\lim_{x \to 0} x^3 \sin(1/x)$ and $\lim_{x \to 0} x^2 \cos(1/x)$ are both equal to zero. 
+	\item We can once again use our rules from calculus to calculate the derivative when $x \neq 0$ to get
+	\begin{align*}
+	f''(x) &= 12x^2 \sin\left(\frac{1}{x}\right) - 4x\cos\left(\frac{1}{x}\right) - 2x\cos\left(\frac{1}{x}\right) - \sin\left(\frac{1}{x}\right) &x \neq 0\\
+	&= 12x^2 \sin\left(\frac{1}{x}\right) - 6x\cos\left(\frac{1}{x}\right) - \sin\left(\frac{1}{x}\right) &x \neq 0
+	\end{align*}
+	When $x = 0$, we can use the definition of the derivative and calculate the limit as
+	\begin{align*}
+	\lim_{x \to 0} \frac{f'(x) - f'(0)}{x - 0} = \lim_{x \to 0} \frac{4x^3 \sin\left(\frac{1}{x}\right) - x^2\cos\left(\frac{1}{x}\right)}{x} &= \lim_{x \to 0} 4x^2 \sin\left(\frac{1}{x}\right) - x \cos\left(\frac{1}{x}\right)\\
+	&\leq \lim_{x \to 0} \left| 4x^2 \sin\left(\frac{1}{x}\right) - x \cos\left(\frac{1}{x}\right)\right|\\
+	&\leq \lim_{x \to 0} \left|4x^2 \sin\left(\frac{1}{x}\right) \right| + \lim_{x \to 0} \left|x \cos\left(\frac{1}{x}\right)\right|\\
+	&\leq \lim_{x \to 0} |4x^2| + \lim_{x \to 0} |x|\\
+	&= 0
+	\end{align*}
+	In particular, the limits before taking absolute values must also be zero meaning the derivative itself is $f''(0) = 0$. Therefore, we can see that $f''$ exists for all $x \in \mathbb{R}$. Therefore, $f$ is indeed twice differentiable. However, Notice that 
+	\begin{align*}
+	\lim_{x \to 0} f''(x)
+	\end{align*}
+	does not exist because of the term $\sin(1/x)$. Therefore, $f''$ is not continuous at $x = 0$, meaning it is not continuous on $\mathbb{R}$. 
+	\end{itemize}
+\item $f''$ is continuous, but not differentiable
+	\begin{itemize}
+	\item Consider the function
+	\begin{align*}
+	f(x) = x^2|x|
+	\end{align*}
+	\item We can see that $f$ can be piecewise defined as 
+	\begin{align*}
+	f(x) = \begin{cases}
+	-x^3 &\text{ for } x < 0\\
+	x^3 &\text{ for } x \geq 0
+	\end{cases}
+	\end{align*}
+	\item Since a function can only be differentiable when defined in an open set, we can use this above representation to find the derivative for all $x \neq 0$ by simply using the power rule from Calc I. In this manner, we get
+	\begin{align*}
+	f'(x) = \begin{cases}
+	-3x^2 &\text{ for } x < 0\\
+	3x^2 &\text{ for } x > 0
+	\end{cases} \qquad = 3x|x| \qquad \forall \; x \neq 0
+	\end{align*}
+	Also, at the point $x = 0$, we have
+	\begin{align*}
+	\lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{x^2|x|}{x} = \lim_{x \to 0} x|x| = 0 \implies f'(0) = 0
+	\end{align*}
+	Thus, the derivative at all other points agrees with the derivative at zero, so we can continuously define $f'(x) = 3x|x|$ for all $x \in \mathbb{R}$. 
+	\item Next, I will show that $f'$ is differentiable, i.e. that $f$ is twice differentiable. Note, we have done this example in class (up to a factor of 3). In class we obtained that $g(x) = x|x|$ is differentiable with derivative of $g'(x) = 2|x|$ for all $x \in \mathbb{R}$. Thus, since the constant multiple of a differentiable function is differentiable (with derivative scaled accordingly), then we get that $f$ is twice differentiable with second derivative $f''(x) = 6|x|$ for all $x \in \mathbb{R}$. This function is clearly continuous, but we have shown before that $|x|$ is not differentiable at 0, so $f''$ is not differentiable at zero either. 
+	\item Therefore, $f$ is twice differentiable with a continuous but not differentiable second derivative.  
+	\end{itemize}
+\end{enumerate}
+
+\section*{Question 2}
+Let $f: (a, b) \to \mathbb{R}$ be differentiable and such that $f'(x) > 0$ in $(a, b)$. Prove
+\begin{enumerate}[label = (\alph*)]
+\item $f$ is injective. 
+\item $f((a, b))$ is an open interval.
+\item $f^{-1}: f((a, b)) \to \mathbb{R}$ is differentiable.
+\end{enumerate}
+
+\begin{proof}
+$ $
+\begin{enumerate}[label = (\alph*)]
+\item Assume that $f$ is not injective. In other words, there exists some $x_0, y_0 \in (a, b)$ such that $f(x_0) = f(y_0)$ and $x_0 \neq y_0$. WLOG, assume that $x_0 < y_0$. This means that $(x_0, y_0) \subset (a, b)$. Thus, since $f$ is differentiable on $(a, b)$ it must continuous on $[x_0, y_0]$ and differentiable on $(x_0, y_0)$. Therefore, by Rolle's Theorem, we can say that there exists some $c \in (x_0, y_0)$ such that $f'(c) = 0$. This is a contradiction, however, to the fact that $f'(x) > 0$ for all $x \in (a, b)$. Therefore, $f$ must be injective. 
+\item I will first show that $f$ is an increasing function on $(a, b)$. Let $a_1$ and $a_2$ be two arbitrary points in $(a, b)$ such that $a_1 < a_2$. Then, by the differentiability of $f$ on $(a, b)$, we have that $f$ is continuous on $[a_1, a_2]$ and differentiable on $(a_1, a_2)$. Thus, we can apply the Mean Value Theorem to conclude the existence of a $c \in (a_1, a_2)$ such that 
+\begin{align*}
+f'(c) = \frac{f(a_2) - f(a_1)}{a_2 - a_1}
+\end{align*}
+Notice that since $f'(x) > 0$ for all $x \in (a,b)$, we have that $f'(c) > 0$. Also, since $a_1 < a_2$, we have that $a_2 - a_1 > 0$. Thus, for the equality above to hold true, we must have that the numerator is also positive, i.e. $f(a_2) - f(a_1) > 0 \implies f(a_1) < f(a_2)$. Therefore, for any two points in $(a, b)$, $f$ maps the larger input to the larger output, meaning $f$ is monotonically increasing. Furthermore, since $f$ is continuous on $(a, b)$ and $(a, b)$ is connected, then $f((a, b))$ is connected. Thus, since the only connected subsets of $\mathbb{R}$ are intervals, we know that $f((a, b))$ must be an interval. Next, define the following constants in the extended real line:
+\begin{align*}
+m = \lim_{x \to a^+} f(x) && M = \lim_{x \to b^-} f(x)
+\end{align*}
+if $f$ is defined continuously at its endpoints, then $m = f(a)$ and $M = f(b)$. Regardless, since $f$ is monotonically increasing, we know that $m$ is the infimum and $M$ is the supremum of the interval $f((a, b))$. Furthermore, the infimum and supremum of $f((a, b))$ are never attained. To see this, assume there is a point $x_0 \in (a, b)$ such that $f(x_0) = m$. However, since $a < (a + x_0)/2 < x_0$, we have $f((a + x_0)/2) < f(x_0) = m$ which is a contradiction to $m$ being the infimum (this follows equivalently for $M$ as supremum). Therefore, we have precisely the open interval
+\begin{align*}
+f((a, b)) = (m, M).
+\end{align*}
+\item Let's first get an intuitive sense for what the derivative should be. Note that $f(f^{-1}(y)) = y$. Thus, by taking derivatives using the chain rule, we get
+\begin{align*}
+f'(f^{-1}(y)) \frac{d}{dy}(f^{-1}(y)) &= 1\\
+\implies \frac{d}{dy}(f^{-1}(y)) &= \frac{1}{f'(f^{-1}(y))}
+\end{align*}
+Therefore, if the derivative exists, we would expect it to be of this form. Thus, let $y_0 \in f((a, b))$ with $f(x_0) = y_0$ for unique $x_0 \in (a, b)$. Similarly, for any arbitrary $y \in f((a, b))$, we can find a unique $x \in (a, b)$ such that $f(x) = y$. The uniqueness of both of these follows from the result in  part (a). Now, we can examine the limit
+\begin{align*}
+\lim_{y \to y_0} \frac{f^{-1}(y) - f^{-1}(y_0)}{y - y_0} &= \lim_{y \to y_0} \frac{f^{-1}(f(x)) - f^{-1}(f(x_0))}{f(x) - f(x_0)}\\
+&= \lim_{y \to y_0} \frac{x - x_0}{f(x) - f(x_0)}\\
+&= \lim_{y \to y_0} \frac{1}{\frac{f(x) - f(x_0)}{x - x_0}}
+\end{align*}
+Notice as $y \to y_0$, we have that $f(x) \to f(x_0)$ by definition of $y$ and $y_0$. However, since $f$ is continuous and injective, then $f(x) \to f(x_0) \implies x \to x_0$. Therefore, we can change the bounds of the limit to say
+\begin{align*}
+\lim_{y \to y_0} \frac{1}{\frac{f(x) - f(x_0)}{x - x_0}} &= \lim_{x \to x_0} \frac{1}{\frac{f(x) - f(x_0)}{x - x_0}}\\
+&= \frac{1}{\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}}\\
+&= \frac{1}{f'(x_0)}\\
+&= \frac{1}{f'(f^{-1}(y_0))}
+\end{align*}
+Note that this is always well defined since $f'(x) > 0$ for all $x \in (a, b)$ so we are never dividing by zero. Therefore, the derivative of $f^{-1}$ exists at $y_0$ and since that was an arbitrary point of $f((a, b))$, we can say that $f^{-1}$ is differentiable over all of $f((a, b))$. 
+\end{enumerate}
+\end{proof}
+
+\section*{Question 3}
+Let $f: [a, b] \to \mathbb{R}$ be continuously differentiable. Prove that $f$ is \enquote{uniformly differentiable} i.e. that
+for all $r > 0$, there exists some $s > 0$ such that $\forall \; x, y \in [a, b]$
+\begin{align*}
+|x - y| < s \implies \left| \frac{f(x) - f(y)}{x - y} - f'(x)\right| < r
+\end{align*}
+
+\begin{proof}$ $
+\\Let us fix $r > 0$. Note, we have proven that for any continuous function $g: X \to Y$ where $X$ is compact, that $g$ is uniformly continuous. Thus, since $[a, b]$ is compact and $f'$ is continuous, we can conclude that $f' : [a, b] \to \mathbb{R}$ is uniformly continuous. This means that there exists some $s > 0$ such that 
+\begin{align*}
+|x - y| < s \implies |f'(x) - f'(y)| < r
+\end{align*}
+Furthermore, if we consider some $x < y \in [a, b]$, note that since $f$ is differentiable on $[a, b] \supset [x, y]$, we can apply the Mean Value Theorem on $(x, y)$ to conclude that there exists some $c \in (x, y)$ such that 
+\begin{align*}
+f'(c) = \frac{f(x) - f(y)}{x - y}
+\end{align*}
+Therefore, assume that $|x - y| < s$. In particular, since $c \in (x, y)$, we have that $|x - c| < s$. Thus, using the previous results with $c$ instead of $y$, we get
+\begin{align*}
+|f'(c) - f'(x)| < r\\
+\implies \left| \frac{f(x) - f(y)}{x - y} - f'(x) \right| < r.
+\end{align*}
+\end{proof}
+
+\section*{Question 4}
+Let $f: [a, b] \to \mathbb{R}$ be thrice differentiable. Prove that there exists some $c, d \in (a, b)$ such that 
+\begin{align*}
+f(b) - f(a) = \frac{f'(a) + f'(b)}{2}(b - a) - \frac{f'''(c)}{12}(b - a)^3 = f'\left(\frac{a + b}{2}\right)(b - a) + \frac{f'''(d)}{24}(b - a)^3
+\end{align*}
+
+\begin{proof}$ $
+\\Define $k \in \mathbb{R}$ as the constant
+\begin{align*}
+k = \frac{f(b) - f(a) - \frac{f'(a) + f'(b)}{2}(b - a)}{-(b - a)^3}
+\end{align*}
+In particular, $k$ satisfies the following equation:
+\begin{align*}
+f(b) - f(a) = \frac{f'(a) + f'(b)}{2}(b - a) - k(b - a)^3
+\end{align*}
+Define the function $g: [a, b] \to \mathbb{R}$ as follows
+\begin{align*}
+g(t) = f(t) - f(a) - \frac{f'(a) + f'(t)}{2}(t - a) + k(t - a)^3
+\end{align*}
+Notice that $g$ must be twice differentiable since $f$ is thrice differentiable, $f'$ is twice differentiable, and polynomials are infinitely differentiable. Thus, let us examine what happens when $t = a$ or $t = b$:
+\begin{align*}
+g(a) &= f(a) - f(a) - \frac{f'(a) + f'(a)}{2}(a - a) + k(a - a)^3\\
+&= 0\\
+g(b) &= f(b) - f(a) - \frac{f'(a) + f'(b)}{2}(b - a) + k(b - a)^3\\
+&= -k(b - a)^3 + k(b - a)^3\\
+&= 0
+\end{align*}
+Thus, $g(a) = g(b) = 0$, so by Rolle's Theorem, there exists some $c_1 \in (a, b)$ such that $g'(c_1) = 0$. In addition, we get
+\begin{align*}
+g'(t) &= f'(t) - \frac{f''(t)}{2}(t - a) - \frac{f'(a) + f'(t)}{2} + 3k(t - a)^2\\
+\implies g'(a) &= f'(a) - \frac{f''(a)}{2}(a - a) - \frac{f'(a) + f'(a)}{2} + 3k(a - a)^2\\
+&= f'(a) - f'(a)\\
+&= 0
+\end{align*}
+Thus, $g'(a) = g'(c_1) = 0$, so by Rolle's Theorem, there exists some $c_2 \in (a, c_1)$ such that $g''(c_2) = 0$. Using this, we have
+\begin{align*}
+g''(t) &= f''(t) - \frac{f'''(t)}{2}(t - a) - \frac{f''(t)}{2} - \frac{f''(t)}{2} + 6k(t - a)\\
+&= 6k(t - a) - \frac{f'''(t)}{2}(t - a)\\
+\implies 0 &= 6k(c_2 - a) - \frac{f'''(c_2)}{2}(c_2 - a) &\text{using $t = c_2$}\\
+\implies \frac{f'''(c_2)}{2}(c_2 - a) &= 6k(c_2 - a)\\
+\implies \frac{f'''(c_2)}{12} &= k
+\end{align*}
+Therefore, we have proven the existence of the $c = c_2$ in $(a, b)$ such that the following equality holds:
+\begin{align*}
+f(b) - f(a) = \frac{f'(a) + f'(b)}{2}(b - a) - \frac{f'''(c)}{12}(b - a)^3
+\end{align*}
+For the next equality, let $K \in \mathbb{R}$ be the constant defined as
+\begin{align*}
+K = \frac{f(b) - f(a) - f'\left(\frac{a + b}{2}\right)(b - a)}{(b - a)^3}
+\end{align*}
+In other words, $K$ satisfies the following equation
+\begin{align*}
+f(b) - f(a) = f'\left(\frac{a + b}{2}\right)(b - a) + K(b - a)^3
+\end{align*}
+Furthermore, WLOG, we may assume that $a = -b$, i.e. that our domain is a symmetric closed interval. If this is not already the case define $\tilde{f}: \left[\frac{-(b - a)}{2}, \frac{b - a}{2}\right] \to \mathbb{R}$ as
+\begin{align*}
+\tilde{f}(x) = f\left(x + \frac{a + b}{2}\right)
+\end{align*}
+and notice that $f(a) = \tilde{f}\left(\frac{-(b-a)}{2}\right)$ and $f(b) = \tilde{f}\left(\frac{b - a}{2}\right)$. Furthermore, $f'\left(\frac{a + b}{2}\right) = \tilde{f}'(0)$. Therefore replacing all $a$ with $\frac{-(b - a)}{2}$, all $b$ with $\frac{b - a}{2}$ and $f$ with $\tilde{f}$, we get
+\begin{align*}
+K = \frac{f(b) - f(a) - f'\left(\frac{a + b}{2}\right)(b - a)}{(b - a)^3} = \frac{\tilde{f}\left(\frac{b - a}{2}\right) - \tilde{f}\left(\frac{-(b - a)}{2}\right) - \tilde{f}'\left(0\right)\left(\frac{b - a}{2} + \frac{b -a}{2}\right)}{\left(\frac{b - a}{2} + \frac{b -a}{2}\right)^3} = \frac{\tilde{f}\left(\frac{b - a}{2}\right) - \tilde{f}\left(\frac{-(b - a)}{2}\right) - \tilde{f}'\left(0\right)\left(b - a\right)}{\left(b - a\right)^3}
+\end{align*}
+Thus, we see that our problem is equivalent to another problem with symmetric endpoints, so it is fine to assume that $a = -b$, or that our domain is $[-b, b]$ (this is assuming that $b > 0$, but once again can be assumed without loss of generality). With this in mind, we can rephrase our starting expression as
+\begin{align*}
+f(b) - f(-b) &= f'(0)(2b) + K(2b)^3\\
+\implies f(b) - f(-b) &= 2f'(0)b + 8Kb^3
+\end{align*}
+Next, recall that any function $f$ can be expressed as the sum of an even and an odd function, $f_e$ and $f_o$ respectively. Explicitly, these functions can be written as
+\begin{align*}
+f_e(x) = \frac{f(x) + f(-x)}{2} &&\text{ and } && f_o(x) = \frac{f(x) - f(-x)}{2}
+\end{align*}
+It is easy to see that they are even and odd respectively and that their sum is simply $f(x)$. Using this representation, we see that $f(b) - f(-b) = 2f_o(b)$. Thus, we get
+\begin{align*}
+2f_o(b) &= 2f'(0)b + 8Kb^3\\
+\implies f_o(b) &= f'(0)b + 4Kb^3
+\end{align*}
+We are now in good shape to define the function $h: [-b, b] \to \mathbb{R}$ as 
+\begin{align*}
+h(t) = f_o(t) - f'(0)t - 4Kt^3
+\end{align*}
+Notice that $h$ is thrice differentiable since $f_o$ has just as many derivatives as $f$ does (which is three) and polynomials are infinitely differentiable. Thus, if we find distinct zeros of the $h$, we can apply Rolle's Theorem. Notice these zeros are found at 
+\begin{align*}
+h(0) &= f_o(0) - f'(0)(0) - 4K(0)^3\\
+&= f_o(0)\\
+&= \frac{f(0) - f(0)}{2}\\
+&= 0\\
+h(b) &= f_o(b) - f'(0)b - 4Kb^3\\
+&= f'(0)b + 4Kb^3 - f'(0)b - 4Kb^3\\
+&= 0
+\end{align*}
+Thus, we have $h(0) = h(b) = 0$ so by Rolle's Theorem, there exists some $d_1 \in (0, b)$ such that $h'(d_1) = 0$. In addition, we have that 
+\begin{align*}
+h'(t) &= f_o'(t) - f'(0) - 12Kt^2\\
+\implies h'(0) &= f_o'(0) - f'(0) - 12K(0)^2\\
+&= \frac{f'(0) + f'(0)}{2} - f'(0)\\
+&= f'(0) - f'(0)\\
+&= 0
+\end{align*}
+Thus, we have $h'(0) = h'(d_1) = 0$, so by Rolle's Theorem, there exists some $d_2 \in (0, d_1)$ such that $h''(d_2) = 0$. This implies that 
+\begin{align*}
+h''(t) &= f_o''(t) - 24Kt\\
+\implies 0 &= f_o''(d_2) - 24Kd_2\\
+\implies 24Kd_2 &= \frac{f''(d_2) - f''(-d_2)}{2}\\
+\implies 24K &= \frac{f''(d_2) - f''(-d_2)}{2d_2}\\
+\implies 24K &= \frac{f''(d_2) - f''(-d_2)}{d_2 - (-d_2)}
+\end{align*}
+However, notice on the RHS of the last equality, we have precisely the form of the Mean Value Theorem. Thus, since $f''$ is continuous and differentiable on $[-d_2, d_2]$, we can conclude that there exists some $d \in (-d_2, d_2)$ such that 
+\begin{align*}
+f'''(d) &= \frac{f''(d_2) - f''(-d_2)}{d_2 - (-d_2)}\\
+\implies 24K &= f'''(d)\\
+\implies K &= \frac{f'''(d)}{24}
+\end{align*}
+Thus, plugging $K$ back into its defining equation, we get
+\begin{align*}
+f(b) - f(a) = f'\left(\frac{a + b}{2}\right)(b - a) + \frac{f'''(d)}{24}(b - a)^3
+\end{align*}
+\end{proof}
+
+\end{document}

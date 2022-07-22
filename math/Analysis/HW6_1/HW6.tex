@@ -1,0 +1,224 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Analysis HW 6}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let $(X, d)$ be a metric space, and let $f_n : X \to \mathbb{R}$ be a Cauchy sequence of bounded functions. Prove that the sequence is uniformly bounded: $\sup\{||f_n||: n \in \mathbb{N}\} < +\infty$. 
+
+\begin{proof}$ $
+\\Since $\{f_n\}$ is a Cauchy sequence, we know that $f_n \to f$ uniformly for some function $f: X \to \mathbb{R}$. Notice that since $\{f_n\}$ is Cauchy, then by fixing some $x \in X$, $\{f_n(x)\}$ is a Cauchy sequence in $\mathbb{R}$; thus, convergent to some $f(x) \in \mathbb{R}$. This function $f$ is our pointwise limit and must agree with the uniform limit. Thus, since we have uniform convergence, then there exists some $N \in \mathbb{N}$ such that 
+\begin{align*}
+||f_n - f|| < 1 \qquad \forall \; n \geq N
+\end{align*}
+Furthermore, since each function $f_n$ is bounded, we can define $M_n \geq 0$ such that $||f_n|| \leq M_n$ all $n \in \mathbb{N}$. Thus, consider $n \geq N$ and we have
+\begin{align*}
+||f_n|| &= ||f_n - f + f - f_N + f_N||\\
+&\leq ||f_n - f|| + ||f - f_N|| + ||f_N||\\
+&< 1 + 1 + M_N = M_N + 2
+\end{align*}
+Therefore, we have that for all $n \geq N$, each $f_n$ is bounded above by $M_N + 2$. Furthermore, for all $n < N$ we have that $f_n$ is bounded above by its respective $M_n$. Therefore, define $M > 0$ as 
+\begin{align*}
+M = \max\{M_1, M_2, M_3, \ldots, M_{N - 1}, M_N + 2\}
+\end{align*}
+We have shown that $||f_n|| \leq M$ for all $n \in \mathbb{N}$. Therefore, $M$ is an upper bound for the set $\{||f_n|| : n \in \mathbb{N}\}$ and $M$ is clearly finite since it is the maximum of a finite set of finite values. Therefore, the supremum of the set $\{||f_n|| : n \in \mathbb{N}\}$, which is the least upper bound must be less than or equal to $M$, so the supremum must also be finite. Indeed, we get
+\begin{align*}
+\sup\{||f_n|| : n \in \mathbb{N}\} < +\infty
+\end{align*}
+\end{proof}
+
+\section*{Question 2}
+Let $f_n$ and $g_n$ be two uniformly convergent sequences of bounded functions on a metric space $(X, d)$. Prove that the sequence of products $f_n g_n$ converges as well. Give an example of two uniformly convergent sequences of functions on $X = (0, 1)$ equipped with the Euclidean metric such that the products do NOT converge uniformly. 
+
+\begin{proof}$ $
+\\Assume that $f_n \to f$ and $g_n \to g$ uniformly as $n \to \infty$. Furthermore, since these are each sequences of bounded functions which converge uniformly (equivalently, they are Cauchy), then we can use the result from Question 1 to conclude that each sequence is uniformly bounded. In other words, the supremum of their sup norms is finite, so there exists some $L, M \geq 0$ such that $||f_n|| < L$ and $||g_n|| < M$ for all $n \in \mathbb{N}$. Therefore, let us fix $r > 0$ and let use the uniform convergence of $g_n$ to say that there exists some $N_1 \in \mathbb{N}$ such that 
+\begin{align*}
+||g_n - g|| < 1
+\end{align*}
+for all $n \geq N_1$. We will use this to obtain a bound on $g$:
+\begin{align*}
+||g|| = ||g - g_N + g_N|| \leq ||g - g_N|| + ||g_N|| < 1 + M
+\end{align*}
+Next, we will use the uniform convergence of $f_n$ and once again use the uniform convergence of $g_n$ to say that there exists some $N_2, N_3 \in \mathbb{N}$ such that
+\begin{align*}
+||f_n - f|| &< \frac{r}{2(1 + M)} & ||g_m - g|| &< \frac{r}{2L}
+\end{align*}
+for all $n \geq N_2$ and all $m \geq N_3$. Therefore, taking $n \geq \max\{N_2, N_3\}$ we have that
+\begin{align*}
+||f_ng_n - fg|| &= ||f_ng_n - f_ng + f_ng - fg||\\
+&= ||f_n(g_n - g) + (f_n - f)g||\\
+&\leq ||f_n(g_n - g)|| + ||(f_n - f)g||\\
+&\leq ||f_n|| \; ||g_n - g|| + ||f_n - f|| \; ||g||\\
+&< L ||g_n - g|| + ||f_n - f||(1 + M)\\
+&< L \cdot \frac{r}{2L} + \frac{r}{2(1 + M)} \cdot (1 + M)\\
+&= \frac{r}{2} + \frac{r}{2}\\
+&= r
+\end{align*}
+Therefore the sequence $f_ng_n \to fg$ uniformly as $n \to \infty$. 
+\end{proof}
+$ $
+\\\textbf{Counterexample}
+\\
+\\To find such a counterexample, notice that the condition of boundedness was dropped from our requirements and this was crucial in our proof of convergence of the product. Therefore, we will construct two sequences of functions such that at least one of them is unbounded on $(0, 1)$. Let $f_n$ be the sequence of (constant) functions where 
+\begin{align*}
+f_n(x) = \frac{1}{n}
+\end{align*}
+for all $n \in \mathbb{N}$ and all $x \in (0, 1)$. It is clear that the pointwise limit of this sequence is 0. Furthermore, 
+\begin{align*}
+||f_n - 0|| = ||f_n|| = \left|\left| \frac{1}{n} \right| \right| = \frac{1}{n}\\
+\implies \lim_{n \to \infty} ||f_n - 0|| = \lim_{n \to \infty} \frac{1}{n} = 0
+\end{align*}
+Thus, this sequence is uniformly convergent to the zero function. Next, let $g_n$ be the (constant) sequence of functions where
+\begin{align*}
+g_n(x) = \frac{1}{x}
+\end{align*}
+for all $n \in \mathbb{N}$ and all $x \in (0, 1)$. It is clear that the pointwise limit of this sequence is simply $1/x$. Furthermore, 
+\begin{align*}
+\left|\left|g_n - \frac{1}{x}\right|\right| = \left|\left|\frac{1}{x} - \frac{1}{x}\right|\right| = ||0|| = 0\\
+\implies \lim_{n \to \infty} \left|\left|g_n - \frac{1}{x}\right|\right| = \lim_{n \to \infty} 0 = 0
+\end{align*}
+Thus, $g_n$ is uniformly convergent to the function $1/x$ on the interval $(0, 1)$. However, if we consider their product
+\begin{align*}
+f_n g_n = \frac{1}{nx}
+\end{align*}
+we can see that the pointwise limit is zero since if we fix $x$
+\begin{align*}
+\lim_{n \to \infty} \frac{1}{nx} = \frac{1}{x} \lim_{n \to \infty} \frac{1}{n} = 0
+\end{align*}
+However, when we examine the following limit
+\begin{align*}
+\lim_{n \to \infty}||f_n g_n - 0|| = \lim_{n \to \infty} \left|\left| \frac{1}{nx} \right| \right| = \lim_{n \to \infty} \sup_{x \in (0, 1)} \left| \frac{1}{nx} \right| = \lim_{n \to \infty} + \infty = +\infty
+\end{align*}
+Thus, the series $f_n g_n$ does not converge uniformly. 
+
+\section*{Question 3}
+Let $(X, d)$ be a metric space, let $f_n : X \to \mathbb{R}$ be a uniformly convergent sequence of continuous functions and let $x_n$ be a sequence in $X$ that converges to some $x \in X$. Prove that the two real sequences $f_n(x_n)$ and $f_n(x)$ both converge to the same limit. 
+
+\begin{proof}$ $
+\\Since $f_n$ is uniformly convergent, say that $f_n \to f$ uniformly as $n \to \infty$. Furthermore, since each $f_n$ is continuous and the convergence is uniform, then $f$ must also be a continuous function on $X$. Let us fix some $r > 0$. By the uniform continuity of $f_n$, we must have that there exists some $N_1$ such that for all $n \geq N_1$, we have
+\begin{align*}
+||f_n - f|| < \frac{r}{2}
+\end{align*}
+Furthermore, since $f$ is continuous, and $x_n \to x$, we must have that
+\begin{align*}
+\lim_{n \to \infty} f(x_n) &= f(x)\\
+\implies \lim_{n \to \infty} f(x_n) - f(x) &= 0\\
+\implies \lim_{n \to \infty} |f(x_n) - f(x)| &= 0
+\end{align*}
+In particular, there exists some $N_2$ such that for all $n \geq N_2$, we have
+\begin{align*}
+|f(x_n) - f(x)| < \frac{r}{2}
+\end{align*}
+Therefore, taking $n \geq \max\{N_1, N_2\}$, we get
+\begin{align*}
+|f_n(x_n) - f(x)| &= |f_n(x_n) - f(x_n) + f(x_n) - f(x)|\\
+&\leq |f_n(x_n) - f(x_n)| + |f(x_n) - f(x)|\\
+&\leq ||f_n - f|| + |f(x_n) - f(x)|\\
+&< \frac{r}{2} + \frac{r}{2}\\
+&= r
+\end{align*}
+Therefore, we have shown that the limit of $f_n(x_n)$ is equal to $f(x)$ and this is precisely the same limit as the sequence $f_n(x)$ which finishes the proof. 
+\end{proof}
+
+\section*{Question 4}
+Let $P_n(x)$ and $Q_n(x)$ be two sequences of polynomials on $[0, 1]$ equipped with the Euclidean metric. They are defined as 
+\begin{align*}
+P_n(x) = \sum_{k = 1}^n (1 - x)x^k, && Q_n(x) = \sum_{k = 1}^n (1 - x)(-x)^k.
+\end{align*}
+Determine which, if any, of the two sequences converges uniformly. 
+
+\begin{proof}$ $
+\\Let us expand both of these polynomials to see what we are working with
+\begin{align*}
+P_n(x) &= \sum_{k = 1}^n (1 - x)x^k\\
+&= (1 - x)\bigg(x + x^2 + \cdots + x^n\bigg)\\
+&= \bigg(x + x^2 + \cdots + x^n\bigg) - \bigg(x^2 + x^3 + \cdots + x^n + x^{n+1}\bigg)\\
+&= x - x^{n+1}\\
+&= x(1 - x^n)
+\end{align*}
+In retrospect, I could have gotten this result using the geometric series, so I will avoid the algebra and use the geometric series for $Q_n$. 
+\begin{align*}
+Q_n(x) &= \sum_{k = 1}^n (1 - x)(-x)^k\\
+&= (1 - x)\sum_{k = 1}^n (-x)^k\\
+&= \frac{-x(1 - x)(1 - (-x)^n)}{1 + x}
+\end{align*}
+I don't immediately see a way to simplify this further, so this is the expression I will work with. I first claim that $P_n$ does NOT converge uniformly. Notice that $P_n(0) = P_n(1) = 0$ for all $n$. However, for $x \in (0, 1)$, we know that $\lim_{n \to \infty} (x^n) = 0$, so that 
+\begin{align*}
+\lim_{n \to \infty} P_n(x) = \lim_{n \to \infty} x(1 - x^n) = x(1 - 0) = x
+\end{align*}
+Therefore, the pointwise limit is $x$ in the interval $[0, 1)$, but is equal to $0$ for the point $x = 1$. This means that the pointwise limit is discontinuous on $[0, 1]$. However, each $P_n$ is continuous on $[0, 1]$, so IF they converged uniformly, THEN their limit would be continuous. Since this is not the case, $P_n$ does not converge uniformly. 
+\\
+\\Next, I claim that $Q_n$ DOES converge uniformly. First, let us examine the pointwise limit. Notice once again that $Q_n(0) = Q_n(1) = 0$ for all $n$. Furthermore for $x \in (0, 1)$, we know that $\lim_{n \to \infty} ((-x)^n) = 0$ which gives us
+\begin{align*}
+\lim_{n \to \infty} Q_n(x) = \lim_{n \to \infty} \frac{-x(1 - x)(1 - (-x)^n)}{1 + x} = \frac{-x(1 - x)(1 - 0)}{1 + x} = \frac{x(x - 1)}{x + 1} =: Q(x)
+\end{align*}
+Furthermore, $Q(0) = Q(1) = 0$ so this limiting function is continuous. Therefore, we have the potential for the convergence to be uniform. Consider the following difference
+\begin{align*}
+\left|Q_n(x) - Q(x)\right| &= \left|\frac{-x(1 - x)(1 - (-x)^n)}{1 + x} - \frac{x(x - 1)}{x + 1}\right|\\
+&= \left|\frac{x(x - 1)[1 - (-x)^n - 1]}{x + 1}\right|\\
+&= \left|\frac{-x(x - 1)(-x)^n)}{x + 1}\right|\\
+&= \frac{x(1 - x)(x^n)}{x + 1}\\
+&= \frac{x^{n + 1}(1 - x)}{x + 1}\\
+&< x^{n+1}(1 - x) &\text{since the denominator was greater or equal than 1}\\
+\end{align*}
+Notice by taking derivatives of this last function, we can see find its critical values as
+\begin{align*}
+(n + 1)x^n - (n + 2)x^{n + 1} &= 0\\
+\implies x = 0 \qquad \text{ or } \qquad x &= \frac{n + 1}{n + 2}
+\end{align*}
+Since $x = 0$ is clearly not a maximum of this function and the other endpoint of our interval $x = 1$ is not a maximum, then since $x^{n +1}(1 - x)$ is a non-negative function over $[0, 1]$, we get that $x = (n + 1)/(n + 2)$ is the $x$-coordinate for the maximum value of this function. In other words, we have
+\begin{align*}
+|Q_n(x) - Q(x)| &< x^{n+1}(1 - x)\\
+&\leq \left(\frac{n + 1}{n + 2}\right)^{n + 1} \left(1 - \frac{n + 1}{n + 2}\right)\\
+&= \left(\frac{n + 1}{n + 2}\right)^{n + 1} \left(\frac{1}{n + 2}\right)
+\end{align*}
+Furthermore, since these bounds hold for all $x \in [0, 1]$, we get that
+\begin{align*}
+||Q_n - Q|| \leq \left(\frac{n + 1}{n + 2}\right)^{n + 1} \left(\frac{1}{n + 2}\right)
+\end{align*}
+Next, it is well known that the following limit holds true
+\begin{align*}
+\lim_{x \to \infty} \left(\frac{x}{x + 1} \right)^x = \frac{1}{e}
+\end{align*}
+which can be seen by using the continuity of the exponential function and writing the limit as $e^{\ln(y)}$ where $y$ is the limiting function. Using this property with $x$ replaced by $n + 1$, we get
+\begin{align*}
+\lim_{n \to \infty} ||Q_n - Q|| \leq \lim_{n \to \infty} \left[\left(\frac{n + 1}{n + 2}\right)^{n + 1} \left(\frac{1}{n + 2}\right)\right] = \lim_{n \to \infty} \left(\frac{n + 1}{n + 2}\right)^{n + 1} \cdot \lim_{n \to \infty} \frac{1}{n + 2} = \frac{1}{e} \cdot 0 = 0
+\end{align*}
+which proves that $Q_n$ converges uniformly to $Q$. 
+\end{proof}
+
+
+
+
+\end{document}

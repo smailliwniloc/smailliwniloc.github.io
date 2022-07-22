@@ -1,0 +1,589 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+\numberwithin{proposition}{section}
+\numberwithin{lemma}{section}
+\numberwithin{corollary}{section}
+
+
+\title{Analysis Theorems}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section{Topology Review}
+
+\begin{theorem}$ $
+\\$Y$ is closed if and only if $Y^c$ is open.
+\end{theorem}
+
+\begin{theorem}$ $
+\begin{enumerate}
+\item The complement of arbitrary unions is the arbitrary intersection of complements.
+\item The arbitrary union of open sets is open and the finite intersection of open sets is is open.
+\item The arbitrary intersection of closed sets is closed and the finite union of closed sets is closed.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}$ $
+\\Let $Y \subset X$, then $\overline{Y}$ is closed and if $Z \subset X$ is closed with $Y \subset Z$, then $\overline{Y} \subset Z$.
+\end{theorem}
+
+\begin{proposition}$ $
+\\Every compact set is closed.
+\end{proposition}
+
+\begin{proposition}$ $
+\\If $Y$ is bounded, then $\forall \; x \in X$, there exists $r_x > 0$ such that $Y \subset U_{r_x}(x)$. 
+\end{proposition}
+
+\begin{proposition}$ $
+\\$Y$ is bounded if and only if diam$(Y) < +\infty$.
+\end{proposition}
+
+\begin{proposition}$ $
+\\diam$(\overline{Y}) = $ diam$(Y)$
+\end{proposition}
+
+\begin{proposition}$ $
+\\Every compact set is bounded. 
+\end{proposition}
+
+\begin{theorem}[Heine-Borel Theorem]$ $
+\\If $(X, d)$ is $\mathbb{R}^n$ with the standard Euclidean metric, then $Y \subset X$ is compact if and only if $Y$ is closed and bounded. 
+\end{theorem}
+
+\begin{theorem}[Relativity]$ $
+Let $Y \subset X$, then
+\begin{enumerate}
+\item Let $Z \subset Y$, then $Z$ is open in $Y$ if and only if $Z = Y \cap G$ where $G$ is open in $X$
+\item Let $Z \subset Y$, then $Z$ is compact in $Y$ if and only if $Z$ is compact in $X$
+\end{enumerate}
+\end{theorem}
+
+
+\newpage
+\section{Convergence}
+
+\begin{proposition}$ $
+\\If $(x_n)$ is convergent, then $(x_n)$ is bounded. 
+\end{proposition}
+
+\begin{proposition}$ $
+\\$\{x_n\}' \subset (x_n)^*$
+\end{proposition}
+
+\begin{lemma}$ $
+\\Let $S \subset X$, suppose $S' \neq \emptyset$, let $x \in S'$, then $\forall \; r > 0$, $U_r(x) \cap S$ is infinite
+\end{lemma}
+
+\begin{proposition}$ $
+\\The set $(x_n)^*$ of subsequential limits of $(x_n)$ is closed in $X$. 
+\end{proposition}
+
+\begin{proposition}$ $
+\\Every Cauchy Sequence is bounded. 
+\end{proposition}
+
+\begin{proposition}$ $
+\\Every convergent sequence is Cauchy
+\end{proposition}
+
+\begin{proposition}$ $
+\\If $(X, d)$ is a complete metric space, and $Y \subset X$, then $(Y, d)$ is complete if and only if $Y$ is closed in $X$.
+\end{proposition}
+
+\begin{theorem}$ $
+\\If $X$ is compact, then $\forall \; (x_n) \subset X$, $(x_n)^* \neq \emptyset$. In other words, every sequence in a compact metric space has a convergent subsequence. 
+\end{theorem}
+
+\begin{theorem}$ $
+\\Every compact metric space $(X, d)$ is complete.
+\end{theorem}
+
+\begin{lemma}$ $
+\\Suppose $Y \subset X$, then $Y$ is compact if and only if $Y$ is closed in $X$.
+\end{lemma}
+
+\begin{lemma}$ $
+\\Let $\{K_n\}_{n \in \mathbb{N}}$ be a countable family of compact non-empty subsets of $X$ such that $K_1 \supset K_2 \supset K_3 \supset \cdots $ and diam$(K_n) \to 0$ as $n \to \infty$, then there exists some $x \in X$ such that 
+\begin{align*}
+\bigcap_{n = 1}^\infty K_n = \{x\}.
+\end{align*}
+\end{lemma}
+
+\begin{theorem}$ $
+\\Every monotonic sequence in $\mathbb{R}$ is convergent (possible to $\pm \infty$). 
+\end{theorem}
+
+\begin{corollary}$ $
+\\$\emptyset \neq (x_n)^* \subset [-\infty, \infty]$ for every sequence in $\mathbb{R}$. 
+\end{corollary}
+
+\begin{proposition}$ $
+\\$\sup(x_n)^*, \inf(x_n)^* \in (x_n)^*$
+\end{proposition}
+
+\begin{theorem}$ $
+\begin{align*}
+\limsup_{n \to \infty} x_n = \sup(x_n)^* && \text{and} && \liminf_{n \to \infty} x_n = \inf(x_n)^*
+\end{align*}
+\end{theorem}
+
+\begin{corollary}$ $
+\\The following are equivalent:
+\begin{enumerate}
+\item $\lim_{n \to \infty} x_n = x$
+\item $(x_n)^* = \{x\}$
+\item $\limsup_{n \to \infty} x_n = \liminf_{n \to \infty} x_n = x$
+\end{enumerate}
+\end{corollary}
+
+\begin{theorem}[Comparison Test]$ $
+\\If $\forall \; n \in \mathbb{N}$, $0 \leq x_n \leq y_n$, then \begin{align*}
+\sum_{n = 1}^\infty x_n \leq \sum_{n = 1}^\infty y_n
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[Root Test]$ $
+\\If we define 
+\begin{align*}
+r := \limsup_{n \to \infty} \left( \sqrt[n]{x_n} \right)
+\end{align*}
+Then we have
+\begin{align*}
+\sum_{n = 1}^\infty x_n \begin{cases}
+< +\infty &\text{if $r < 1$}\\
+? &\text{if $r = 1$}\\
+= +\infty &\text{if $r > 1$}
+\end{cases}
+\end{align*}
+\end{theorem}
+
+\begin{proposition}[Root vs. Ratio]$ $
+\\Suppose for all $n \in \mathbb{N}$, $x_n > 0$, then
+\begin{align*}
+\liminf_{n \to \infty} \frac{x_{n + 1}}{x_n} \leq \liminf_{n \to \infty} \sqrt[n]{x_n} \leq \limsup_{n \to \infty} \sqrt[n]{x_n} \leq \limsup_{n \to \infty} \frac{x_{n+1}}{x_n}
+\end{align*}
+\end{proposition}
+
+
+\begin{theorem}[Dirichlet Test]$ $
+\\Suppose the following:
+\begin{enumerate}
+\item $\displaystyle \sup\left\{\left| \sum_{n = 1}^N y_n \right| : N \in \mathbb{N}\right\} < +\infty$
+\item $\forall \; n \in \mathbb{N}, x_n \geq x_{n + 1}$
+\item $\displaystyle \lim_{n \to \infty} x_n = 0$
+\end{enumerate}
+Then, $\displaystyle \sum_{n = 1}^\infty x_n y_n$ is convergent.
+\end{theorem}
+
+\begin{theorem}[Rearrangement Theorem]$ $
+\\If we have a bijective map $k \mapsto n_k$, and 
+\begin{align*}
+S = \sum_{n = 1}^\infty x_n && S' = \sum_{k = 1}^\infty x_{n_k}.
+\end{align*}
+Then, 
+\begin{align*}
+\sum_{n = 1}^\infty |x_n| < +\infty \implies \sum_{k = 1}^\infty |x_{n_k}| < +\infty \qquad \text{ and } \qquad S = S'
+\end{align*}
+\end{theorem}
+
+\begin{theorem}$ $
+\\If we have convergence in the previous theorem, but not absolute convergence, then we can have $S'$ converge to whatever value we want.
+\end{theorem}
+
+\newpage
+\section{Continuity}
+\begin{proposition}$ $
+\\If $f: X \to Y$ is continuous at $a$ and $g: Y \to Z$ is continuous at $y = f(a)$, then $g \circ f: X \to Z$ is continuous at $x = a$. 
+\end{proposition}
+
+\begin{proposition}$ $
+\\$f$ is continuous if and only if $\forall \; G \subset Y$ which are open in $Y$, then $f^{-1}(G)$ is also open in $X$. 
+\end{proposition}
+
+\begin{theorem}$ $
+\\If $X$ is compact and $f$ is continuous, then $f(X)$ is compact. 
+\end{theorem}
+
+\begin{corollary}$ $
+\\If $f: X \to Y$ for $X$ and $f$ as above and $Y = \mathbb{R}$, then $f$ attains its maximum and minimum on $X$. 
+\end{corollary}
+
+\begin{theorem}$ $
+\\If $X$ is compact metric space, $f: X \to Y$ is a continuous bijection, then $Y$ is compact and $f^{-1}: Y \to X$ is also continuous.
+\end{theorem}
+
+\begin{theorem}$ $
+\\If $X$ is compact and $f$ is continuous, then $f: X \to Y$ is uniformly continuous. 
+\end{theorem}
+
+\begin{theorem}$ $
+\\If $(X, d)$ is a connected metric space and $f: X \to Y$ is continuous, then $f(X)$ is connected. 
+\end{theorem}
+
+\begin{corollary}$ $
+\\If $X$ and $f$ are as above, then $f(X)$ is an interval.
+\end{corollary}
+
+
+\newpage
+\section{Differentiability}
+
+\begin{theorem}[Fermat]$ $
+\\If $f: (a, b) \to \mathbb{R}$ and $c \in (a, b)$ such that $f(c) = \max\{f(a, b)\}$ or $f(c) = \min\{f(a, b)\}$, then if $f'(c)$ exists, we must have $f'(c) = 0$. 
+\end{theorem}
+
+\begin{theorem}[Rolle's Theorem]$ $
+\\Suppose $f: [a, b] \to \mathbb{R}$ is continuous and that $f: (a, b) \to \mathbb{R}$ is differentiable such that $f(a) = f(b)$, then there exists some $c \in (a, b)$ such that $f'(c) = 0$. 
+\end{theorem}
+
+\begin{theorem}[Lagrange's Mean Value Theorem]$ $
+\\Assume that $f: [a, b] \to \mathbb{R}$ is continuous and $f: (a, b) \to \mathbb{R}$ is differentiable, then there exists some $c \in (a, b)$ such that 
+\begin{align*}
+f'(c) = \frac{f(b) - f(a)}{b - a}
+\end{align*}
+\end{theorem}
+
+\begin{corollary}$ $
+\\If $f:(a, b) \to \mathbb{R}$ is differentiable and $f'(x) = 0$ for all $x \in (a, b)$, then $f$ is constant. 
+\end{corollary}
+
+\begin{theorem}$ $
+\\Suppose $f: U_r(x_0) \to \mathbb{R}$ is continuous and that $f: \overset{\circ}{U_r}(x_0) \to \mathbb{R}$ is differentiable and $\lim_{x \to x_0} f'(x)$ exists, then $f'(x_0) = \lim_{x \to x_0} f'(x)$
+\end{theorem}
+
+\begin{theorem}[Generalized MVT]$ $
+\\Let $f, g: [a, b] \to \mathbb{R}$ be continuous and $f, g: (a, b) \to \mathbb{R}$ be differentiable. Assume $g'(x) \neq 0$ for all $x \in (a, b)$, then 
+\begin{align*}
+\frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)} \qquad \text{ for some } c \in (a, b)
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[Taylor's Formula]$ $
+\\If $f: U_r(x_0) \to \mathbb{R}$ is $(n + 1)$-times differentiable, then 
+\begin{align*}
+f(x) = f(x_0) + \frac{f'(x_0)}{1!} (x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac{f^{(n+1)}(c)}{(n+1)!}(x - x_0)^{n+1}
+\end{align*}
+for some $c$ between $x_0$ and $x$. 
+\end{theorem}
+
+
+\newpage
+\section{Sequences of Functions}
+\begin{theorem}$ $
+\\A sequence of functions $(f_n)$ is uniformly convergent if and only if it is Cauchy. 
+\end{theorem}
+
+\begin{theorem}$ $
+If $(f_n)$ is a sequence of continuous functions which is Cauchy, then $\lim_{n \to \infty} f_n$ is also continuous. 
+\end{theorem}
+
+\begin{theorem}$ $
+Suppose the following:
+\begin{enumerate}
+\item $(X, d)$ is compact
+\item $(f_n) \subset C(X)$
+\item $f = \lim_{n \to \infty} f_n$ is continuous
+\item For all $x \in X$, $f_1(x) \geq f_2(x) \geq \cdots $
+\end{enumerate}
+Then, $f_n \to f$ uniformly as $n \to \infty$. 
+\end{theorem}
+
+\begin{theorem}[Weierstrass Theorem]$ $
+\\Let $f: [a, b] \to \mathbb{R}$ be continuous. Then $\forall \; r > 0$, there exists some polynomial $P(x)$ such that 
+\begin{align*}
+||f - P|| = \sup\{|f(x) - P(x)| : x \in [a, b]\} < r
+\end{align*}
+\end{theorem}
+
+\begin{theorem}
+Let $X = (a, b)$ and suppose $f_n : X \to \mathbb{R}$ is such that 
+\begin{enumerate}
+\item For all $n \in \mathbb{N}$, $f_n$ is differentiable.
+\item $(f_n')$ is a Cauchy Sequence.
+\item There exists an $x \in X$ such that $(f_n(x))$ is convergent. 
+\end{enumerate}
+Then, $(f_n)$ is a Cauchy sequence and $\lim_{n \to \infty} f_n(x)$ is differentiable with derivative $\frac{d}{dx}[\lim_{n \to \infty} f_n(x)] = \lim_{n \to \infty} f_n'(x)$
+\end{theorem}
+
+\begin{proposition}[Homework Assignment]$ $
+\\If $(X, d)$ is compact and $(f_n) \subset C(X)$ with 
+\begin{align*}
+\sum_{n = 1}^\infty |f_n(x)| \in C(X)
+\end{align*}
+Then, $\sum_{n = 1}^\infty f_n(x)$ is uniformly convergent. 
+\end{proposition}
+
+\begin{theorem}[Arzela-Ascoli]$ $
+\\Let $(X, d)$ be compact and let $f_n : X \to \mathbb{R}$ be an equicontinuous, pointwise bounded sequence. Then $f_n$ is uniformly bounded and there is a subsequence $f_{n_k}$ that converges uniformly. 
+\end{theorem}
+
+\begin{theorem}[Adaptation of Arzela-Ascoli]$ $
+\\Let $(X, d)$ be compact and suppose $f_n : X \to \mathbb{R}$ is equicontinuous and pointwise convergent, then $f_n$ is uniformly convergent and $\lim_{n \to \infty} f_n(x)$ is uniformly continuous on $X$. 
+\end{theorem}
+
+
+\newpage 
+
+
+\section{Multivariable Functions}
+
+\begin{theorem}$ $
+\\Let $X \subset \mathbb{R}^n$ be open, then $f: X \to \mathbb{R}^m$ is continuously differentiable if and only if $D_1f, D_2f, \ldots, D_nf: X \to \mathbb{R}^m$ are all continuous. 
+\end{theorem}
+
+
+\begin{theorem}[Chain Rule]$ $
+\\Let $X \subset \mathbb{R}^n$ and $Y \subset \mathbb{R}^m$ be open. Let $f: X \to \mathbb{R}^m$ be differentiable at some $x_0 \in X$. Suppose $y_0 = f(x_0) \in Y$ and that $g: Y \to \mathbb{R}^k$ is differentiable at $y_0$. Then $g \circ f: X \to \mathbb{R}^k$ is differentiable at $x_0$ with $(g \circ f)'(x_0) = g'(f(x_0))f'(x_0)$
+\end{theorem}
+
+\begin{lemma}$ $
+\\Let $I_n \in L(\mathbb{R}^n, \mathbb{R}^n)$ be such that $I_n x = x \; \forall \; x \in \mathbb{R}^n$. Let $A \in L(\mathbb{R}^n, \mathbb{R}^n)$ be such that $||A|| < 1$. Then $I_n - A$ is invertible and 
+\begin{align*}
+||(I - A)^{-1}|| \leq \frac{1}{1 - ||A||}
+\end{align*}
+\end{lemma}
+
+\begin{lemma}$ $
+\\Let $\gamma: GL(\mathbb{R}^n) \to GL(\mathbb{R}^n)$. Then $\gamma(A) = A^{-1}$ is continuous and $GL(\mathbb{R}^n)$ is open in the space $L(\mathbb{R}^n, \mathbb{R}^n)$. 
+\\
+\\\textit{Note that $GL(X)$ represents the invertible linear transformations from $X \to X$}
+\end{lemma}
+
+\begin{lemma}[Contraction Principle]$ $
+\\Let $(X, d)$ be a complete metric space. Suppose that $\varphi: X \to X$ is a (strict) contraction, i.e. $\exists \; C \in (0, 1)$ such that $\forall \; x, y \in X, d(\varphi(x), \varphi(y)) \leq Cd(x, y)$. Then, there exists a unique fixed point $x \in X$ such that $\varphi(x) = x$. 
+\end{lemma}
+
+\begin{lemma}$ $
+\\Let $X \subset \mathbb{R}^n$ be open and convex. Let $f: X \to \mathbb{R}^m$ be differentiable. Suppose $\exists \; M > 0$ such that $||f'(x)|| \leq M$ for all $x \in X$. Then, $\forall \; a, b \in X, |f(b) - f(a)| \leq M|b - a|$
+\end{lemma}
+
+\begin{theorem}[Inverse Function Theorem]$ $
+\\Let $X \subset \mathbb{R}^n$ be open and $f: X \to \mathbb{R}^n$ be continuously differentiable with $x_0 \in X$ and $f'(x_0) \in GL(\mathbb{R}^n)$. Then, there exists an open $U \subset \mathbb{R}^n$ with $x_0 \in U \subset X$ and such that 
+\begin{enumerate}
+\item $f: U \to \mathbb{R}^n$ is injective. 
+\item $V = f(U)$ is open in $\mathbb{R}^n$.
+\item $f^{-1}: V \to \mathbb{R}^n$ is continuously differentiable.
+\item $(f^{-1})'(f(x)) = (f^{-1}(x))^{-1}$ for all $x \in U$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Implicit Function Theorem]$ $
+\\Let $X \subset \mathbb{R}^{n+m}$ be open and $f: X \to \mathbb{R}^n$ be continuously differentiable. Denote $[f'(x, y)](\alpha, \beta) = [f'(x, y)](\alpha, 0) + [f'(x, y)](0, \beta) = f_x'(x, y)\alpha + f_y'(x, y)\beta$ where $f_x'(x, y) \in L(\mathbb{R}^n, \mathbb{R}^n)$ and $f_y'(x, y) \in L(\mathbb{R}^m, \mathbb{R}^n$.
+\\
+\\Suppose $(x_0, y_0) \in X$ such that $f_x'(x_0, y_0) \in GL(\mathbb{R}^n)$. Then, there exists open sets $U, V$ with $U \subset X$ and $V \subset \mathbb{R}^m$ such that $(x_0, y_0) \in U, y_0 \in V$. 
+\\
+\\Assume $f(x_0, y_0) = 0$, then there exists a unique $g: V \to \mathbb{R}^n$ which is continuously differentiable such that $\forall \; y \in V$, $(g(y), y) \in U$ and $f(g(y), y) = 0$ for $y \in V$ and $g(y_0) = x_0$. Furthermore,
+\begin{align*}
+g'(y_0) = -f_x'(x_0, y_0)^{-1}f_y'(x_0, y_0)
+\end{align*}
+\end{theorem}
+
+\begin{proposition}$ $
+\\Let $X \subset \mathbb{R}^2$ be open. Let $f: X \to \mathbb{R}$ be such that $D_{21}f$ is defined and in $X$. Let $(x_0, y_0) \in X$ and let $a, b > 0$ be such that $[x_0, x_0 + a] \times [y_0, y_0 + b] \subset X$, then $\exists \; x_1 \in (x_0, x_0 + a), y_1 \in (y_0, y_0 + b)$ such that 
+\begin{align*}
+f(x_0 + a, y_0 + b) - f(x_0, y_0 + b) - f(x_0 + a, y_0) + f(x_0, y_0) = abD_21 f(x_1, y_1)
+\end{align*}
+\end{proposition}
+
+
+\begin{theorem}$ $
+\\Let $X \subset \mathbb{R}^2$ be open, and $f: X \to \mathbb{R}$ be such that $D_{21}f, D_2f$ are defined in $X$. Let $(x_0, y_0) \in X$ be such that $D_{21}f$ is continuous at $(x_0, y_0)$, then $D_{12}f(x_0, y_0)$ exists and $D_{12}f(x_0, y_0) = D_{21}f(x_0, y_0)$
+\end{theorem}
+
+
+\begin{corollary}[Taylor's Linearization]$ $
+\\The following linearization holds in a sufficiently small neighborhood:
+\begin{align*}
+f(x_0 + a, y_0 + b) = f(x_0, y_0) + D_1f(x_0, y_0)a + D_2f(x_0, y_0)b + \frac{D_{11}f(x_0, y_0)}{2}a^2 + \frac{D_{22}f(x_0, y_0)}{2}b^2 + D_{12}f(x_0, y_0)ab + o(a^2 + b^2)
+\end{align*}
+\end{corollary}
+
+\begin{theorem}[HW 8 $\#$1]$ $
+\\Let $f \in \mathbf{L}(\mathbb{R}^n, \mathbb{R}^m)$. Then, $f$ is injective if and only if $\ker(f) = \{0\}$. 
+\end{theorem}
+
+\begin{theorem}[HW 8 $\#$3]$ $
+\\Let $X$ be an open subset of $\mathbb{R}^n$ and let $f: X \to \mathbb{R}^m$ be such that $D_1f, D_2f, \ldots, D_nf$ are defined and bounded in $X$. Then, $f$ is continuous. 
+\end{theorem}
+
+\begin{theorem}[HW 8 $\#$4]$ $
+\\Let $X$ be an open subset of $\mathbb{R}^n$ and let $f: X \to \mathbb{R}$ be differentiable. Suppose that $x_0 \in X$ is a point of maximum of $f$, then $f'(x_0) = 0$. 
+\end{theorem}
+
+\begin{theorem}[HW 9 $\#$1]$ $
+\\Let $X \subset \mathbb{R}^n$ be open. Let $x_0 \in X$ and let $f: X \to \mathbb{R}^m$ be differentiable at $x_0$. Let $Y \subset \mathbb{R}^m$ be open and such that $f(x_0) \in Y$. Finally, let $g: Y \to \mathbb{R}^k$ be differentiable at $f(x_0)$. Then,
+\begin{align*}
+D_j(g \circ f)(x_0) = \sum_{i = 1}^m (D_i g)(f(x_0))(D_jf^i)(x_0)
+\end{align*}
+where $f^i(x)$ is the $i$-th component of $f(x)$. 
+\end{theorem}
+
+\begin{theorem}[HW 9 $\#$2]$ $
+\\Let $X \subset \mathbb{R}^n$ be open and let $f: X \to \mathbb{R}^n$ be continuously differentiable and such that $f'(x)$ is invertible for every $x \in X$. Then $f(X)$ is open in $\mathbb{R}^n$. 
+\end{theorem}
+
+\begin{theorem}[HW 10 $\#$1]$ $
+\\Let $X \subset \mathbb{R}^n$ be an open connected set. Let $f: X \to \mathbb{R}^n$ be differentiable and such that $f'(x) = 0$ for all $x \in X$. Then, $f$ is a constant function. 
+\end{theorem}
+
+\begin{theorem}[HW 11 $\#$2]$ $
+\\If $f: \mathbb{R}^2 \to \mathbb{R}$ is continuously differentiable, then $f$ is not injective. 
+\end{theorem}
+
+\newpage
+
+\section{Integration}
+
+\begin{proposition}$ $
+\\Let $\{Y_{\alpha}\} \subset 2^X$, then there is a unique $\Sigma$ that is a minimal $\sigma$-algebra such that $\{Y_{\alpha}\} \subset \Sigma$. 
+\\
+\\This $\Sigma$ is called the $\sigma$-completion of $\{Y_{\alpha}\}$
+\end{proposition}
+
+\begin{lemma}$ $
+\\If $\mu: \Sigma \to [0, +\infty]$ is a positive measure on $X$, then the following properties hold:
+\begin{enumerate}
+\item $\mu(\emptyset) = 0$
+\item If $Y_1, Y_2, \ldots, Y_N \in \Sigma$ with $m \neq n \implies Y_m \cap Y_n = \emptyset$, then 
+\begin{align*}
+\mu\left(\bigcup_{n = 1}^N Y_n \right) = \sum_{n = 1}^N \mu(Y_n)
+\end{align*}
+\item If $Y_1, Y_2 \in \Sigma$ are such that $Y_1 \subset Y_2$, then $\mu(Y_1) \leq \mu(Y_2)$.
+\item If $\{Y_n : n \in \mathbb{N}\}$ are nested subsets where $Y_1 \subset Y_2 \subset Y_3 \subset \cdots$, then 
+\begin{align*}
+\mu\left(\bigcup_{n = 1}^N Y_n \right) = \lim_{n \to \infty} \mu(Y_n)
+\end{align*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proposition}$ $
+\\Let $(X, \Sigma, \mu)$ be a measure space and let $(Y, d_Y), (Z, d_Z)$ be metric spaces. Let $f: X \to Y$ be measurable and let $g: Y \to Z$ be continuous, then $g \circ f: X \to Z$ is measurable. 
+\end{proposition}
+
+\begin{theorem}$ $
+\\Suppose $(X, \Sigma, \mu)$ is a measure space. Let $f, g: X \to \mathbb{R}$ be measurable and consider $F: \mathbb{R}^2 \to \mathbb{R}$ some continuous function. Then $F(f(x), g(x))$ is measurable
+\end{theorem}
+
+\begin{proposition}$ $
+\\Let $(f_n(x))$ be a sequence functions such that $f_n : X \to [-\infty, +\infty]$ is measurable for all $n \in \mathbb{N}$. Then, all of the following are measurable:
+\begin{itemize}
+\item $a(x) = \sup\{f_n(x) : n \in \mathbb{N}\}$
+\item $b(x) = \inf\{f_n(x) : n \in \mathbb{N}\}$
+\item $c(x) = \limsup_{n \to \infty} f_n(x)$
+\item $d(x) = \liminf_{n \to \infty} f_n(x)$
+\end{itemize}
+\end{proposition}
+
+\begin{proposition}$ $
+\\Let $f: X \to [0, +\infty]$ be measurable, then $\exists$ simple, measurable functions $s_n: X \to \mathbb{R}$ such that $\forall \; x \in X$
+\begin{align*}
+0 \leq s_1(x) \leq s_2(x) \leq s_3(x) \leq \cdots \leq f(x) = \lim_{n \to \infty} s_n(x) = \sup_{n \in \mathbb{N}} s_n(x)
+\end{align*}
+\end{proposition}
+
+\begin{proposition}$ $
+\begin{align*}
+\int_X \sum_{n = 1}^N s_n d \mu = \sum_{n = 1}^N \int_X s_n d \mu
+\end{align*}
+\end{proposition}
+
+\begin{theorem}$ $
+\\Let $f: X \to [0, +\infty]$ be measurable. Define $\nu_f : \Sigma \to [0, +\infty]$ by
+\begin{align*}
+\nu_f(Y) = \int_Y f d \mu
+\end{align*}
+then $\nu_f$ is a positive measure. 
+\end{theorem}
+
+\begin{theorem}[Monotone Convergence Theorem]$ $
+\\Suppose $(f_n)$ is a sequence of functions such that for all $n \in \mathbb{N}$, $f_n: X \to [0, +\infty]$ is measurable and $$f_1 \leq f_2 \leq f_3 \leq \cdots \leq f = \lim_{n \to \infty} f_n = \sup_{n \in \mathbb{N}} f_n$$ Then, $$\int_X f d\mu = \lim_{n \to \infty} \int_X f_n d\mu$$
+\end{theorem}
+
+\begin{lemma}[Fatou Lemma]$ $
+\\Let $f_n : X \to [0, +\infty]$ be measurable, then
+\begin{align*}
+\int_X \liminf_{n \to \infty} f_n d\mu \leq \liminf_{n \to \infty} \int_X f_n d\mu
+\end{align*}
+\end{lemma}
+
+\begin{proposition}[Additivity]$ $
+\\Let $f, g: X \to \mathbb{R}$ be in $\mathcal{L}(\mu)$. Then, $f + g \in \mathcal{L}(\mu)$ with 
+\begin{align*}
+\int_X f + g d\mu = \int_X f d\mu + \int_X g d\mu
+\end{align*}
+\end{proposition}
+
+\begin{proposition}[Triangle Inequality]$ $
+\begin{align*}
+\left| \int_X f d\mu \right| \leq \int_X |f| d\mu
+\end{align*}
+\end{proposition}
+
+\begin{theorem}[Dominated Convergence]$ $
+\\Suppose $f_n : X \to [-\infty, +\infty]$ are measurable functions such that 
+\begin{enumerate}
+\item $\exists \; g \in \mathcal{L}(\mu)$ such that $|f_n| \leq g$ for all $n \in \mathbb{N}$. 
+\item $f_n \to f$ pointwise as $n \to \infty$.
+\end{enumerate}
+Then, $f_n \in \mathcal{L}(\mu), f \in \mathcal{L}(\mu)$ and 
+\begin{align*}
+\int_X f_n d\mu \to \int_X f d \mu \qquad \text{as $n \to \infty$}
+\end{align*}
+\end{theorem}
+
+\begin{lemma}$ $
+\\For $X \subset \mathbb{R}$ and $(X, \Sigma, \mu)$ a measure space, define the Outer Measure as
+\begin{align*}
+\mu^*(X) = \inf\{ \sum_{n = 1}^\infty \mu(G_n) : G_n \in \Sigma_0, G_n open, X \subset \bigcup_{n = 1}^\infty G_n \}
+\end{align*}
+where $\Sigma_0$ is the collection of unions of intervals (open, closed, or half-open) of $\mathbb{R}$. Then $\mu^*(X) = \mu(X)$ for all $X \in \Sigma_0$. 
+\end{lemma}
+
+\begin{theorem}$ $
+\\Let $(\mathbb{R}, \Sigma, \mu)$ be the Lebesgue Measure Space. Let $f: [a, b] \to \mathbb{R}$ be bounded. Then $f$ is Riemann Integrable if and only if $\mu(\{x \in [a, b] : f$ is discontinuous at $x\}) = 0$. In this case, $f \in \mathcal{L}(\mu)$ and $\int_a^b f dx = \int_{[a, b]} f d\mu$ where the first is the Riemann Integral and the second is the Lebesgue Integral. 
+\end{theorem}
+
+\begin{theorem}[HW 12 $\#$1]$ $
+\\Let $Y_n$ be a sequence in $\Sigma$ such that $Y_1 \supset Y_2 \supset Y_3 \supset \cdots$. If $\mu(Y_1) < +\infty$, then
+\begin{align*}
+\mu\left(\bigcap_{n \in \mathbb{N}} Y_n \right) = \lim_{n \to \infty} \mu(Y_n)
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[HW 12 $\#$3]$ $
+\\If $f, g: X \to [-\infty, +\infty]$ are two measurable functions, then $\{x: f(x) = g(x)\}$ is a measurable set. 
+\end{theorem}
+
+\end{document}

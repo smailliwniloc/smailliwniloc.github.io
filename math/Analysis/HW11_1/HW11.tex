@@ -1,0 +1,176 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Analysis HW 11}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+
+\section*{Question 1}
+Let $f: \mathbb{R}^2 \to \mathbb{R}$ be given by $f(x, y) = 2x^3 + 6xy^2 - 3x^2 + 3y^2$. Find all points that have no neighborhood where the equation $f(x, y) = 0$ can be solved either for $x$ in terms of $y$ or for $y$ in terms of $x$. 
+
+\begin{answer*}$ $
+\\First, consider the partial derivatives of $f$:
+\begin{align*}
+D_1f(x, y) = 6x^2 + 6y^2 - 6x &= 6[x(x - 1) + y^2]\\
+D_2f(x, y) = 12xy + 6y &= 6y[2x + 1]
+\end{align*}
+To see when we cannot have solve for $x$ in terms of $y$, we need to see when the Implicit Function Theorem does not apply, i.e. when $D_1f(x, y)$ is not invertible; or in the one dimensional case, when $D_1f(x, y) = 0$. This happens when:
+\begin{align*}
+6[x(x-1) + y^2] &= 0\\
+x(1 - x) &= y^2
+\end{align*}
+To find the problematic points satisfying this relation and satisfying $f(x, y) = 0$ we can substitute all instances of $y^2$ with $x(1 - x)$ in the equation $f(x, y) = 0$:
+\begin{align*}
+[f(x, y) &= 0]_{D_1f(x, y) = 0}\\
+\implies 2x^3 + 6x^2(1 - x) - 3x^2 + 3x(1 - x) &= 0\\
+\implies 2x^3 - 6x^3 + 6x^2 - 3x^2 - 3x^2 + 3x &= 0\\
+\implies 3x &= 4x^3\\
+\implies x = 0, \quad \text{ or } \quad \frac{3}{4} &= x^2\\
+\implies x = 0, \quad \text{ or } \quad x = \frac{\sqrt{3}}{2} \quad \text{ or } \quad x &= \frac{-\sqrt{3}}{2}
+\end{align*}
+It is impossible to have $x = -\sqrt{3}/2$ as this would make $y^2 = x(1 - x)$ a negative number. However, for the other two cases, we have 
+\begin{align*}
+y &= \pm \sqrt{0(1 - 0)} & y &= \pm \sqrt{\frac{\sqrt{3}}{2}\left(1 - \frac{\sqrt{3}}{2}\right)} = \pm \sqrt{\frac{\sqrt{3}}{2} - \frac{3}{4}}\\
+&= 0 & &\approx \pm 0.340625
+\end{align*}
+Thus, the points where we cannot solve for $x$ in terms of $y$ are precisely the points 
+\begin{align*}
+(0, 0) && \left(\frac{\sqrt{3}}{2}, 0.340625\right) && \left(\frac{\sqrt{3}}{2}, -0.340625\right)
+\end{align*}
+To analyze the situation in the other direction, let us look at when $D_2f(x, y) = 0$. This happens when:
+\begin{align*}
+6y[2x + 1] &= 0\\
+\implies y = 0 \quad &\text{or} \quad x = -\frac{1}{2}
+\end{align*}
+Using these values into the equation $f(x, y) = 0$, we get:
+\begin{align*}
+f(x, 0) &= 0\\
+\implies 2x^3 - 3x^2 &= 0\\
+\implies x^2(2x - 3) &= 0\\
+\implies x = 0 \quad \text{ or } \quad  x &= \frac{3}{2}\\
+f(-1/2, y) &= 0\\
+\implies -\frac{1}{4} - 3y^2 - \frac{3}{4} + 3y^2 &= 0\\
+\implies -1 &= 0 \text{ (not good)}
+\end{align*}
+We see when $x = -1/2$, we don't have any solutions at all for $y$. However, for $y = 0$, we do have two solutions for $x$. Both of these solutions will correspond to points where we cannot solve for $y$ in terms of $x$. These points are:
+\begin{align*}
+(0,0) && \left(\frac{3}{2}, 0\right)
+\end{align*}
+Together, all of the problematic points are:
+\begin{align*}
+(0,0) && \left(\frac{\sqrt{3}}{2}, 0.340625\right) && \left(\frac{\sqrt{3}}{2}, -0.340625\right) && \left(\frac{3}{2}, 0\right)
+\end{align*}
+\end{answer*}
+
+
+\section*{Question 2}
+Let $f: \mathbb{R}^2 \to \mathbb{R}$ be continuously differentiable. Prove that $f$ is not injective. Hint: if $f'(x, y) \neq 0$ at some point, you may use the Implicit Function Theorem.
+
+\begin{proof}$ $
+\\If $f'(x, y) = 0$ for all $(x, y) \in \mathbb{R}^2$, then $f$ is a constant function and trivially not injective as all inputs map to the same output. Thus, assume that there exists some point $(x_0, y_0) \in \mathbb{R}^2$ such that $f'(x_0, y_0) \neq 0$. In particular, this means that either $D_1f(x_0, y_0) \neq 0$ or that $D_2f(x_0, y_0) \neq 0$. WLOG, assume that $D_1f(x_0, y_0) \neq 0$ (the proof is symmetric for the other case). Furthermore, assume that $f(x_0, y_0) = 0$ (otherwise, consider the function $g: \mathbb{R}^2 \to \mathbb{R}$ defined as $g(x, y) = f(x, y) - f(x_0, y_0)$ which clearly satisfies $g(x_0, y_0) = 0$, $g$ is also continuously differentiable with $D_1f(x_0, y_0) = D_1g(x_0, y_0) \neq 0$, and $g$ is injective iff $f$ is injective). 
+\\
+\\Since the hypotheses of the Implicit Function Theorem are satisfied near the point $(x_0, y_0)$, there is an open set $V \subset \mathbb{R}$ containing the point $y_0$ such that there exists a unique function $h: V \to \mathbb{R}$ which is continuously differentiable with $h(y_0) = x_0$ and such that $f(h(y), y) = 0$ for all $y \in V$. Since this set $V$ is an open set, it is in fact not a singleton (since singletons are not open sets in the usual topology on $\mathbb{R}$). Therefore, there are distinct points $y_1 \neq y_2 \in V$ which satisfy $f(h(y_1), y_1) = f(h(y_2), y_2) = 0$. However, since $y_1 \neq y_2$, then in particular, the points $(h(y_1), y_1) \neq (h(y_2), y_2)$. Therefore, $f$ maps two distinct points to the same image, meaning $f$ is indeed not injective. 
+\end{proof}
+
+\section*{Question 3}
+Let $X$ be a neighborhood of some point $(x_0, y_0)$ in $\mathbb{R}^2$ and let $f: X \to \mathbb{R}$ be twice continuously differentiable. Derive the formula: as $(x, y) \to (x_0, y_0)$, 
+\begin{align*}
+f(x,y) = f(x_0, y_0) &+ [D_1f(x_0, y_0)](x - x_0) + [D_2f(x_0, y_0)](y - y_0) + \frac{1}{2}[D_{11}f(x_0, y_0)](x - x_0)^2 + \\ &+ [D_{21}f(x_0,y_0)](x - x_0)(y - y_0) + \frac{1}{2}[D_{22}f(x_0, y_0)](y - y_0)^2 + o[(x - x_0)^2 + (y - y_0)^2]
+\end{align*}
+
+\begin{proof}$ $
+\\First, recall the identity 
+\begin{align}
+f(x, y) - f(x, y_0) - f(x_0, y) + f(x_0, y_0) = [D_{21}f(x_1, y_1)](x - x_0)(y - y_0).
+\end{align}
+To get the desired equality, I will use Taylor's formula on $f(x, y_0)$ as a function of $x$ and again on $f(x_0, y)$ as a function of $y$. Denote $g(x) = f(x, y_0)$ and $h(y) = f(x_0, y)$ and note that $g'(x_0) = D_1f(x_0, y_0), g''(x_0) = D_{11}f(x_0, y_0), h'(y_0) = D_2f(x_0, y_0)$, and $h''(y_0) = D_{22}f(x_0, y_0)$. Therefore, using the Taylor expansion of $g$ near the point $x_0$, we obtain:
+\begin{align*}
+g(x) = g(x_0) + g'(x_0)(x - x_0) + \frac{g''(x_0)}{2}(x - x_0)^2 + o[(x - x_0)^2]
+\end{align*}
+Similarly for $h$ near the point $y_0$, we obtain:
+\begin{align*}
+h(y) = h(y_0) + h'(y_0)(y - y_0) + \frac{h''(y_0)}{2}(y - y_0)^2 + o[(y - y_0)^2]
+\end{align*}
+Therefore, continuing from equation (0.1), we get:
+\begin{align*}
+f(x, y) &= f(x, y_0) + f(x_0, y) - f(x_0, y_0) + [D_{21}f(x_1, y_1)](x - x_0)(y - y_0)\\
+&= g(x) + h(y) - g(x_0) + [D_{21}f(x_1, y_1)](x - x_0)(y - y_0)\\
+&= g(x_0) + g'(x_0)(x - x_0) + \frac{g''(x_0)}{2}(x - x_0)^2 + o[(x - x_0)^2] + h(y_0) + h'(y_0)(y - y_0) \\
+&\qquad \qquad \qquad + \frac{h''(y_0)}{2}(y - y_0)^2 + o[(y - y_0)^2] - g(x_0) + [D_{21}f(x_1, y_1)](x - x_0)(y - y_0)\\
+&= f(x_0, y_0) + [D_1f(x_0, y_0)](x - x_0) + [D_2f(x_0, y_0)](y - y_0) + \frac{1}{2}[D_{11}f(x_0, y_0)](x - x_0)^2 \\
+&\qquad \qquad \qquad + [D_{21}f(x_0,y_0)](x - x_0)(y - y_0) + \frac{1}{2}[D_{22}f(x_0, y_0)](y - y_0)^2 + o[(x - x_0)^2 + (y - y_0)^2]
+\end{align*}
+Where the last step was obtained simply by canceling out the $g(x_0)$ and the $-g(x_0)$ and then replacing $g$ and $h$ with their definitions in terms of $f$. Furthermore, this is indeed the equality we wished to show. The only non-trivial bit of work done above was when writing $o[(x - x_0)^2] + o[(y - y_0)^2] = o[(x - x_0)^2 + (y - y_0)^2]$. This is easy to show if we denote $a(x) = o[(x - x_0)^2]$ and $b(y) = o[(y - y_0)^2]$ as $x \to x_0$, then by defining $c(x, y) = a(x) + b(y)$, we see that
+\begin{align*}
+\left|\lim_{(x, y) \to (x_0, y_0)} \frac{c(x, y)}{(x - x_0)^2 + (y - y_0)^2}\right| &= \lim_{(x, y) \to (x_0, y_0)} \frac{|a(x) + b(y)|}{|(x - x_0)^2 + (y - y_0)^2|}\\
+&\leq \lim_{(x, y) \to (x_0, y_0)} \frac{|a(x)|}{|(x - x_0)^2 + (y - y_0)^2|} + \lim_{(x, y) \to (x_0, y_0)} \frac{|b(x)|}{|(x - x_0)^2 + (y - y_0)^2|}\\
+&= \lim_{x \to x_0} \frac{|a(x)|}{|x - x_0|^2} + \lim_{y \to y_0} \frac{|b(x)|}{|y - y_0|^2}\\
+&= 0
+\end{align*}
+where the last equality follows since $a(x) = o[(x - x_0)^2]$ and $b(x) = o[(y - y_0)^2]$. Therefore, $c(x, y) = o[(x - x_0)^2 + (y - y_0)^2]$. Using this result cleans up my previous work and gives us the equality that we wanted (at least in a neighborhood where $(x, y) \to (x_0, y_0)$ that is). 
+\end{proof}
+
+\section*{Question 4}
+Let $X$ be an uncountable set. Let $\Sigma$ be the collection of all subsets $Y$ of $X$ such that either $Y$ or $Y^c$ is at most countable (i.e. countable or finite). For $Y \in \Sigma$, let $\mu(Y) = 1$ whenever $Y$ is uncountable, and $\mu(Y) = 0$ otherwise. Prove that $\Sigma$ is a $\sigma$-algebra and $\mu$ is a positive measure on $\Sigma$.
+
+\begin{proof}$ $
+\\First I will verify that $\Sigma$ is a $\sigma$-algebra:
+\begin{itemize}
+\item $X \in \Sigma$ since $X^c = \emptyset$ is a finite set (with zero elements). Therefore, $X$ is a subset of $X$ with a complement that is at most countable, so $X \in \Sigma$. 
+\item Assume that $Y \in \Sigma$. Then, it is trivial that $Y^c \in \Sigma$ since it requires that either $Y^c$ or $(Y^c)^c = Y$ is at most countable. However, that requirement is already satisfied by the fact that $Y \in \Sigma$. 
+\item Let $\{Y_n : n \in \mathbb{N}\} \subset \Sigma$.  Then, consider
+\begin{align*}
+Y = \bigcup_{n = 1}^\infty Y_n
+\end{align*}
+If each $Y_n$ is at most countable, then $Y$ is the countable union of (at most) countable sets, so $Y$ is also (at most) countable; therefore, $Y \in \Sigma$. Otherwise, there is some $Y_k \subset Y$ which is uncountable. However, we must have that $Y_k^c$ is indeed at most countable since $Y_k \in \Sigma$. Then, if we consider $Y^c$ which is expressed as 
+\begin{align*}
+Y^c = \left(\bigcup_{n = 1}^\infty Y_n \right)^c = \bigcap_{n = 1}^\infty Y_n^c
+\end{align*}
+We see that $Y^c \subset Y_k^c$ and since $Y_k^c$ is at most countable, then we must also have that $Y^c$ is at most countable. Therefore, we see that either $Y$ or $Y^c$ must be at most countable, so in fact $Y \in \Sigma$. 
+\end{itemize}
+The previous bullet points all illustrate that $\Sigma$ is indeed a $\sigma$-algebra. Next, I will show that $\mu$ is a positive measure on $\Sigma$. First, it is clear that $\mu$ maps into non-negative extended real numbers and is not identically positive infinity. Next, let $\{Y_n : n \in \mathbb{N}\} \subset \Sigma$ be a collection of disjoint sets in $\Sigma$. First, assume that each $Y_n$ is at most countable, then $\mu(Y_n) = 0$ for all $n$. Furthermore, denoting $Y$ as the union of all $Y_n$, we see (just as in the verification of $\Sigma$ being a $\sigma$-algebra) that $Y$ must also be at most countable. Therefore, $\mu(Y) = 0$ so we get:
+\begin{align*}
+\sum_{n = 1}^\infty \mu(Y_n) = \sum_{n = 1}^\infty 0 = 0 = \mu(Y) = \mu\left(\bigcup_{n = 1}^\infty Y_n \right)
+\end{align*}
+Next, assume that not every $Y_n$ is at most countable. I claim that there can only be a single $Y_n$ which is uncountable. If not assume there are some $Y_i$ and $Y_j$ which are both uncountable. Recall that each $Y_n$ is disjoint so in fact $Y_i \cap Y_j = \emptyset$, or alternatively $Y_i \subset Y_j^c$. However, since $Y_j \in \Sigma$ and $Y_j$ is uncountable, then we must have that $Y_j^c$ is at most countable. Therefore, we get that $Y_i$ which is uncountable is a subset of $Y_j^c$ which is at most countable -- which is a contradiction. Therefore, there cannot exist more than one uncountable set $Y_n$. 
+\\
+\\With this in place, say that $Y_j$ is our ONE uncountable set. Then $Y$ must clearly be uncountable as well since $Y_j \subset Y$. Therefore, $\mu(Y_j) = \mu(Y) = 1$ and $\mu(Y_n) = 0$ for all $n \neq j$. Using this, we have
+\begin{align*}
+\sum_{n = 1}^\infty \mu(Y_n) = \mu(Y_j) + \underset{n \neq j}{\sum_{n = 1}^\infty} \mu(Y_n) = 1 + \underset{n \neq j}{\sum_{n = 1}^\infty} 0 = 1 = \mu(Y) = \mu\left(\bigcup_{n = 1}^\infty Y_n \right)
+\end{align*}
+Therefore, $\mu$ is indeed a positive measure on $\Sigma$. 
+\end{proof}
+
+
+
+\end{document}

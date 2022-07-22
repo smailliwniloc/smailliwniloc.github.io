@@ -1,0 +1,131 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Analysis HW 8}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let $f \in \mathbf{L}(\mathbb{R}^n, \mathbb{R}^m)$. Define the kernel of $f$ as $\ker(f) = f^{-1}(0)$. Prove that $f$ is injective if and only if, $\ker(f) = \{0\}$. 
+
+\begin{proof}$ $
+\\First, assume that $f$ is injective. Assume also, for the sake of contradiction, that there exists some nonzero $x \in \mathbb{R}^n$ such that $f(x) = 0$. In other words, $x \in \ker(f)$. Notice that since $x$ is not the zero vector, then $x \neq 2x$, so by injectivity of $f$, $f(2x) \neq f(x) = 0$. On the other hand, using the linearity of $f$, we have
+\begin{align*}
+f(2x) = f(x + x) = f(x) + f(x) = 0 + 0 = 0
+\end{align*}
+which is a contradiction to our previous expression that $f(2x) \neq 0$. Therefore, our assumption was wrong, and the only vector in $\ker(f)$ is the zero vector. 
+\\
+\\Next, assume that $\ker(f) = \{0\}$. Next, let $x, y \in \mathbb{R}^n$ such that $x \neq y$. Equivalently, $x - y \neq 0$. In particular, $x - y \not \in \ker(f)$ so that $f(x - y) \neq 0$. However, by linearity of $f$, $f(x - y) = f(x) - f(y) \neq 0$. Equivalently, we get $f(x) \neq f(y)$, meaning that $f$ is injective. 
+\end{proof}
+
+
+\section*{Question 2}
+Let $f: \mathbb{R}^2 \to \mathbb{R}$ be given by 
+\begin{align*}
+f(x, y) = \begin{cases}
+\displaystyle \frac{xy}{x^2 + y^2}, &x^2 + y^2 \neq 0\\
+0, &x = y = 0.
+\end{cases}
+\end{align*}
+Prove that $D_1f(0,0) = D_2f(0,0) = 0$, but $f$ is not continuous at $(0,0)$. 
+
+\begin{proof}$ $
+\\First, calculating $D_1f(0,0)$:
+\begin{align*}
+D_1f(0,0) = \lim_{t \to 0} \frac{f((0,0) + (t, 0)) - f((0,0))}{t} = \lim_{t \to 0} \frac{f((t, 0))}{t} = \lim_{t \to 0} \frac{\frac{t \cdot 0}{t^2 + 0^2}}{t} =\lim_{t \to 0} \frac{0}{t^3} = 0
+\end{align*}
+The calculation for $D_2f(0, 0)$ would be identical since $f$ is symmetric in $x$ and $y$. Therefore, $D_1f(0, 0) = D_2f(0, 0) = 0$. Next, I will show that $f$ is not continuous at $(0, 0)$. To do this, I will show that $\lim_{(x, y) \to (0, 0)}f(x, y) \neq 0$. Let $v_t = (t, t)$, then consider
+\begin{align*}
+\lim_{t \to 0} f(v_t) = \lim_{t \to 0} \frac{t^2}{t^2 + t^2} = \lim_{t \to 0} \frac{t^2}{2t^2} = \lim_{t \to 0} \frac{1}{2} = \frac{1}{2} \neq 0
+\end{align*}
+Thus, the limit $\lim_{(x, y) \to (0, 0)} f(x, y)$, if it even exists, can certainly not be equal to zero since it is not equal to zero for this path through the origin. Thus, $f$ is not continuous at the point $(0, 0)$. 
+\end{proof}
+
+\section*{Question 3}
+Let $X$ be an open subset of $\mathbb{R}^n$ and let $f: X \to \mathbb{R}^m$ be such that $D_1f, D_2f, \ldots, D_nf$ are defined and bounded in $X$. Prove that $f$ is continuous. 
+
+\begin{proof}$ $
+\\First, I will fix $x_0 = (x_0^1, x_0^2, \ldots, x_0^n) \in X$. Then, for $x = (x^1, x^2, \ldots, x^n)$, define the sequence $x_i = x_{i - 1} + (x^i - x_0^i)e_i$ for $i = 1, 2, \ldots, n$. Notice $x_1 = (x^1, x_0^2, x_0^3,  \ldots, x_0^n)$, $x_2 = (x^1, x^2, x_0^3, \ldots, x_0^n)$, $ \ldots$, $ x_n = x$. 
+\\
+\\Next, for the intervals $I_i = [-|x^i - x_0^i|, |x_i - x_0^i|]$ for $i = 1, 2, \ldots, n$, define the following functions: $\gamma_i: I_i \to X$ as $\gamma_i(t) = x_{i - 1} + te_i$ for $i = 1, 2, \ldots, n$. Then, examine the function $(f \circ \gamma_i): I_i \to \mathbb{R}^m$ and notice
+\begin{align*}
+(f \circ \gamma_i)'(t) = \lim_{h \to 0} \frac{(f \circ \gamma)(t + h) - (f \circ \gamma)(t)}{h} = \lim_{h \to 0} \frac{f(x_{i - 1} + (t + h)e_i) - f(x_{i - 1} + te_i)}{h} = D_i f(x_{i - 1} + te_i)
+\end{align*}
+Since $D_i f$ exists, then we can see that $f \circ \gamma_i$ is indeed differentiable and by extension must be continuous on $I_i$. Therefore, using the mean value theorem over the interval $[0, x^i - x_0^i]$ (or on $[0, x_0^i - x^i]$, whichever is nonempty), we get that there exists some $t_i \in I_i^\circ$ (in particular in one of the open half-intervals described above) such that
+\begin{align*}
+\frac{(f \circ \gamma_i)(x^i - x_0^i) - (f \circ \gamma_i)(0)}{x^i - x_0^i} &= (f \circ \gamma_i)'(t_1)\\
+\implies \frac{f(x_{i - 1} + (x^i - x_0^i)e_i) - f(x_{i - 1})}{x^i - x_0^i} &= D_i f(x_{i - 1} + t_i e_i)\\
+\implies \frac{f(x_i) - f(x_{i - 1})}{x^i - x_0^i} &= D_i f(x_{i - 1} + t_i e_i)\\
+\implies f(x_i) - f(x_{i - 1}) &= D_i f(x_{i - 1} + t_i e_i ) (x^i - x_0^i)
+\end{align*}
+Next, recall that each $D_i f$ is bounded. Therefore, there exists some $M_i \in \mathbb{R}$ such that $|D_i f(x)| \leq M_i$ for all $x \in X$. Let $M := \max \{M_i\}_{i = 1}^n$ which gives
+\begin{align*}
+|f(x_i) - f(x_{i - 1})| = |D_i f(x_{i - 1} + t_i e_i ) (x^i - x_0^i)| \leq M_i|x^i - x_0^i| \leq M|x^i - x_0^i|
+\end{align*}
+With all of this in place, let $r > 0$ be given and let $|x - x_0| < r/(M \sqrt{n})$ Notice, we have the following:
+\begin{align*}
+|f(x) - f(x_0)| &= |f(x_n) - f(x_0)|\\
+&= |f(x_n) - f(x_{n - 1}) + f(x_{n - 1}) - f(x_{n - 2}) + \cdots - f(x_1) + f(x_1) - f(x_0)|\\
+&\leq |f(x_n) - f(x_{n - 1})| + |f(x_{n - 1}) - f(x_{n - 2})| + \cdots + |f(x_1) - f(x_0)|\\
+&\leq M \bigg( |x^n - x_0^n| + |x^{n - 1} - x_0^{n - 1}| + \cdots + |x^1 - x_0^1| \bigg)\\
+&= M \bigg\langle x - x_0, (1, 1, \ldots, 1) \bigg\rangle\\
+&\leq M |x - x_0| \; |(1, 1, \ldots, 1)| &\text{by Cauchy-Schwarz}\\
+&= M \sqrt{n} |x - x_0|\\
+&< M \sqrt{n} \frac{r}{M \sqrt{n}}\\
+&= r
+\end{align*}
+Thus, for every $r > 0$, we can find some $s$ (which is $r/(M \sqrt{n})$) such that $|x - x_0| < s$ implies that $|f(x) - f(x_0)| < r$ which means that $f$ is continuous at $x_0$. Since $x_0$ was arbitrary, we know that $f$ is continuous in all of $X$. 
+\end{proof}
+
+\section*{Question 4}
+Let $X$ be an open subset of $\mathbb{R}^n$, and let $f: X \to \mathbb{R}$ be differentiable. Suppose that $x_0 \in X$ is a point of maximum of $f$ (that is, $\forall \; x \in X$, $f(x_0) \geq f(x)$). Prove that $f'(x_0) = 0$. 
+
+\begin{proof}$ $
+\\Let $X$ be an open subset of $\mathbb{R}^n$ and let $x_0 = (x_0^1, x_0^2, \ldots, x_0^n) \in X$ be a point of maximum of the differentiable function $f: X \to \mathbb{R}$. Notice that since $X$ is open, there is an open ball around $x_0$ contained in $X$. In particular, for each coordinate of $x_0$, there is some $r_i$ such that for all $t \in I_i := (-r_i, r_i)$ we have $x_0 + te_i \in X$. With this in mind, define $g_i : I_i \to \mathbb{R}$ such that 
+\begin{align*}
+g_i(t) = f(x_0 + te_i)
+\end{align*}
+Notice that since $f$ attains its maximum at $x_0$, then $g_i$ attains its maximum at $t = 0$. Therefore, we can use the one-dimensional version of Fermat's Theorem for maximum points to say that $g_i'(0) = 0$. Notice that $g_i'$ exists because $f$ itself is differentiable. Therefore, we get
+\begin{align*}
+g_i'(0) &= \lim_{t \to 0} \frac{g_i(t) - g_i(0)}{t}\\
+\implies 0 &= \lim_{t \to 0} \frac{f(x_0 + te_i) - f(x_0)}{t}\\
+\implies 0 &= D_i f(x_0)
+\end{align*}
+Therefore, each partial derivative of $f$ at $x_0$ is equal to zero. Then, since the partial derivatives fully determine the form of the derivative of a differentiable function, we get that for any arbitrary $v = (v^1, v^2, \ldots, v^n) \in \mathbb{R}^n$
+\begin{align*}
+f'(x_0)v = \sum_{k = 1}^n v^k D_k f(x_0) = \sum_{k = 1}^n v^k (0) = 0
+\end{align*}
+Thus, since $f'(x_0)$ maps any vector in $\mathbb{R}^n$ to the point $0 \in \mathbb{R}$, we can conclude that $f'(x_0)$ must be identically zero. 
+\end{proof}
+
+
+\end{document}

@@ -1,0 +1,76 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+
+\title{Analysis Homework 2}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let $(X, d)$ be a metric space, and let $(x_n)$ be a convergent sequence in $X$. Prove that every subsequence of the sequence $(x_n)$ converges to the same limit. 
+
+\begin{proof}$ $
+\\Since $(x_n)$ converges, let $x$ be its limit. Furthermore, let us fix an $r > 0$. Thus, by the convergence, there exists some $N \in \mathbb{N}$ such that for all $n \geq N$ we have $d(x, x_n) < r$. Next, let $(x_{n_k})$ be a subsequence of $(x_n)$. Note that $n_k \geq k$ for all $k$. Thus, if we consider $k \geq N$ we also have $n_k \geq N$ which means that $d(x, x_{n_k}) < r$ for all $k \geq N$ meaning $(x_{n_k})$ also converges to $x$. 
+\end{proof}
+
+\section*{Question 2}
+Let $(X, d)$ be a metric space, and let $(x_n)$ be a Cauchy sequence in $X$. Suppose that a subsequence of the sequence $(x_n)$ converges. Prove that the sequence $(x_n)$ converges as well and to the same limit. 
+
+\begin{proof}$ $
+\\Let us fix some $r > 0$. Let $(x_{n_k})$ be the convergent subsequence of $(x_n)$ whose limit is $x$. Since the sequence converges, we can say that there exists some $N_1 \in \mathbb{N}$ such that $d(x, x_{n_k}) < r/2$ for all $k \geq N_1$. Furthermore, since $(x_n)$ is Cauchy, we know that there exists some $N_2 \in \mathbb{N}$ such that $d(x_n, x_m) < r/2$ for all $n, m \geq N_2$. In particular, since $n_k \geq k$ for all $k$, we can say that $d(x_n, x_{n_k}) < r/2$ for all $n, k \geq N_2$. Thus, if we let $N := \max\{N_1, N_2\}$, then we can say the following inequalities hold for all $n, k \geq N$:
+\begin{align*}
+d(x, x_n) &\leq d(x, x_{n_k}) + d(x_{n_k}, x_n)\\
+&< \frac{r}{2} + \frac{r}{2}\\
+&= r
+\end{align*}
+Therefore, we can conclude that $(x_n)$ also converges to the limit $x$. 
+\end{proof}
+
+\section*{Question 3}
+Let $(X, d)$ be a complete metric space, and let $Y \subset X$. Prove that $(Y, d)$ is a complete metric space if and only if $Y$ is closed in $X$. 
+
+\begin{proof}$ $
+\\Let us first assume that $Y$ is closed in $X$. Let $(x_n) \subset Y$ be a Cauchy sequence. Since $Y \subset X$, and $X$ is complete, we have that $x_n \to x \in X$ as $n \to \infty$. Since this sequence (which is a subset of $Y$) converges to $x$, then we know that $x$ is a limit point of $Y$. Thus, since $Y$ is closed, we can say that $x \in Y$ which means the Cauchy sequence $(x_n)$ converges in $Y$ making $Y$ complete. 
+\\
+\\Next, assume that $(Y, d)$ is complete, but $Y$ is not closed in $X$. Since $Y$ is not closed, that means that there exists some limit point $x \in Y'$ which is not in $Y$. Since $x$ is a limit point of $Y$, we can construct a sequence $(x_n) \subset Y$ which is convergent to $x$ (thus, is a Cauchy sequence). However, we have now constructed a Cauchy sequence in $Y$ which converges to a point not in $Y$. This is a contradiction to $(Y, d)$ being complete, so our assumption that $Y$ is not closed must have been false. Thus, $Y$ is closed in $X$. 
+\end{proof}
+
+\section*{Question 4}
+Let $(X,d)$ be a complete metric space. Prove the following: if $\{F_n\}$ is a collection of non-empty closed bounded subsets of $X$ such that $F_1 \supset F_2 \supset F_3 \supset \ldots$ and $$\lim_{n \to \infty} \text{diam}(F_n) = 0, \quad \text{then}$$ $$ \exists \; x \in X \text{ such that } \bigcap_{n = 1}^\infty F_n = \{x\}.$$
+
+\begin{proof}$ $
+\\Note that since the diameter of each $F_n$ is tending towards zero, then the diameter of the intersection is also zero. Thus, anything with a diameter of zero is either empty or has exactly one point, so we simply need to prove that the intersection is nonempty. 
+\\
+\\To do this, I will construct a sequence $(x_n)$ where $x_i \in F_i$ for all $i \in \mathbb{N}$. Note this is possible since each $F_i$ is non-empty. I claim that this sequence is Cauchy. To prove this, I will fix some $N \in \mathbb{N}$ and note that diam$\{x_n : n \geq N\} = \sup\{d(x_n, x_m) : n, m \geq N\} \leq $ diam$(F_n) = \sup\{d(x, y) : x, y \in F_n\}$ since $\{x_n : n \geq N\} \subset F_n$. Thus, since the diameters of the $F_n$ go to zero, the diameter of $\{x_n : n \geq N\}$ also goes to zero meaning $(x_n)$ is a Cauchy sequence. Thus, since $(X, d)$ is a complete metric space, we know that $(x_n)$ converges to some $x \in X$.
+\\
+\\Furthermore, since each $F_n$ is closed, then we can use the result from the previous question to conclude that $(F_n, d)$ is also a complete metric space. Then, for each $F_i$, we can consider the tail of $(x_n)$ starting at $x_i$ to be a new sequence which also must be Cauchy and is contained in $F_i$, thus converges in $F_i$. Since this is true for all of the subsets, we can finally conclude that $(x_n)$ converges inside of each $F_n$. Thus, it converges in their intersection, meaning the intersection is nonempty and is in fact equal to $\{x\}$. 
+\end{proof}
+
+
+\end{document}
