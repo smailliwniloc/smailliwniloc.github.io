@@ -1,0 +1,271 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\theoremstyle{definition}
+\newtheorem{verify}{Verification}
+\newtheorem*{verify*}{Verification}
+
+\numberwithin{equation}{section}
+
+
+\title{Applied Math HW 1}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Show that any linear transformation $f: \mathbb{R}^n \to \mathbb{R}^m$ can be expressed as $$f(x) = Ax$$ where $A$ is an $m \times n$ matrix. 
+
+\begin{proof}$ $
+\\Let $x = (x_1, x_2, \ldots, x_n)^T$ be a column vector in $\mathbb{R}^n$. Then, recall that $x$ can be expressed as
+\begin{align*}
+x = x_1e_1 + x_2e_2 + \ldots + x_ne_n
+\end{align*}
+where $(e_j)$ is the standard basis of $\mathbb{R}^n$. Thus, by the linearity of $f$, we can say
+\begin{align*}
+f(x) &= f(x_1e_1 + x_2e_2 + \ldots + x_ne_n)\\
+&= f(x_1e_1) + f(x_2e_2) + \ldots + f(x_ne_n)\\
+&= x_1f(e_1) + x_2f(e_2) + \ldots + x_nf(e_n)\\
+&= \sum_{j = 1}^n x_jf(e_j)
+\end{align*}
+Next, denote $f(e_j)$ as the following vector in $\mathbb{R}^m$:
+\begin{align*}
+f(e_j) &= \begin{bmatrix}
+a_{1j}\\
+a_{2j}\\
+\vdots\\
+a_{mj}
+\end{bmatrix}
+\end{align*}
+Then, substitute this expression into the previous summation to get:
+\begin{align*}
+f(x) &= \sum_{j = 1}^n x_jf(e_j)\\
+&= \sum_{j = 1}^n x_j \begin{bmatrix}
+a_{1j}\\
+a_{2j}\\
+\vdots\\
+a_{mj}
+\end{bmatrix}\\
+&= x_1 \begin{bmatrix}
+a_{11}\\
+a_{21}\\
+\vdots\\
+a_{m1}
+\end{bmatrix} + x_2 \begin{bmatrix}
+a_{12}\\
+a_{22}\\
+\vdots\\
+a_{m2}
+\end{bmatrix} + \cdots + x_n \begin{bmatrix}
+a_{1n}\\
+a_{2n}\\
+\vdots\\
+a_{mn}
+\end{bmatrix}\\
+&= \begin{bmatrix}
+x_1 a_{11} + x_2 a_{12} + \ldots + x_n a_{1n}\\
+x_1 a_{21} + x_2 a_{22} + \ldots + x_n a_{2n}\\
+\vdots\\
+x_1 a_{m1} + x_2 a_{m2} + \ldots + x_n a_{mn}
+\end{bmatrix}\\
+&= \begin{bmatrix}
+a_{11} & a_{12} & \cdots & a_{1n}\\
+a_{21} & a_{22} & \cdots & a_{2n}\\
+\vdots & & \ddots\\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{bmatrix} \begin{bmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{bmatrix}\\
+&= Ax
+\end{align*}
+which finishes the proof.
+\end{proof}
+
+\section*{Question 2}
+Show that any matrix $A \in \mathbb{R}^{m \times n}$ with $m < n$ has full rank if and only if the map $x \mapsto Ax$ is surjective.
+
+\begin{proof}$ $
+\\First, assume $A \in \mathbb{R}^{m \times n}$ is of full rank, i.e. Rank$(A) = m$. By definition of Rank, this means that $A$ has $m$ linearly independent columns. Let $S = \{a_1, a_2, \ldots, a_m\} \subset \mathbb{R}^m$ be these linearly independent columns (Note that since $m < n$, this is not all columns of $A$). Note that $S$ must be a basis for $\mathbb{R}^m$ since it is a set of $m$ linearly independent vectors of $\mathbb{R}^m$. Therefore, any $y \in \mathbb{R}^m$ can be expressed as a linear combination of vectors in $S$. Thus, since the matrix-vector multiplication $Ax$ can be thought of as a linear combination of the columns of $A$, we know that there exists some solution to the equation $Ax = y$ which means that the map $x \mapsto Ax$ is surjective. 
+\\
+\\Next, assume that the map $x \mapsto Ax$ is surjective. This means that for any $y \in \mathbb{R}^m$, we can find a solution to the equation $Ax = y$. Since this matrix-vector multiplication can be thought of as a linear combination of the columns of $A$, we can say that $y$ is an element of the column space of $A$. Since this can be done for any $y \in \mathbb{R}^m$, we can say that the column space of $A$ is equal to $\mathbb{R}^m$. In other words, we have that dim(Column Space) = Rank$(A) = m$. Thus, $A$ is full rank. 
+\end{proof}
+
+\section*{Question 3}
+Let $A \in \mathbb{R}^{n \times n}$, with rank$(A) = 1$. 
+\begin{enumerate}[label = (\alph*)]
+\item Show that $A$ can be written as an outer product $uv^T$, with $u, v \in \mathbb{R}^n \backslash \{0\}$. 
+	\begin{itemize}
+	\item \begin{proof}
+	Since Rank$(A) = 1$, we know that $A$ only has 1 linearly independent column. In other words, every column of $A$ is equal to a scalar multiple of the first column of $A$:
+	\begin{align*}
+	A &= \begin{bmatrix}
+	\vline & \vline & & \vline\\
+	a_1 & a_2 & \ldots & a_n\\
+	\vline & \vline & & \vline
+	\end{bmatrix}\\
+	&= \begin{bmatrix}
+	\vline & \vline & & \vline\\
+	\beta_1 a_1 & \beta_2 a_1 & \ldots & \beta_n a_1\\
+	\vline & \vline & & \vline
+	\end{bmatrix}
+	\end{align*}
+	Where $\beta_i \in \mathbb{R}$ for $i = 1, 2, \ldots, n$ (Clearly, $\beta_1 = 1$ but the presentation seemed nicer to leave it as is). Thus, if we define 
+	\begin{align*}
+	u := a_1 = \begin{bmatrix}
+	u_1\\u_2\\\vdots\\u_n
+	\end{bmatrix} && v := \begin{bmatrix}
+	\beta_1\\\beta_2\\\vdots\\\beta_n
+	\end{bmatrix}
+	\end{align*}
+	Then we get that
+	\begin{align*}
+	uv^T &= \begin{bmatrix}
+	u_1\\u_2\\\vdots\\u_n
+	\end{bmatrix} \cdot \begin{bmatrix}
+	\beta_1 & \beta_2 & \cdots & \beta_n
+	\end{bmatrix}\\
+	&= \begin{bmatrix}
+	u_1 \beta_1 & u_1 \beta_2 & \cdots & u_1 \beta_n\\
+	u_2 \beta_1 & u_2 \beta_2 & \cdots & u_2 \beta_n\\
+	\vdots & \vdots & \ddots & \vdots\\
+	u_n \beta_1 & u_n \beta_2 & \cdots & u_n \beta_n\\ 
+	\end{bmatrix}\\
+	&= \begin{bmatrix}
+	\vline & \vline & & \vline\\
+	\beta_1 a_1 & \beta_2 a_1 & \ldots & \beta_n a_1\\
+	\vline & \vline & & \vline
+	\end{bmatrix}\\
+	&= A
+	\end{align*}
+	Notice that $a_1$ is nonzero and that not every $\beta_i$ is zero or otherwise $A$ would be the zero matrix which has Rank of zero. Thus, $u, v \neq 0$ and we have shown the desired statement. 
+	\end{proof}
+	\end{itemize}
+\item Give an interpretation of null$(A)$ and range$(A)$ in terms of the vectors $u$ and $v$ in part (a).
+	\begin{itemize}
+	\item Recall that null$(A)$ is the set of all vectors $x$ such that $Ax = 0$. However, in our case, this is equivalent to evaluating $uv^Tx = 0$. Since Matrix multiplication is an associative operation, we can evaluate this as $u(v^T x) = 0$. Note that $v^T x \in \mathbb{R}$ so $u(v^T x) = 0 \iff v^T x = 0$. Therefore, $x$ must be an orthogonal vector to $v$, meaning we can interpret null$(A)$ as
+	\begin{align*}
+	\text{null}(A) = \{x \in \mathbb{R}^n \; | \; x \text{ is orthogonal to } v\}
+	\end{align*}
+	\item Recall that range$(A)$ is the span of the columns of $A$. However in our case, every column is a multiple of $u$, so we can say that 
+	\begin{align*}
+	\text{range}(A) = \{\beta u \; | \; \beta \in \mathbb{R}\}
+	\end{align*}
+	\end{itemize}	 
+\end{enumerate}
+
+\section*{Question 4}
+For $A, B \in \mathbb{C}^{n \times n}$, show that $(AB)^* = B^* A^*$.
+
+\begin{proof}$ $
+\\Let us do this by direct computation. I will use the notation $[C]_{ij}$ to represent the $(i,j)$-th component of the matrix $C$. 
+\begin{align*}
+[AB]_{ij} &= \sum_{k = 1}^n [A]_{ik} [B]_{kj} &\text{by definition of matrix product}\\
+\implies [(AB)^*]_{ij} &= \overline{ \sum_{k = 1}^n [A]_{jk} [B]_{ki} } &\text{since adjoint swaps indices then conjugates}\\
+&= \sum_{k = 1}^n \overline{[A]_{jk} [B]_{ki}}\\
+&= \sum_{k = 1}^n \overline{[A]_{jk}} \; \; \overline{ [B]_{ki}}\\
+&= \sum_{k = 1}^n \overline{[B]_{ki}} \; \; \overline{[A]_{jk} }\\
+&= \sum_{k = 1}^n [B^*]_{ik} [A^*]_{kj} &\text{since adjoint swaps indices then conjugates}\\
+&= [B^* A^*]_{ij} &\text{by definition of matrix product}
+\end{align*}
+Therefore, I have shown that the $(i,j)$-th component of $(AB)^*$ is equal to the $(i,j)$-th component of $B^* A^*$ which proves the two matrices are equal. 
+\end{proof}
+
+\section*{Question 5}
+\begin{enumerate}[label = (\alph*)]
+\item Show that $$||x||_\infty \leq ||x||_1 \leq n ||x||_\infty$$.
+	\begin{proof}$ $
+	\begin{itemize}
+	\item First, note that 
+	\begin{align*}
+	||x||_\infty = \max_{1 \leq j \leq n} |x_j| && \text{ and } && ||x||_1 = \sum_{j = 1}^n |x_j|
+	\end{align*}
+	Thus, let $k$ be the index of the maximum coordinate of $x$ so that $||x||_\infty = |x_k|$. Then, we clearly have that 
+	\begin{align*}
+	||x||_\infty &= |x_k|\\
+	&\leq |x_1| + |x_2| + \ldots + |x_k| + \ldots + |x_n|\\
+	&= ||x||_1
+	\end{align*}
+	which proves the first inequality. 
+	\item Next, notice that since $|x_k|$ is the maximum of all coordinates of $x$ that $|x_i| \leq |x_k|$ for all $i = 1, 2, \ldots, n$. Thus, 
+	\begin{align*}
+	||x||_1 &= |x_1| + |x_2| + \ldots + |x_n|\\
+	&\leq |x_k| + |x_k| + \ldots + |x_k|\\
+	&= n|x_k|\\
+	&= n||x||_\infty
+	\end{align*}
+	Thus, I have shown both inequalities hold true. 
+	\end{itemize}
+	\end{proof}
+\item Show that 
+$$
+||A|| = \sqrt{\sum_{i = 1}^m \sum_{j = 1}^n a_{ij}^2}, \quad A = [a_{ij}] \in \mathbb{R}^{m \times n}
+$$
+defines a matrix norm on $\mathbb{R}^{m \times n}$.
+\begin{proof}$ $
+	\begin{itemize}
+	\item Notice that $a_{ij}^2$ is guaranteed to be non-negative since $a_{ij} \in \mathbb{R}$. Thus, $||A||$ is the square root of the sum of non-negative numbers, so $||A|| \geq 0$ which clearly has equality when $A$ is the zero matrix. On the other hand, if $||A|| = 0 \implies ||A||^2 = 0$, then we can conclude that each $a_{ij}^2 = 0$ since we're evaluating a sum and each term is non-negative. Thus, $a_{ij} = 0$ for all $i, j$. 
+	\item Next, notice the following:
+	\begin{align*}
+	||A||^2 &= \sum_{i = 1}^m \sum_{j = 1}^n a_{ij}^2\\
+	&= \sum_{j = 1}^n \sum_{i = 1}^m a_{ij}^2 \\
+	&= \sum_{j = 1}^n ||a_j||_2^2 &\text{by definition of vector 2-norm}\\
+	&= \left|\left|\begin{bmatrix}
+	\vline\\
+	a_1\\
+	\vline\\
+	\\
+	\vline\\
+	a_2\\
+	\vline\\
+	\vdots\\
+	\vline\\
+	a_{n}
+	\end{bmatrix}
+	\right|\right|_2^2\\
+	\end{align*}
+	The final expression is simply the vector 2-norm of the vector composed of each column of $A$ stacked on top of each other. Thus, the matrix norm we are given can be thought of as the vector 2-norm for a vector $\widetilde{A} \in \mathbb{R}^{m\cdot n}$ where the tilde simply represents a re-indexing of the matrix $A$. Thus, we can use the fact that the vector 2-norm satisfies the Triangle Inequality to say:
+	\begin{align*}
+	||A + B|| &= ||\widetilde{A + B}||_2\\
+	&= ||\widetilde{A} + \widetilde{B}||_2\\
+	&\leq ||\widetilde{A}||_2 + ||\widetilde{B}||_2\\
+	&= ||A|| + ||B||
+	\end{align*}
+	Thus, the Triangle Inequality is satisfied for the Matrix Norm
+	\item Lastly, let $\alpha \in \mathbb{R}$ be a scalar, then
+	\begin{align*}
+	||\alpha A||^2 &= \sum_{i = 1}^m \sum_{j = 1}^n (\alpha a_{ij})^2\\
+	&= \sum_{i = 1}^m \sum_{j = 1}^n \alpha^2 a_{ij}^2\\
+	&= \alpha^2 \sum_{i = 1}^m \sum_{j = 1}^n a_{ij}^2\\
+	&= \alpha^2 ||A||\\
+	\implies ||\alpha A|| &= |\alpha| \; ||A||
+	\end{align*}
+	Thus, this function satisfies all three required properties of a norm. 
+	\end{itemize}
+\end{proof}
+\end{enumerate}
+
+\end{document}
