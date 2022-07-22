@@ -1,26 +1,19 @@
-[Comment]: # (Below is a list of reference links to be used in the markdown file)
+# My webpage
 
-[gaming]: /gaming "My game collection"
-[running]: /running "This is currently empty"
-[math]: /math "This is currently empty"
-[ksuMath]: https://www.math.ksu.edu/ "K-State Math Homepage"
-[github]: https://github.com/smailliwniloc "My GitHub Page"
+## About the page
 
-[Comment]: # (Here is the start of the actual page content)
+This will primarily be a place for me to publish and store some information about myself. This will include personal projects, hobbies, and a professional resume. At the moment, the page is far from complete. In this README, I will display the features currently in place, those in progress, and those to be added in the future. 
 
-# Hi, I'm Colin Williams!
+### In place
+* Landing page
+* Gaming collection
 
-## About Me
-I'm currently finishing my Master's in Mathematics at [Kansas State University][ksuMath]. My areas of interest are: 
-* Scattering Theory
-* Geometric Analysis
-* Harmonic Analysis
-* Functional Analysis
-* Machine Learning
+### In progress
+* Education/Math page
+* Running page
 
-If you're interested in seeing what I work on, [go here][math] to check out some of my research as well as a collection of notes, homework, and resources that I find useful. 
-
-Outside of math, I have started working on several programming projects as well. Most of these are available on my [GitHub Homepage][github], and include some Python game development, coding challenges, and my work on this page. I'm not much of an athlete, but I do run from time to time. At some point, I plan on adding a collection of my races and times on a [page][running] here. I'm also a pretty big Nintendo and tabletop gaming fan so you can [check out my gaming library][gaming] on here as well. 
-
-
-
+### In the future
+* Professional career page
+* Display of coding projects
+* Integrated web app or web game
+* Interesting API usage
