@@ -1,0 +1,357 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Advanced Calc. Homework 9}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{15.1}
+Determine which of the following series converge. Justify your answers.
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \sum \frac{(-1)^n}{n}$
+	\begin{itemize}
+	\item This series \boxed{\text{converges}} by the Alternating Series Test since $\frac{1}{n} \to 0$ as $n \to \infty$.
+	\end{itemize}
+\item $\displaystyle \sum \frac{(-1)^nn!}{2^n}$
+	\begin{itemize}
+	\item This series \boxed{\text{diverges}} by the Ratio test, since $\lim|\frac{a_{n+1}}{a_n}| = \lim\left(\frac{(n+1)!}{2^{n+1}} \cdot \frac{2^n}{n!}\right) = \lim\left(\frac{n + 1}{2}\right) = +\infty > 1$.
+	\end{itemize}
+\end{enumerate}
+
+\section*{15.2}
+Determine which of the following series converge. Justify your answers.
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \sum \left[\sin\left(\frac{n\pi}{6}\right)\right]^n$
+	\begin{itemize}
+	\item Note, that in order for a series $\sum a_n$ to converge, that $\lim(a_n)$ must be 0. That also means that for any subsequence, $\lim(a_{n_k}) = 0$. However, in this case for $\displaystyle a_n =  \left[\sin\left(\frac{n\pi}{6}\right)\right]^n$ and choosing $n_k = 12k + 3$, we get:
+	\begin{align*}
+	a_{n_k} &= \left[\sin\left(\frac{(12k + 3)\pi}{6}\right)\right]^{12k + 3}\\
+	&= \left[\sin\left(2k\pi + \frac{\pi}{2}\right)\right]^{12k + 3}\\
+	&= \left[\sin\left(\frac{\pi}{2}\right)\right]^{12k + 3}\\
+	&= (1)^{12K + 3}\\
+	&= 1
+	\end{align*}
+	\item Hence, $\lim(a_{n_k}) = 1 \neq 0$. Therefore, $\lim(a_n) \neq 0$. From this, we can conclude that \boxed{\text{the series diverges}}.
+	\end{itemize}
+\item $\displaystyle \sum \left[\sin\left(\frac{n\pi}{7}\right)\right]^n$
+	\begin{itemize}
+	\item For this series, I will use the root test. I will also note that $|\sin(x)| \leq 1$ for all $x$. However, $|\sin(x)| = 1$ only for $x$ of the form $x = k\pi + \frac{\pi}{2}$. Thus, for $x = \frac{n\pi}{7}$, $|\sin(x)| < 1$ since $x$ is never of the aforementioned form. Thus, 
+	\begin{align*}
+	\sqrt[n]{|a_n|} &= \sqrt[n]{\left|\left[\sin\left(\frac{n\pi}{7}\right)\right]^n \right|}\\
+	&= \sqrt[n]{\left|\sin\left(\frac{n\pi}{7}\right)\right|^n}\\
+	&= \left|\sin\left(\frac{n\pi}{7}\right)\right|\\
+	&< 1 &\text{by the above comments}
+	\end{align*}
+	Thus, \boxed{\text{this series converges by the root test}}.
+	\end{itemize}
+\end{enumerate}
+
+\section*{15.3}
+Show $\displaystyle \sum_{n = 2}^{\infty} \frac{1}{n(\log(n))^p}$ converges if and only if $p > 1$.
+
+\begin{answer*}{$ $}
+\\First, let's assume that $p > 1$ and note that this sum is strictly less than $\displaystyle \frac{1}{2(\log(2))^p} + $ the area under the curve $\displaystyle \frac{1}{x(\log(x))^p}$ from $2$ to $\infty$. This translates to:
+\begin{align*}
+\sum_{n = 2}^{\infty} \frac{1}{n(\log(n))^p} &< \frac{1}{2(\log(2))^p} + \int_2^{\infty} \frac{1}{x(\log(x))^p}dx\\
+&= \frac{1}{2(\log(2))^p} + \lim_{n \to \infty} \int_2^n \frac{1}{x(\log(x))^p}dx\\
+&= \frac{1}{2(\log(2))^p} + \lim_{n \to \infty} \int_{\log(2)}^{\log(n)} \frac{1}{u^p}du &\text{with $u = \log(x)$ and $du = \frac{1}{x}dx$}\\
+&= \frac{1}{2(\log(2))^p} + \lim_{n \to \infty} \frac{u^{-p + 1}}{-p+1} \bigg|_{u = \log(2)}^{u = \log(n)}\\
+&= \frac{1}{2(\log(2))^p} + \lim_{n \to \infty} \frac{1}{1 - p}\left(\frac{1}{(\log(n))^{p - 1}} - \frac{1}{(\log(2))^{p - 1}}\right)
+\end{align*}
+Here the limit only applies to the first term in the parentheses in which the denominator goes to $\infty$ as $n \to \infty$. Therefore, that term goes to $0$ as $n \to \infty$, so the whole expression is finite, meaning the series converges. Since these calculations were only valid under the assumption that $p > 1$, we have shown one direction of the statement. Now assume that $p \leq 1$. We can now use a similar statement about the integrals and say the following:
+\begin{align*}
+\sum_{n = 2}^{\infty} \frac{1}{n(\log(n))^p} &> \int_2^{\infty} \frac{1}{x(\log(x))^p}dx\\
+&= \lim_{n \to \infty} \int_2^n \frac{1}{x(\log(x))^p}dx\\
+&= \lim_{n \to \infty} \int_{\log(2)}^{\log(n)} \frac{1}{u^p}du &\text{with $u = \log(x)$ and $du = \frac{1}{x}dx$}\\
+&= \lim_{n \to \infty} 
+\begin{cases}
+	\log(u) \bigg|_{u = \log(2)}^{u = \log(n)} &\text{for $p = 1$}\\
+	\frac{u^{-p + 1}}{-p+1} \bigg|_{u = \log(2)}^{u = \log(n)} &\text{for $p < 1$}
+\end{cases}\\
+&= \lim_{n \to \infty} 
+\begin{cases}
+	\log(\log(n)) - \log(\log(2))  &\text{for $p = 1$}\\
+	\frac{1}{1 - p}\left((\log(n))^{1 - p} - (\log(2))^{1 - p}\right) &\text{for $p < 1$}
+\end{cases}\\
+\end{align*}
+However, in both cases, these expressions diverge since $\log(\log(n)) \to \infty$ as $n \to \infty$ and $(\log(n))^{1 - p} \to \infty$ as $n \to \infty$ since $1 - p > 0$. Thus, in this case, the series is greater than a divergent integral, so the series must also be divergent. Therefore, the series is convergent precisely when $p > 1$, just as desired. 
+\end{answer*}
+
+\section*{15.4}
+Determine which of the following series converge. Justify your answers.
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \sum_{n = 2}^{\infty} \frac{1}{\sqrt{n}\log(n)}$
+	\begin{itemize}
+	\item As we have shown in 15.3, $\sum \frac{1}{n\log(n)}$ diverges. Furthermore, we know that $\sqrt{n}\log(n) < n\log(n)$ for all $n \geq 2$ since $\sqrt{n} < n$ for all $n \geq 2$. Thus, $\frac{1}{\sqrt{n}\log(n)} > \frac{1}{n\log(n)}$ for all $n \geq 2$ which implies that \\\boxed{\text{this series diverges by the Comparison Test with} \frac{1}{n\log(n)}}
+	\end{itemize}
+\item $\displaystyle \sum_{n = 2}^{\infty} \frac{\log(n)}{n}$
+	\begin{itemize}
+	\item Here, we know that $\sum \frac{1}{n}$ diverges, and we also know that $\frac{\log(n)}{n} > \frac{1}{n}$ for all $n \geq 3$ (assuming this is the natural logarithm) since $\log(n) > 1$ for all $n \geq 3$. Thus, \boxed{\text{this series diverges by the Comparison Test with }\frac{1}{n}}
+	\end{itemize}
+\item $\displaystyle \sum_{n = 4}^{\infty} \frac{1}{n(\log n)(\log \log n)}$
+	\begin{itemize}
+	\item Here we can note that this series is strictly greater than the integral of that expression from 4 to $\infty$. Thus, calculating the integral, we get:
+	\begin{align*}
+	\int_4^{\infty} \frac{1}{x(\log x)(\log \log x)}dx &= \lim_{N \to \infty} \int_4^N \frac{1}{x(\log x)(\log \log x)}dx\\
+	&= \lim_{N \to \infty} \int_{\log \log 4}^{\log \log N} \frac{1}{u}du &\text{with $u = \log \log x$ and $du = \frac{1}{x\log x}dx$}\\
+	&= \lim_{N \to \infty} \log(u) \bigg|_{u = \log \log 4}^{u = \log \log N}\\
+	&= \lim_{N \to \infty} \log \log \log(N) - \log \log \log (4)
+	\end{align*}
+	\item However, with the limit, this term goes to $\infty$ as $N \to \infty$; thus, the integral is divergent. Therefore, since the series is strictly greater than this integral, we know that \boxed{\text{the series also diverges}}
+	\end{itemize}
+\item $\displaystyle \sum_{n = 2}^{\infty} \frac{\log(n)}{n^2}$
+	\begin{itemize}
+	\item I claim that this is convergent. To show this, I will first show that $\log(n) < \sqrt{n}$ for all $n \in \mathbb{N}$. Consider $f(x) = \sqrt{x} - \log(x)$, then $f'(x) = \frac{1}{2\sqrt{x}} - \frac{1}{x} = \frac{1}{\sqrt{x}}\left(\frac{1}{2} - \frac{1}{\sqrt{x}}\right) \geq 0 \iff \frac{1}{2} - \frac{1}{\sqrt{x}} \geq 0 \iff x \geq 4$. Also note that $f(1) = 1, f(2) \approx 0.721, f(3) \approx 0.622, f(4) \approx 0.614$. Thus, with these values and the fact that $f'(x) \geq 0$ for all $x \geq 4$, we can conclude that $f(x) > 0$ for all $x \geq 1$. In particular, this means that $\log(n) < \sqrt{n}$ for all $n \in \mathbb{N}$. Thus, $\frac{\log(n)}{n^2} < \frac{\sqrt{n}}{n^2} = \frac{1}{n^{1.5}}$. We know that the series using this last term converges by the $p$-series test since $1.5 > 1$. Thus, our series of interest \boxed{\text{converges by Comparison Test with} \frac{1}{n^{1.5}}}
+	\end{itemize}
+\end{enumerate}
+
+\section*{15.6}
+\begin{enumerate}[label = (\alph*)]
+\item Give an example of a divergent series $\sum a_n$ for which $\sum a_n^2$ converges.
+	\begin{itemize}
+	\item We know that for $a_n = \frac{1}{n}$, $\sum a_n$ diverges. However, for $a_n^2 = \frac{1}{n^2}$, $\sum a_n^2$ converges, both by the $p$-series test.
+	\end{itemize}
+\item Observe that if $\sum a_n$ is a convergent series of nonnegative terms, then $\sum a_n^2$ also converges (see Exercise 14.7).
+	\begin{itemize}
+	\item Note that if $\sum a_n$ is convergent, then $\lim(a_n) = 0$ which implies that there exists some $N$ such that $a_n < 1$ for all $n \geq N$. In particular, this means that $a_n^2 < a_n$ for all $n \geq N$, thus, $\sum_{n = N}^{\infty} a_n^2$ converges by Comparison Test, which also means that $\sum a_n^2$ converges since a finite number ($N$) of terms does not affect convergence. 
+	\end{itemize}
+\item Give an example of a convergent series $\sum a_n$ for which $\sum a_n^2$ diverges. 
+	\begin{itemize}
+	\item Let $a_n = \frac{(-1)^n}{\sqrt{n}}$, then $\sum a_n$ converges by the Alternating Series Test since $\lim(a_n) = 0$ and $a_n$ is alternating. However, $a_n^2 = \frac{1}{n}$ and we know that $\sum a_n^2$ diverges by the $p$-series test.
+	\end{itemize}
+\end{enumerate}
+
+\section*{17.5}
+\begin{enumerate}[label = (\alph*)]
+\item Prove that if $m \in \mathbb{N}$, then the function $f(x) = x^m$ is continuous on $\mathbb{R}$.
+\item Prove every polynomial function $p(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$ is continuous on $\mathbb{R}$.
+\end{enumerate}
+
+\begin{proof}{\textbf{(a)}}
+\\I will prove this by using the sequential definition of continuity. Thus, let $(x_n)$ be some sequence that converges to $x_0 \in \mathbb{R}$ and let $f(x) = x^m$. Therefore, 
+\begin{align*}
+\lim_{n \to \infty} f(x_n) &= \lim_{n \to \infty} x_n^m\\
+&= \lim_{n \to \infty} \underbrace{x_n \cdot x_n \cdots x_n}_{m \text{ times}}\\
+&= \underbrace{\left(\lim_{n \to \infty} x_n\right) \cdot \left(\lim_{n \to \infty} x_n \right) \cdots \left(\lim_{n \to \infty} x_n \right)}_{m \text{ times}} &\text{by Limit Theorems}\\
+&= \underbrace{x_0 \cdot x_0 \cdots x_0}_{m \text{ times}} &\text{since $x_n \to x_0$ as $n \to \infty$}\\
+&= x_0^m\\
+&= f(x_0)
+\end{align*}
+Thus, $f$ satisfies the sequential definition of continuity at every point $x_0 \in \mathbb{R}$, so $f$ is continuous on $\mathbb{R}$.
+\end{proof}
+
+\begin{proof}{\textbf{(b)}}
+\\First, note that the constant function $f(x) = a_0$ for $a_0 \in \mathbb{R}$, is clearly continuous since $|f(x) - f(x_0)| = 0 < \varepsilon$ for every $\varepsilon > 0$ and any $x_0 \in \mathbb{R}$. Furthermore, by using part (a) of this question and Theorem 17.3, we know that $a_ix^i$ is continuous for all $i \in \mathbb{N}$. Therefore, since $p(x) = a_0 + a_1x + a_2x^2 + \cdots + a_nx^n$ is the sum of $n+1$ different continuous functions, then Theorem 17.4(i) assures us that $p(x)$ is also a continuous function. 
+\end{proof}
+
+\section*{17.7}
+\begin{enumerate}[label = (\alph*)]
+\item Observe that if $k \in \mathbb{R}$, then the function $g(x) = kx$ is continuous by Exercise 17.5.
+\item Prove that $f(x) = |x|$ is continuous on $\mathbb{R}$.
+\item Use parts (a) and (b) and Theorem 17.5 to give another proof of Theorem 17.3.
+\end{enumerate}
+
+\begin{answer*}{\textbf{(a)}}
+\\Simply note that $g(x)$ is a first degree polynomial of the form $g(x) = a_0 + a_1x$ for $a_0 = 0$ and $a_1 = k$. Thus, Exercise 17.5(b) assures us that $g(x)$ is a continuous function. 
+\end{answer*}
+
+\begin{proof}{\textbf{(b)}}
+\\I will prove this using the $\varepsilon$-$\delta$ definition of limits. Let $\varepsilon > 0$ and $x_0 \in \mathbb{R}$ be fixed. We wish to show that $\big||x| - |x_0|\big| < \varepsilon$ whenever $|x - x_0| < \delta$ for sufficiently small $\delta$. First, note that 
+\begin{align*}
+\big||x| - |x_0|\big| &= \big||x - x_0 + x_0| - |x_0|\big|\\
+&= \big||(x - x_0) + x_0| - |x_0|\big|\\
+&\leq \big||x - x_0| + |x_0| - |x_0|\big| &\text{by the Triangle Inequality}\\
+&= \big||x-x_0|\big|\\
+&= |x - x_0|
+\end{align*}
+Thus, if $\delta = \varepsilon$, then whenever $|x - x_0| < \delta$, $\big||x| - |x_0|\big| \leq |x - x_0| < \delta = \varepsilon$. Thus, $|x|$ is continuous on $\mathbb{R}$.
+\end{proof}
+
+\begin{proof}{\textbf{(c)}}
+\\Let $g(x) = kx$ and $f(x) = |x|$. Then, by parts (a) and (b) of this question, $g$ and $f$ are both continuous functions on $\mathbb{R}$. Furthermore, let $h$ be any real-valued function with dom$(h) \subseteq \mathbb{R}$. Let's also assume that $h$ is continuous at $x_0 \in $ dom$(h)$.
+\\
+\\First, since $g$ is continuous on all of $\mathbb{R}$, then in particular $g$ is continuous at $h(x_0)$. Thus, Theorem 17.5 guarantees that $g \circ h = k h$ is a continuous function at $x_0$. 
+\\
+\\Next, since $f$ is continuous on all of $\mathbb{R}$, then in particular, $f$ is continuous at $h(x_0)$. Thus, Theorem 17.5 guarantees that $f \circ h = |h|$ is a continuous function at $x_0$. This completes the proof of Theorem 17.3.
+\end{proof}
+\section*{17.9}
+Prove each of the following functions is continuous at $x_0$ by verifying the $\varepsilon$--$\delta$ property of Theorem 17.2.
+\begin{enumerate}[label = (\alph*)]
+\item $f(x) = x^2, x_0 = 2$;
+	\begin{itemize}
+	\item Let $\varepsilon > 0$, then we wish to show that $|x^2 - 2^2| < \varepsilon$ whenever $|x - 2| < \delta$ for $\delta$ sufficiently small. 
+	\item Since $\delta$ will likely be very small, let us assume that $\delta \leq 1$. Thus, 
+	\begin{align*}
+	|x^2 - 2^2| = |x^2 - 4| = |(x - 2)(x + 2)| = |x - 2||x + 2| < |x - 2|\cdot 5
+	\end{align*}
+	\item The last inequality here follows from the assumption that $\delta \leq 1$. In other words, $|x - 2| < 1 \implies 1 < x < 3 \implies |x + 2| < 5$.
+	\item Therefore, choosing $\delta = \min\{1, \frac{\varepsilon}{5}\}$ yields:
+	\begin{align*}
+	|x^2 - 2^2| &< |x - 2| \cdot 5\\
+	&< \delta \cdot 5\\
+	&\leq \frac{\varepsilon}{5} \cdot 5\\
+	&= \varepsilon
+	\end{align*}
+	\item Which proves that $f$ is continuous at $x_0$.
+	\end{itemize}
+\item $f(x) = \sqrt{x}, x_0 = 0$;
+	\begin{itemize}
+	\item Let $\varepsilon > 0$, then we wish to show that $|\sqrt{x} - \sqrt{0}| < \varepsilon$ whenever $|x - 0| < \delta$ for $\delta$ sufficiently small. 
+	\item Note that $|\sqrt{x} - \sqrt{0}| = \sqrt{x} < \varepsilon$ if and only if $x < \varepsilon^2$.
+	\item Thus, choose $\delta = \varepsilon^2$. This yields:
+	\begin{align*}
+	|\sqrt{x} - \sqrt{0}| = \sqrt{x} = \sqrt{|x - 0|} < \sqrt{\varepsilon^2} = \varepsilon
+	\end{align*}
+	\item Which proves that $f$ is continuous at $x_0$.
+	\end{itemize}
+\item $\displaystyle f(x) = 
+		\begin{cases}
+			x\sin\left(\frac{1}{x}\right) &\text{ for } x \neq 0\\
+			0 &\text{ for } x = 0
+		\end{cases} \quad ,x_0 = 0$;
+	\begin{itemize}
+	\item Let $\varepsilon > 0$, then we wish to show that $|x\sin\left(\frac{1}{x}\right) - 0| < \varepsilon$ whenever $|x - 0| < \delta$ for $\delta$ sufficiently small. 
+	\item Let us choose $\delta = \varepsilon$ to obtain the following:
+	\begin{align*}
+	\left|x\sin\left(\frac{1}{x}\right) - 0\right| &= \left|x\sin\left(\frac{1}{x}\right)\right|\\
+	&= |x|\left|\sin\left(\frac{1}{x}\right)\right|\\
+	&\leq |x| &\text{since $|\sin(\theta)| \leq 1$ for all $\theta$}\\
+	&= |x - 0|\\
+	&< \delta\\
+	&= \varepsilon
+	\end{align*}
+	\item Which proves that $f$ is continuous at $x_0$.
+	\end{itemize}
+\item $g(x) = x^3, x_0$ arbitrary.
+	\begin{itemize}
+	\item Let $\varepsilon > 0$, then we wish to show that $|x^3 - x_0^3| < \varepsilon$ whenever $|x - x_0| < \delta$ for $\delta$ sufficiently small. 
+	\item Since $\delta$ will likely be very small, let us assume that $\delta \leq 1$. Thus, 
+	\begin{align*}
+	|x^3 - x_0^3| = |(x - x_0)(x^2 + xx_0 + x_0^2)| &= |x - x_0||x^2 + xx_0 + x_0^2|\\
+	&\leq |x - x_0|(|x|^2 + |x||x_0| + |x_0|^2) &\text{by Triangle Inequality}\\
+	&< |x - x_0|(1 + 3|x_0| + 3|x_0|^2)
+	\end{align*}
+	\item The last inequality follows from the assumption that $\delta \leq 1$. In other words,
+	\begin{align*}
+	|x - x_0| &< 1\\
+	\implies -1 - |x_0| \leq -1 + x_0 < x &< 1 + x_0 \leq 1 + |x_0|\\ 			\implies |x| &< 1 + |x_0|\\
+	\implies |x|^2 + |x||x_0| + |x_0|^2 &< (1 + |x_0|)^2 + (1 + |x_0|)|x_0| + |x_0|^2\\
+	&= 1 + 2|x_0| + |x_0|^2 + |x_0| + |x_0|^2 + |x_0|^2\\
+	&= 1 + 3|x_0| + 3|x_0|^2
+	\end{align*}
+	\item Therefore, choosing $\delta = \min\{1, \frac{\varepsilon}{1 + 3|x_0| + 3|x_0|^2}\}$ yields:
+	\begin{align*}
+	|x^3 - x_0^3| &< |x - x_0|(1 + 3|x_0| + 3|x_0|^2)\\
+	&< \delta \cdot (1 + 3|x_0| + 3|x_0|^2)\\
+	&\leq \frac{\varepsilon}{1 + 3|x_0| + 3|x_0|^2} \cdot (1 + 3|x_0| + 3|x_0|^2)\\
+	&= \varepsilon
+	\end{align*}
+	\item Which proves that $g$ is continuous at $x_0$.
+	\end{itemize}
+\end{enumerate}
+
+\section*{17.10}
+Prove the following functions are discontinuous at the indicated points. You may use either Definition 17.1 or the $\varepsilon$--$\delta$ property in Theorem 17.2.
+\begin{enumerate}[label = (\alph*)]
+\item $f(x) = 1$ for $x > 0$ and $f(x) = 0$ for $x \leq 0$, $x_0 = 0$;
+	\begin{itemize}
+	\item Let $x_n = \frac{1}{n}$. Then $(x_n)$ is a sequence of positive real numbers that converges to $x_0 = 0$. Thus, $f(x_n) = 1$ for all $n$ since $x_n > 0$ for all $n$ which implies that $\lim_{n \to \infty} f(x_n) = 1 \neq 0 = f(0)$. Thus, $f$ is discontinuous at $x_0$. 
+	\end{itemize}
+\item $g(x) = \sin\left(\frac{1}{x}\right)$ for $x \neq 0$ and $g(0) = 0, x_0 = 0$;
+	\begin{itemize}
+	\item Let $x_n = \frac{1}{(2n\pi + \frac{\pi}{2})}$. Then $(x_n)$ is a sequence that converges to $x_0 = 0$. Thus, $\displaystyle g(x_n) = \sin\left(\frac{1}{\frac{1}{2n\pi + \frac{\pi}{2}}}\right) = \sin\left(2n\pi + \frac{\pi}{2}\right) = \sin\left(\frac{\pi}{2}\right) = 1$ which implies that $\lim_{n \to \infty} g(x_n) = 1 \neq 0 = g(0)$. Thus, $g$ is discontinuous at $x_0$.
+	\end{itemize}
+\item sgn$(x) = -1$ for $x < 0$, sgn$(x) = 1$ for $x > 0$, and sgn$(0) = 0, x_0 = 0$.
+	\begin{itemize}
+	\item Again, let $x_n = \frac{1}{n}$ making $(x_n)$ a sequence of positive real numbers that converges to $x_0 = 0$. Thus, sgn$(x_n) = 1$ for all $n$ since $x_n > 0$ for all $n$. Therefore, $\lim_{n \to \infty}$ sgn$(x_n) = 1 \neq 0 = $ sgn$(0)$. Thus, sgn$(\cdot)$ is discontinuous at $x_0$. 
+	\end{itemize}
+\end{enumerate}
+
+\section*{17.12}
+\begin{enumerate}[label = (\alph*)]
+\item Let $f$ be a continuous real-valued function with domain $(a,b)$. Show that if $f(r) = 0$ for each rational number $r$ in $(a,b)$, then $f(x) = 0$ for all $x \in (a,b)$.
+\item Let $f$ and $g$ be continuous real-valued functions on $(a,b)$ such that $f(r) = g(r)$ for each rational number $r$ in $(a,b)$. Prove that $f(x) = g(x)$ for all $x \in (a,b)$.
+\end{enumerate}
+
+\begin{proof}{\textbf{(a)}}
+\\I will prove this by contradiction: assume that $f$ is continuous in $(a,b)$ and $f(r) = 0$ for all $r \in (a,b) \cap \mathbb{Q}$, but there exists some $x_0 \in (a,b)$ such that $|f(x_0)| > 0$.
+\\By Theorem 17.3 (or Question 17.7(c)), $|f|$ is also a continuous function on $(a,b)$. In particular, $|f|$ is continuous at $x_0$. That means that for every $\varepsilon > 0$ there exists some $\delta > 0$ such that for all $x \in (a,b)$ satisfying $|x - x_0| < \delta$, we have $\big||f(x)| - |f(x_0)|\big| < \varepsilon$. In particular, we can choose $\varepsilon = \frac{|f(x_0)|}{2} > 0$ which gives us
+\[-\frac{|f(x_0)|}{2} < |f(x)| - |f(x_0)| < \frac{|f(x_0)|}{2}\]
+\[\implies \frac{|f(x_0)|}{2} < |f(x)| < \frac{3|f(x_0)|}{2}\]
+\[\implies |f(x)| > 0\]
+This means for all $x \in (x_0 - \delta, x_0 + \delta)$ we have $|f(x)| > 0$. However, by the Denseness of the Rationals inside of the Real Numbers, there exists some $r_0 \in \mathbb{Q}$ where also $r_0 \in (x_0 - \delta, x_0 + \delta)$ which implies that $|f(r_0)| > 0$, which is a contradiction to the definition of $f$ being 0 for all rational numbers in $(a,b)$, so our assumption must have been false, so there does not exist an $x_0$ such that $|f(x_0)| > 0 \implies f(x) = 0$ for all $x \in (a,b)$.
+\end{proof}
+
+\begin{proof}{\textbf{(b)}}
+\\Define $h(x) = f(x) - g(x)$. Then clearly $h$ is a continuous function on $(a,b)$ by Theorem 17.3/17.4(i). Also for $r \in (a,b) \cap \mathbb{Q}$, $h(r) = f(r) - g(r) = 0$ since $f(r) = g(r)$ for each rational $r$ in $(a,b)$. Then, by part (a) of this question, $h(x) = 0$ for all $x \in (a,b)$ which implies $f(x) - g(x) = 0 \implies f(x) = g(x)$ for all $x \in (a,b)$, completing the proof. 
+\end{proof}
+
+\section*{17.13}
+\begin{enumerate}[label = (\alph*)]
+\item Let $f(x) = 1$ for rational numbers $x$ and $f(x) = 0$ for irrational numbers. Show $f$ is discontinuous at every $x$ in $\mathbb{R}$.
+	\begin{itemize}
+	\item Let $x_0 \in \mathbb{R}$ be arbitrary. I will show that $f$ is discontinuous at $x_0$. First, let $d_n$ represent the integer part of $x_0$ plus the first $n$ decimal places of $x_0$ (For example, if $x_0 = \pi$, then $d_1 = 3.1, d_2 = 3.14, d_3 = 3.141, d_4 = 3.1415, \ldots)$ From this, define
+	\[x_n = \begin{cases}
+		d_n &\text{if $n$ is even}\\
+		d_n + \frac{\sqrt{2}}{n} &\text{if $n$ is odd}
+	\end{cases}\]
+	\item It is clear that $\lim(d_n) = x_0$ and $\lim(\frac{\sqrt{2}}{n}) = 0$. Thus, $\lim(x_n) = x_0$. However, for even $n$ we have $f(x_n) = 1$ since $d_n$ is rational and for odd $n$ we have $f(x_n) = 0$ since $d + \frac{\sqrt{2}}{n}$ is irrational. Therefore $\lim f(x_n)$ does not exist. In particular, $\lim f(x_n) \neq f(x_0)$, so $f$ is not continuous for any $x_0 \in \mathbb{R}$.
+	\end{itemize}
+\item Let $h(x) = x$ for rational numbers $x$ and $h(x) = 0$ for irrational numbers. Show $h$ is continuous at $x = 0$ and at no other point.
+	\begin{itemize}
+	\item First, I will show continuity at $x_0 = 0$. Let $\varepsilon > 0$ be given, then let's examine $|h(x) - h(x_0)|$, 
+	\begin{align*}
+	|h(x) - h(x_0)| = |h(x) - h(0)| = |h(x) - 0| &= |h(x)|\\
+	&= \begin{cases}
+		|x| &\text{if $x \in \mathbb{Q}$}\\
+		0 &\text{if $x \not \in \mathbb{Q}$}
+	\end{cases}\\
+	\end{align*}
+	\item Thus, if we set $\delta = \varepsilon$ in the $\varepsilon$--$\delta$ definition of continuity, we get $|x - x_0| < \varepsilon \implies |x| < \varepsilon$. Furthermore, since $|x| \geq 0$, we know that $|h(x)| \leq |x|$ for all $x$ which implies $|h(x)| \leq |x| < \varepsilon$, proving continuity at $x_0 = 0$.
+	\item Now, I will show discontinuity at any $x_0 \neq 0$. I will prove this by contradiction: assume $h$ is continuous at some $x_0 \neq 0$. In the $\varepsilon$--$\delta$ definition of continuity, choose $\varepsilon = \frac{|x_0|}{2}$ ($> 0$ since $x_0 \neq 0$), then there must exist some $\delta$ such that for any $x \in (x_0 - \delta, x_0 + \delta)$, we have $|h(x) - h(x_0)| < \frac{|x_0|}{2}$. However, this cannot possibly be true for all $x \in (x_0 - \delta, x_0 + \delta)$ because if $x_0$ is rational, there there is an irrational $x$ in $(x_0 - \delta, x_0 + \delta)$ which forces $|h(x) - h(x_0)| = |0 - x_0| = |x_0| > \frac{|x_0|}{2} = \varepsilon$. Alternatively, if $x_0$ is irrational, then by the Denseness of the Rationals in the Reals, there exists a rational $x$ in $(x_0 - \delta, x_0 + \delta)$ such that $|x| > |x_0|$ which forces $|h(x) - h(x_0)| = |x - 0| = |x| > |x_0| > \frac{|x_0|}{2} = \varepsilon$. Therefore, there is never an instance in which $|x - x_0| < \delta \implies |h(x) - h(x_0)| < \frac{|x_0|}{2}$ which means $h$ can never be continuous (if $x_0 \neq 0$).
+	\end{itemize}
+\end{enumerate}
+
+
+\section*{17.15}
+Let $f$ be a real-valued function whose domain is a subset of $\mathbb{R}$. Show $f$ is continuous at $x_0$ in dom$(f)$ if and only if, for every sequence $(x_n)$ in dom$(f) \backslash \{x_0\}$ converging to $x_0$, we have $\lim f(x_n) = f(x_0)$.
+\\
+\\Let's label these premises as (i) and (ii):
+\begin{enumerate}[label = (\roman*)]
+\item $f$ is continuous at $x_0 \in $ dom$(f)$.
+\item $\lim f(x_n) = f(x_0)$ for every sequence $(x_n)$ in dom$(f) \backslash \{x_0\}$ that converges to $x_0$. 
+\end{enumerate}
+
+\begin{proof}{\textbf{(i) $\implies$ (ii)}}
+\\By the sequential definition of continuity, since (i) says $f$ is continuous at $x_0$, we can conclude that $\lim f(x_n)= f(x_0)$ for all sequences $(x_n) \subseteq $ dom$(f)$ that converge to $x_0$. In particular, since dom$(f) \backslash \{x_0\} \subset$ dom$(f)$, we know that $\lim f(x_n) = f(x_0)$ for every sequence $(x_n) \subseteq $ dom$(f) \backslash \{x_0\}$ that converges to $x_0$, proving this direction.
+\end{proof}
+
+\begin{proof}{\textbf{(ii) $\implies$ (i)}}
+\\Now assume that $\lim f(x_n) = f(x_0)$ for every sequence $(x_n)$ in dom$(f) \backslash \{x_0\}$ that converges to $x_0$. However, assume that (i) fails, i.e. that $f$ is not continuous at $x_0$. This means that there exists some sequence $(x_n)$ in dom$(f)$ that converges to $x_0$ but that $\lim f(x_n) \neq f(x_0)$. In other words, there exists some $\varepsilon > 0$ such that $|f(x_n) - f(x_0)| \geq \varepsilon$ for all $n$. This statement means that $x_n \neq x_0$ for all $n$ (since if $x_n = x_0$ for some $n$, then $|f(x_n) - f(x_0)| = 0 < \varepsilon$). Thus, we can see that $(x_n) \subseteq $ dom$(f) \backslash \{x_0\}$ which contradicts (ii) being true. Thus, (i) must be true. 
+\end{proof}
+
+
+\end{document}

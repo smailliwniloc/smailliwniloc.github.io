@@ -1,0 +1,334 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Advanced Calc. Homework 12}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{24.1}
+Let $\displaystyle f_n(x) = \frac{1 + 2\cos^2(nx)}{\sqrt{n}}$. Prove carefully that $(f_n)$ converges uniformly to 0 on $\mathbb{R}$.
+
+\begin{proof}{$ $}
+\\Let's begin by fixing $\varepsilon > 0$ and examining $|f_n(x) - 0|$ for $x \in \mathbb{R}$:
+\begin{align*}
+|f_n(x) - 0| = |f_n(x)| &= \left|\frac{1 + 2\cos^2(nx)}{\sqrt{n}}\right|\\
+&= \frac{|1 + 2\cos^2(nx)|}{|\sqrt{n}|}\\
+&\leq \frac{|1| + |2\cos^2(nx)|}{\sqrt{n}} &\text{by Triangle Inequality}\\
+&= \frac{1 + 2|\cos(nx)|^2}{\sqrt{n}}\\
+&\leq \frac{1 + 2}{\sqrt{n}} &\text{since $|\cos(\theta)| \leq 1$ for all $\theta$}\\
+&= \frac{3}{\sqrt{n}}
+\end{align*}
+Thus, if we set $\displaystyle N := \frac{9}{\varepsilon^2}$, we can obtain:
+\begin{align*}
+|f_n(x) - 0| &\leq \frac{3}{\sqrt{n}} &\text{from above}\\
+&< \frac{3}{\sqrt{N}} &\text{for all $n > N$}\\
+&= \frac{3}{\sqrt{9/\varepsilon^2}}\\
+&= \frac{3}{3/\varepsilon} = \varepsilon
+\end{align*}
+Thus, we have shown the existence of $N$ (that does not depend on $x$) such that $|f_n(x) - 0| < \varepsilon$ for all $x \in \mathbb{R}$ and all $n > N$, proving that $(f_n)$ converges uniformly to 0 on $\mathbb{R}$.
+\end{proof}
+
+\section*{24.2}
+For $x \in [0, \infty)$, let $\displaystyle f_n(x) = \frac{x}{n}$.
+\begin{enumerate}[label = (\alph*)]
+\item Find $f(x) = \lim f_n(x)$.
+	\begin{itemize}
+	\item $\displaystyle \lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} \frac{x}{n} = 0$. Thus, $f(x) \equiv 0$.
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0,1]$.
+	\begin{itemize}
+	\item First, note that for $x \in [0,1]$, $\displaystyle f_n(x) = \frac{x}{n} \leq \frac{1}{n}$. Thus, fixing $\varepsilon > 0$ and choosing $\displaystyle N := \frac{1}{\varepsilon}$ yields
+	\begin{align*}
+	|f_n(x) - 0| = |f_n(x)| = \left|\frac{x}{n}\right| &\leq \left|\frac{1}{n}\right| &\text{as discussed above}\\
+	&= \frac{1}{n}\\
+	&< \frac{1}{N} &\text{for all $n > N$}\\
+	&= \frac{1}{1/\varepsilon} = \varepsilon
+	\end{align*}
+	\item Therefore, we have shown the existence of $N$ (that does not depend on $x$) such that $|f_n(x) - 0| < \varepsilon$ for all $x \in [0,1]$ and all $n > N$, proving that \boxed{(f_n) \text{ converges uniformly to 0 on } [0,1]}.
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0, \infty)$.
+	\begin{itemize}
+	\item Suppose (for contradiction) that $f_n \to f$ uniformly on $[0, \infty)$. This means that taking $\varepsilon = 1$, there exists some $N$ such that $\displaystyle \left|\frac{x}{n}\right| < 1$ for all $n > N$. In particular, we need to have $\displaystyle \left|\frac{x}{N+1}\right| < 1$. However, taking $x = N + 2$ yields $\frac{x}{N + 1} > 1$ violating the assumption that $f_n \to f$ uniformly. Thus, \\\boxed{f_n \text{ does not converge uniformly to 0 on } [0, \infty)}
+	\end{itemize}
+\end{enumerate}
+
+\section*{24.3}
+For $x \in [0, \infty)$, let $\displaystyle f_n(x) = \frac{1}{1 + x^n}$.
+\begin{enumerate}[label = (\alph*)]
+\item Find $f(x) = \lim f_n(x)$.
+	\begin{itemize}
+	\item First, note that $x^n \to 0$ for $x \in [0,1)$, $x^n \to 1$ for $x = 1$ and $x^n \to \infty$ for $x > 1$. Thus, 
+	\[f(x) = \begin{cases}
+	1 &\text{for $x \in [0,1)$}\\
+	\frac{1}{2} &\text{for $x = 1$}\\
+	0 &\text{for $x > 1$}
+	\end{cases}\]
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0,1]$.
+	\begin{itemize}
+	\item Theorem 24.3 tells us that if $f_n \to f$ uniformly on a set $S$, then if each $f_n$ is continuous on $S$, we must have that $f$ is continuous on $S$ as well. However, each $f_n$ is indeed continuous since the numerator, 1, and the denominator, $1 + x^n$, are both continuous functions (and the denominator never equals 0). Additionally, it is clear that $f$ above is not continuous on $[0,1]$ since it has a discontinuity as $x = 1$. Thus, \boxed{\text{this convergence cannot be uniform}} by the contrapositive to Theorem 24.3.
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0, \infty)$.
+	\begin{itemize}
+	\item If we had uniform continuity on $[0, \infty)$, then in particular, we would have uniform continuity on $[0,1]$. However, we showed in the previous question that this is not the case. Thus, \boxed{\text{this convergence cannot be uniform}}
+	\end{itemize}
+\end{enumerate}
+
+\section*{24.4}
+For $x \in [0, \infty)$, let $\displaystyle f_n(x) = \frac{x^n}{1 + x^n}$.
+\begin{enumerate}[label = (\alph*)]
+\item Find $f(x) = \lim f_n(x)$.
+	\begin{itemize}
+	\item Using the same analysis on $x^n$ as we did in the last question, we can see that 
+	\[f(x) = \begin{cases}
+	0 &\text{for $x \in [0, 1)$}\\
+	\frac{1}{2} &\text{for $x = 1$}\\
+	1 &\text{for $x > 1$}
+	\end{cases}\]
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0,1]$.
+	\begin{itemize}
+	\item We will again use the contrapositive to Theorem 24.3. Note that each $f_n$ is continuous since $x^n$ and $1 + x^n$ are both continuous functions and $1 + x^n \neq 0$ for all $x \in [0, 1]$. However, $f$ is clearly not continuous on $[0,1]$ since $f$ has a discontinuity at $x = 1$. Thus, \boxed{\text{this convergence cannot be uniform}} by the contrapositive to Theorem 24.3.
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0, \infty)$.
+	\begin{itemize}
+	\item Since this convergence is not uniform on $[0,1]$, it cannot be uniformly convergent on $[0,\infty)$, so \\ \boxed{\text{this convergence cannot be uniform}}
+	\end{itemize}
+\end{enumerate}
+
+\section*{24.5}
+For $x \in [0, \infty)$, let $\displaystyle f_n(x) = \frac{x^n}{n + x^n}$.
+\begin{enumerate}[label = (\alph*)]
+\item Find $f(x) = \lim f_n(x)$.
+	\begin{itemize}
+	\item Once again, using the same analysis on $x^n$, we can see that for $x \leq 1$, $f_n \to 0$. However, for $x > 1$, we need to consider:
+	\begin{align*}
+	\lim_{n \to \infty} \frac{x^n}{n + x^n} = \lim_{n \to \infty} \frac{1}{1 + n/x^n} &= 1 &\text{since $n/x^n \to 0$ as exponential terms}\\
+	& &\text{grow faster than linear terms with base $>1$}
+	\end{align*}
+	\item Thus, we can define $f$ as 
+	\[f(x) = \begin{cases}
+	0 &\text{for $x \in [0,1]$}\\
+	1 &\text{for $x > 1$}
+	\end{cases}\]
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0,1]$.
+	\begin{itemize}
+	\item Let's fix $\varepsilon > 0$ and examine $|f_n(x) - f(x)| = |f_n(x) - 0|  = |f_n(x)|$ for $x \in [0,1]$:
+	\begin{align*}
+	|f_n(x)| &= \left|\frac{x^n}{n + x^n}\right|\\
+	&= \frac{|x^n|}{|n + x^n|}\\
+	&= \frac{x^n}{n + x^n} &\text{since the numerator and denominator are both positive}\\
+	&\leq \frac{1}{n + x^n} &\text{since $x \leq 1$}\\
+	&\leq \frac{1}{n + 0} &\text{since $x \geq 0$}\\
+	&= \frac{1}{n}
+	\end{align*}
+	\item Thus, choosing $N := 1/\varepsilon$ yields:
+	\begin{align*}
+	|f_n(x)| &\leq \frac{1}{n} &\text{by the above comments}\\
+	&< \frac{1}{N} &\text{for all $n > N$}\\
+	&= \frac{1}{1/\varepsilon} = \varepsilon
+	\end{align*}
+	\item Therefore, we have shown the existence of $N$ (that does not depend on $x$) such that $|f_n(x) - 0| < \varepsilon$ for all $x \in [0,1]$ and all $n > N$, proving that \boxed{(f_n) \text{ converges uniformly to 0 on } [0,1]}.
+	\end{itemize}
+\item Determine whether $f_n \to f$ uniformly on $[0, \infty)$.
+	\begin{itemize}
+	\item First, note that each $f_n$ is continuous on $[0,\infty)$ since $x^n$ and $n + x^n$ are both continuous functions and $n + x^n \neq 0$ for all $x \in [0, \infty)$. However, $f$ is not continuous on $[0, \infty)$ since $f$ has different left and right limits at the point $x = 1$, thus $x = 1$ is a discontinuity. Thus, by applying the contrapositive of Theorem 24.3, we can conclude that \boxed{\text{this convergence is not uniform}}
+	\end{itemize}
+\end{enumerate}
+
+\section*{24.6}
+Let $\displaystyle f_n(x) = \left(x - \frac{1}{n}\right)^2$ for $x \in [0,1]$.
+\begin{enumerate}[label = (\alph*)]
+\item Does the sequence $(f_n)$ converge pointwise on the set $[0,1]$? If so, give the limit function.
+	\begin{itemize}
+	\item To determine this, lets examine the limit:
+	\begin{align*}
+	\lim_{n \to \infty} \left(x - \frac{1}{n}\right)^2 &= \lim_{n \to \infty} \left(x^2 - \frac{2x}{n} + \frac{1}{n^2}\right)\\
+	&= \left(x^2 - 2x(0) + 0\right)\\
+	&= x^2
+	\end{align*}
+	\item Thus, \boxed{\text{yes, the sequence converges pointwise to } f(x) = x^2}
+	\end{itemize}
+\item Does $(f_n)$ converge uniformly on $[0,1]$? Prove your assertion.
+	\begin{itemize}
+	\item Let's fix $\varepsilon > 0$ and examine $|f_n(x) - f(x)|$:
+	\begin{align*}
+	|f_n(x) - f(x)| &= \left|\left(x - \frac{1}{n}\right)^2 - x^2\right|\\
+	&= \left|x^2 - \frac{2x}{n} + \frac{1}{n^2} - x^2\right|\\
+	&= \left|\frac{1}{n^2} - \frac{2x}{n}\right|\\
+	&\leq \left|\frac{1}{n^2}\right| &\text{since $\frac{2x}{n} \geq 0$ for $x \in [0,1]$}\\
+	&= \frac{1}{n^2} &\text{since $\frac{1}{n^2} > 0$}
+	\end{align*}
+	\item Thus, choosing $N := 1/\sqrt{\varepsilon}$ yields:
+	\begin{align*}
+	|f_n(x) - f(x)| &\leq \frac{1}{n^2} &\text{by the above comments}\\
+	&< \frac{1}{N^2} &\text{for all $n > N$}\\
+	&= \frac{1}{(1/\sqrt{\varepsilon})^2}\\
+	&= \frac{1}{1/\varepsilon} = \varepsilon
+	\end{align*}
+	\item Therefore, we have shown the existence of $N$ (that does not depend on $x$) such that $|f_n(x) - x^2| < \varepsilon$ for all $x \in [0,1]$ and all $n > N$, proving that \boxed{(f_n) \text{ converges uniformly to $x^2$ on } [0,1]}.
+	\end{itemize}
+\end{enumerate}
+
+\section*{25.2}
+Let $\displaystyle f_n(x) = \frac{x^n}{n}$. Show $(f_n)$ is uniformly convergent on $[-1,1]$ and specify the limit function.
+
+\begin{proof}{$ $}
+\\I claim that the limit function is 0. I will prove this by using the definition of uniform continuity. Let $\varepsilon > 0$ and examine $|f_n(x) - 0| = |f_n(x)|$:
+\begin{align*}
+|f_n(x)| &= \left|\frac{x^n}{n}\right|\\
+&= \frac{|x|^n}{n}\\
+&\leq \frac{1}{n} &\text{since $|x| \leq 1$ for all $x \in [-1,1]$}
+\end{align*}
+Thus, choosing $N := 1/\varepsilon$ yields:
+\begin{align*}
+|f_n(x)| &\leq \frac{1}{n} &\text{by the above comments}\\
+&< \frac{1}{N} &\text{for all $n > N$}\\
+&= \frac{1}{1/\varepsilon} = \varepsilon
+\end{align*}
+Therefore, we have shown the existence of $N$ (that does not depend on $x$) such that $|f_n(x) - 0| < \varepsilon$ for all $x \in [-1,1]$ and all $n > N$, proving that \boxed{(f_n) \text{ converges uniformly to 0 on } [-1,1]}.
+\end{proof} 
+
+\section*{25.3}
+Let $\displaystyle f_n(x) = \frac{n + \cos(x)}{2n + \sin^2(x)}$ for all real numbers $x$. 
+\begin{enumerate}[label =(\alph*)]
+\item Show $(f_n)$ converges uniformly on $\mathbb{R}$. 
+	\begin{itemize}
+	\item I will show this by using the definition of uniform continuity. First, to find our desired limit function, note:
+	\begin{align*}
+	\lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} \frac{n + \cos(x)}{2n + \sin^2(x)} = \lim_{n \to \infty} \frac{1 + \cos(x)/n}{2 + \sin^2(x)/n} = \frac{1}{2}
+	\end{align*}
+	\item Let $\varepsilon > 0$ and examine $\left|f_n(x) - \frac{1}{2}\right|$:
+	\begin{align*}
+	\left|f_n(x) - \frac{1}{2}\right| &= \left|\frac{n + \cos(x)}{2n + \sin^2(x)} - \frac{1}{2}\right|\\
+	&= \left|\frac{2n + 2\cos(x)}{2(2n + \sin^2(x))} - \frac{2n + \sin^2(x)}{2(2n + \sin^2(x))}\right|\\
+	&= \frac{|2\cos(x) - \sin^2(x)|}{|4n + 2\sin^2(x)|}\\
+	&\leq \frac{|2\cos(x)| + |-\sin^2(x)|}{4n + 2\sin^2(x)} &\text{by Triangle Inequality}\\
+	&\leq \frac{2 + 1}{4n + 2\sin^2(x)} &\text{since $|\cos(\theta)| \leq 1$ and $|\sin(\theta)| \leq 1$ for all $\theta$}\\
+	&\leq \frac{3}{4n} &\text{since $4n + 2\sin^2(x) \geq 4n$ for all $x$}
+	\end{align*}
+	\item Thus, if we choose $N := 3/(4\varepsilon)$, we obtain:
+	\begin{align*}
+	\left|f_n(x) - \frac{1}{2}\right| &\leq \frac{3}{4n} &\text{by the above comments}\\
+	&< \frac{3}{4N} &\text{for all $n > N$}\\
+	&= \frac{3}{4\cdot(3/(4\varepsilon))}\\
+	&= \frac{3}{3/\varepsilon} = \varepsilon
+	\end{align*}
+	\item Therefore, we have shown the existence of $N$ (that does not depend on $x$) such that $\left|f_n(x) - \frac{1}{2}\right| < \varepsilon$ for all $x \in \mathbb{R}$ and all $n > N$, proving that \boxed{(f_n) \text{ converges uniformly to $\frac{1}{2}$ on } \mathbb{R}}.
+	\end{itemize}
+\item Calculate $\displaystyle \lim_{n \to \infty} \int_2^7 f_n(x) \; dx$
+	\begin{itemize}
+	\item \begin{align*}
+	\lim_{n \to \infty} \int_2^7 f_n(x) \; dx &= \int_2^7 \lim_{n \to \infty} f_n(x) \; dx &\text{by Theorem 25.2 and the uniform convergence of $(f_n)$}\\
+	&= \int_2^7 \frac{1}{2} \; dx &\text{since $\frac{1}{2}$ is the limit function of $(f_n)$}\\
+	&= \frac{x}{2} \bigg|_{x = 2}^{x = 7}\\
+	&= \frac{7}{2} - \frac{2}{2} = \boxed{\frac{5}{2}}
+	\end{align*}
+	\end{itemize}
+\end{enumerate}
+
+\section*{25.5}
+Let $(f_n)$ be a sequence of bounded functions on a set $S$, and suppose $f_n \to f$ uniformly on $S$. Prove $f$ is a bounded function on $S$.
+
+\begin{proof}{$ $}
+\\Assume that $f_n \to f$ uniformly on $S$ and that each $f_n$ is a bounded function. By the uniform convergence of $f_n$, we know that (for $\varepsilon = 1$) there exists some $N$ such that for all $n > N$, we have $|f_n(x) - f(x)| < 1$ for all $x \in S$. Thus, in particular this must hold for $n = N + 1$. Additionally, since all $f_n$ are bounded functions, we must have that $f_{N+1}$ is bounded, say $|f_{N+1}(x)| \leq M$ for all $x \in S$ and $M > 0$. Thus, we can do the following:
+\begin{align*}
+|f_{N+1}(x) - f(x)| &< 1\\
+\iff |f(x) - f_{N+1}(x)| &< 1\\
+\iff f_{N+1}(x) - 1 < f(x) &< 1 + f_{N+1}(x) &\text{by Exercise 3.7(b)}\\
+\implies -|f_{N+1}(x)| - 1 < f(x) &< 1 + |f_{N+1}(x)| &\text{since $a \leq |a|$ for all $a \in \mathbb{R}$}\\
+\implies |f(x)| &< 1 + |f_{N+1}(x)| &\text{by Exercise 3.7(a)}\\
+&\leq 1 + M &\text{by the boundedness of $f_{N+1}$}
+\end{align*}
+Thus, we have shown that $|f(x)| < 1 + M$ for all $x \in S$, so this means $f$ is bounded and one possible upper bound is $1 + M$.
+\end{proof}
+
+\section*{25.6}
+\begin{enumerate}[label = (\alph*)]
+\item Show that if $\sum |a_k| < \infty$, then $\sum a_kx^k$ converges uniformly on $[-1,1]$ to a continuous function. 
+	\begin{itemize}
+	\item First, observe that $|a_kx^k| = |a_k||x|^k \leq |a_k|$ since $x \in [-1,1]$. Thus, by the Weierstrass M-Test (25.7), the series $\sum a_kx^k$ converges uniformly on $[-1,1]$. Furthermore, since the function $g_k(x) = a_kx^k$ is a continuous function for all $k$, then we can use Theorem 25.5 to conclude that $\sum a_kx^k$ represents a continuous function on $S$.
+	\end{itemize}
+\item Does $\displaystyle \sum_{n = 1}^{\infty} \frac{1}{n^2}x^n$ represent a continuous function on $[-1,1]$?
+	\begin{itemize}
+	\item By part (a) of this question, $\displaystyle \sum_{n = 1}^{\infty} \frac{1}{n^2}x^n$ will converge uniformly to a continuous function on $[-1,1]$ if $\displaystyle \sum \left|\frac{1}{n^2}\right|$ is finite. However, by Theorem 15.1, we know that $\displaystyle \sum \frac{1}{n^p}$ converges if and only if $p > 1$. Thus, our desired series converges, so \boxed{\text{yes, the series represents a continuous function on }[-1,1]}
+	\end{itemize}
+\end{enumerate}
+
+\section*{25.7}
+Show $\displaystyle \sum_{n = 1}^{\infty} \frac{1}{n^2}\cos(nx)$ converges uniformly on $\mathbb{R}$ to a continuous function. 
+
+\begin{proof}{$ $}
+\\Let $(M_n)$ be a sequence of nonnegative real numbers such that $M_n = \frac{1}{n^2}$. Furthermore, we know from Theorem 15.1 that $\sum M_n$ converges and we know that
+\begin{align*}
+\left|\frac{1}{n^2}\cos(nx)\right| = \left|\frac{1}{n^2}\right||\cos(nx)| \leq \frac{1}{n^2} &= M_n &\text{for all $x \in \mathbb{R}$}
+\end{align*}
+since $|\cos(\theta)| \leq 1$ for all $\theta \in \mathbb{R}$. Thus, by Weierstrass M-Test (25.7), we can conclude that $\displaystyle \sum_{n = 1}^{\infty} \frac{1}{n^2}\cos(nx)$ converges uniformly on $\mathbb{R}$. Therefore, since $g_n(x) = \frac{1}{n^2}\cos(nx)$ is continuous (by the continuity of $\cos(\cdot)$), we can use Theorem 25.5 to finally say that $\displaystyle \sum_{n = 1}^{\infty} \frac{1}{n^2}\cos(nx)$ represents a continuous function. 
+\end{proof}
+
+\section*{25.8}
+Show $\displaystyle \sum_{n = 1}^{\infty} \frac{x^n}{n^22^n}$ has radius of converge 2 and the series converges uniformly to a continuous function on $[-2,2]$.
+
+\begin{proof}{$ $}
+\\Recall that the radius of convergence, $R$ of a power series $\sum a_nx^n$ is equal to $\frac{1}{\beta}$ where $\beta = \limsup |a_n|^{1/n}$ or $\beta = \lim \left|\frac{a_{n+1}}{a_n}\right|$ if the limit exists. I will use this second definition of $\beta$ to find that:
+\begin{align*}
+\beta = \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| &= \lim_{n \to \infty} \left|\frac{n^22^n}{(n+1)^22^{n+1}}\right|\\
+&= \lim_{n \to \infty} \frac{1}{2}\left|\frac{n}{n + 1}\right|^2\\
+&= \frac{1}{2}\cdot \left(\lim_{n \to \infty} \frac{n}{n + 1}\right)^2\\
+&= \frac{1}{2} \cdot \left(\lim_{n \to \infty} \frac{1}{1 + \frac{1}{n}}\right)^2\\
+&= \frac{1}{2} \cdot \left(\frac{1}{1 + 0}\right)^2 = \frac{1}{2}
+\end{align*}
+Thus, $R = 2$, just as desired. I will now examine if the series conberges at $x = \pm 2$. For $x = 2$, the series becomes $\displaystyle \sum_{n =1}^{\infty} \frac{2^n}{n^22^n} = \sum_{n = 1}^{\infty} \frac{1}{n^2}$ which we know converges by Theorem 15.1. Alternatively, for $x = -2$, we have $\displaystyle \sum_{n =1}^{infty} \frac{(-2)^n}{n^22^n} = \sum_{n = 1}^{\infty} \frac{(-1)^n}{n^2}$ which converges by the Alternating Series Test. Therefore, the interval of convergence for this series is indeed $[-2,2]$. We now need to show that this convergence is uniform and the limiting function is continuous. Note that for $M_n = \frac{1}{n^2}$, we have that 
+\begin{align*}
+\left|\frac{x^n}{n^22^n}\right| = \frac{|x|^n}{|n^22^n|} \leq \frac{2^n}{n^22^n} = \frac{1}{n^2} &= M_n &\text{for all $x \in [-2,2]$}
+\end{align*}
+Thus, since $\sum M_n$ converges (as we have already shown), then we can use the Weierstrass M-Test (25.7) to conclude that $\displaystyle \sum_{n = 1}^{\infty} \frac{x^n}{n^22^n}$ converges uniformly on $[-2,2]$. Furthermore, since the function $\displaystyle g_n(x) = \frac{x^n}{n^22^n}$ is continuous for all $n$, then we can use Theorem 25.5 to also conclude that the series we are interested in represents a continuous function on $[-2,2]$.
+\end{proof}
+
+\section*{25.9}
+\begin{enumerate}[label = (\alph*)]
+\item Let $0 < a < 1$. Show the series $\displaystyle \sum_{n = 0}^{\infty} x^n$ converges uniformly on $[-a, a]$ to $\displaystyle \frac{1}{1 - x}$.
+	\begin{itemize}
+	\item Notice that $|x^n| = |x|^n \leq a^n$ for all $x \in [-a,a]$. Furthermore, $\sum a^n$ converges quite easily by the Root Test (since $\limsup |a^n|^{1/n} = a < 1$). Therefore, the Weierstrass M-Test (25.7) tells us that $\displaystyle \sum_{n = 1}^{\infty} x^n$ converges uniformly for all $x \in [-a,a]$. Furthermore, since we know that the convergence is uniform, we can examine the value of this series as follows:
+	\begin{align*}
+	\text{Let } f_k(x) &= \sum_{n = 0}^{k} x^n\\
+	\implies xf_k(x) &= \sum_{n = 0}^{k} x^{n+1} = \sum_{n = 1}^{k+1} x^n\\
+	\implies f_k(x) - xf_k(x) &= \sum_{n = 0}^{k} x^n - \sum_{n = 1}^{k+1} x^n = 1 + \sum_{n = 1}^k x^n - \sum_{n = 1}^k x^n - x^{k+1}\\
+	\implies f_k(x)(1 - x) &= 1 - x^{k+1}\\
+	\implies f_k(x) &= \frac{1 - x^{k+1}}{1 - x}\\
+	\implies \sum_{n = 0}^{\infty}x^n = \lim_{k \to \infty} f_k(x) &= \lim_{k \to \infty} \frac{1 - x^{k+1}}{1 - x} = \frac{1}{1 -x} &\text{since $|x| < 1 \implies x^{k+1} \to 0$}
+	\end{align*}
+	\item Thus, the series does indeed converge uniformly on $[-a,a]$ and the limiting function is as desired
+	\end{itemize}
+\item Does the series $\displaystyle \sum_{n = 0}^{\infty} x^n$ converge uniformly on $(-1, 1)$ to $\displaystyle \frac{1}{1 - x}$? Explain.
+	\begin{itemize}
+	\item Exercise 25.5 told us that if a sequence of functions $(f_n)$ on a set $S$ is bounded and $f_n \to f$ uniformly on $S$, then $f$ must also be bounded on $S$. Thus, the contrapositive to this statement would say that if $(f_n)$ is a bounded sequence of functions on $S$ such that $f_n \to f$, but $f$ is not bounded on $S$, then this convergence must not be uniform. However, we can see that $\displaystyle f(x) = \frac{1}{1 - x}$ is not bounded on $(-1,1)$ since if we were to claim there exists some $M > 0$ such that $f(x) \leq M$ for all $x \in (-1,1)$, then we can consider $x_0 = 1 - \frac{1}{2M} \in (-1,1)$ to get $\displaystyle f(x_0) = \frac{1}{1 - (1 - (1/2M))} = \frac{1}{1/2M} = 2M > M$. Thus, $f$ cannot possibly be bounded, so Exercise 25.5 tells us that \boxed{\text{this convergence is not uniform on } (-1,1).}
+	\end{itemize}
+\end{enumerate}
+
+
+
+\end{document}

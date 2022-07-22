@@ -1,0 +1,481 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Advanced Calc. Homework 2}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{Useful Results/Properties}
+Below are several properties and results that will be useful and that I will reference throughout this assignment.
+\\
+\\\underline{Additive Properties:}
+\begin{enumerate}[label = A\arabic*.]
+\item $a + (b + c) = (a + b) + c \quad \forall \; a,b,c$.
+\item $a + b = b + a \quad \forall \; a,b$.
+\item $a + 0 = a \quad \forall \; a$.
+\item $\forall \; a, \exists$ an element $-a$ such that $a + (-a) = 0$.
+\end{enumerate}
+{$ $}\\
+\underline{Multiplicative Properties}
+\begin{enumerate}[label = M\arabic*.]
+\item $a(bc) = (ab)c \quad \forall \; a,b,c$.
+\item $ab = ba \quad \forall \; a,b$.
+\item $a \cdot 1 = a \quad \forall \; a$.
+\item $\forall \; a \neq 0, \exists$ an element $a^{-1}$ such that $aa^{-1} = 1$.
+\end{enumerate}
+{$ $}\\
+\underline{Distributive Law}
+\begin{enumerate}[label = DL.]
+\item $a(b + c) = ab + ac \quad \forall \; a,b,c$.
+\end{enumerate}
+{$ $}\\
+\underline{Ordering Properties}
+\begin{enumerate}[label = O\arabic*.]
+\item Given $a$ and $b$, either $a \leq b$ or $b \leq a$.
+\item If $a \leq b$ and $b \leq a$, then $a = b$.
+\item If $a \leq b$ and $b \leq c$, then $a \leq c$.
+\item If $a \leq b$, then $a + c \leq b + c \quad \forall \; c$.
+\item If $a \leq b$ and $0 \leq c$, then $ac \leq bc$.
+\end{enumerate}
+
+\begin{theorem*}{\textbf{3.1}}
+\\The following are consequences of the field properties above for $a,b,c \in \mathbb{R}$:
+\begin{enumerate}[label = (\roman*)]
+\item $a + c = b = c$ implies $a = b$.
+\item $a \cdot 0 = 0 \quad \forall \; a$.
+\item $(-a)b = -ab \quad \forall \; a,b$.
+\item $(-a)(-b) = ab \quad \forall \; a,b$.
+\item $ac = bc$ and $c \neq 0$ implies $a = b$.
+\item $ab = 0$ implies either $a = 0$ or $b = 0$.
+\end{enumerate}
+
+\end{theorem*}
+
+\begin{theorem*}{\textbf{3.2}}
+\\The following are consequences of the properties of an ordered field for $a,b,c \in \mathbb{R}$:
+\begin{enumerate}[label = (\roman*)]
+\item If $a \leq b$, then $-b \leq -a$.
+\item If $a \leq b$ and $c \leq 0$, then $bc \leq ac$.
+\item If $0 \leq a$ and $0 \leq b$, then $0 \leq ab$.
+\item $0 \leq a^2 \quad \forall \; a$.
+\item $0 < 1$.
+\item If $0 < a, then 0 < a^{-1}$.
+\item If $0 < a < b$, then $0 < b^{-1} < a^{-1}$.
+\end{enumerate}
+Note that $a < b$ means $a \leq b$ and $a\neq b$.
+\end{theorem*}
+
+\begin{theorem*}{\textbf{3.5}}
+\\These represent the basic properties of the absolute value:
+\begin{enumerate}[label = (\roman*)]
+\item $0 \leq |a| \quad \forall \; a \in \mathbb{R}$
+\item $|ab| = |a| \cdot |b| \quad \forall \; a, b \in \mathbb{R}$
+\end{enumerate}
+\end{theorem*}
+
+\begin{theorem*}{\textbf{Triangle Inequality}}
+\\$|a + b| \leq |a| + |b| \quad \forall \; a,b \in \mathbb{R}$.
+\end{theorem*}
+{$ $}
+\\With all of that in place, let's begin with the questions:
+
+\section*{3.1}
+\begin{question*}{\textbf{a.)}}
+\\Which of the properties {\normalfont A1-A4, M1-M4, DL, O1-O5} fail for $\mathbb{N}$?
+\end{question*}
+
+\begin{answer*}{\textbf{a.)}}
+\\Since $\mathbb{N} \subset \mathbb{R}$, then the "$0$" element in $\mathbb{R}$ must be the same at the "$0$" element in $\mathbb{N}$. However, this $0$ is not an element in $\mathbb{N}$ since $\mathbb{N} = \{1,2,3,\ldots\}$; thus, it is impossible for A3 to hold since A3 implies the existence of 0 in the set.
+\\Likewise, for some element $a \in \mathbb{N}$, A4 implies the existence of $-a$. However, $-a \notin \mathbb{N}$ for any $a \in \mathbb{N}$, so A4 also does not hold.
+\\Lastly, M4 does not hold either since for any $a \in \mathbb{N}$ with $a \neq 1$, $a^{-1} \notin \mathbb{N}$. However, M4 requires that $a^{-1}$ exist for all $a \neq 0$ and this is not true. 
+\\Therefore, \fbox{A3, A4, and M4 do not hold for $\mathbb{N}$}.
+
+\end{answer*}
+
+\begin{question*}{\textbf{b.)}}
+\\Which of the properties {\normalfont A1-A4, M1-M4, DL, O1-O5} fail for $\mathbb{Z}$?
+\end{question*}
+
+\begin{answer*}{\textbf{b.)}}
+\\M4 once again does not hold in $\mathbb{Z}$ since with $a \in \mathbb{Z}$ only for $a = 1$ or $a = -1$ does $a^{-1}$ exist. Since M4 requires the existence of $a^{-1}$ for all $a \in \mathbb{Z}$, \fbox{M4 does not hold for $\mathbb{Z}$}.
+\end{answer*}
+\section*{3.2}
+\begin{question*}{\textbf{a.)}}
+\\The commutative law {\normalfont A2} was used in the proof of (ii) in Theorem 3.1. Where?
+\end{question*}
+
+\begin{answer*}{\textbf{a.)}}
+\\For convenience, here is the proof of (ii) in Theorem 3.1:
+\begin{proof}{\textbf{Theorem 3.1 (ii)}}
+\\Let $a,b \in \mathbb{R}$, then
+\begin{align}
+a \cdot 0 &= a \cdot (0 + 0) &\text{by A3}\\
+&= a \cdot 0 + a \cdot 0 &\text{by DL}\\
+\implies a \cdot 0 + 0 &= a \cdot 0 + a \cdot 0 &\text{since A3 says } a \cdot 0 = a \cdot 0 + 0\\
+\implies 0 + a \cdot 0 &= a \cdot 0 + a \cdot 0 &\text{by A2}\\
+\implies 0 &= a \cdot 0 &\text{by Theorem 3.1 (i)}\\
+\implies a \cdot 0 &= 0 &\text{by symmetry of "=" sign}
+\end{align}
+\end{proof}
+This is the full proof, and it is clear by my annotating that \fbox{A2 is used going from line (3) to line (4)} on the left hand side of the equation. 
+\end{answer*}
+
+\begin{question*}{\textbf{b.)}}
+\\The commutative law {\normalfont A2} was also used in the proof of (iii) in Theorem 3.1. Where?
+\end{question*}
+
+\begin{answer*}{\textbf{b.)}}
+\\Again, for convenience, here is the proof of (iii) in Theorem 3.1:
+
+\begin{proof}{\textbf{Theorem 3.1 (iii)}}
+\\Let $a,b \in \mathbb{R}$, then by A4, we know that
+\begin{equation}
+ab + (-ab) = 0.
+\end{equation}
+Also, we can find that:
+\begin{align}
+ab + (-a)b &= ba + b(-a) &\text{by M2 used twice}\\
+&= b(a + (-a)) &\text{by DL}\\
+&= b \cdot 0 &\text{by A4}\\
+&= 0 &\text{by Theorem 3.1 (ii).}
+\end{align}
+Thus,
+\begin{align}
+ab + (-ab) &= ab + (-a)b &\text{since LHS and RHS both equal 0}\\
+\implies (-ab) + ab &= (-a)b + ab &\text{by A2 used on both sides}\\
+\implies -ab &= (-a)b &\text{by Theorem 3.1 (i)}\\
+\implies (-a)b &= -ab &\text{by symmetry of "=".}
+\end{align}
+\end{proof}
+This completes the proof, and you can see that by my annotations, \fbox{we use A2 going from line (12) to line (13)} on the LHS and the RHS . 
+\end{answer*}
+
+\section*{3.3}
+\begin{question*}{$ $}
+\\Prove (iv) and (v) of Theorem 3.1.
+\end{question*}
+
+\begin{proof}{\textbf{Theorem 3.1 (iv)}}
+\\Let $a,b \in \mathbb{R}$, then by A4, we know that
+\begin{equation}
+ab + (-ab) = 0.
+\end{equation}
+Also, we can find that:
+\begin{align*}
+(-a)(-b) + (-ab) &= (-a)(-b) + (-a)b &\text{by Theorem 3.1 (iii)}\\
+&= (-a)((-b) + b) &\text{by DL}\\
+&= (-a)(b + (-b)) &\text{by A2}\\
+&= (-a) \cdot 0 &\text{by A4}\\
+&= 0 &\text{by Theorem 3.1 (ii)}
+\end{align*}
+Thus, 
+\begin{align*}
+(-a)(-b) + (-ab) &= ab + (-ab) &\text{since LHS and RHS are both equal to 0}\\
+\implies (-a)(-b) &= ab &\text{by Theorem 3.1 (i)}
+\end{align*}
+\end{proof}
+
+\begin{proof}{\textbf{Theorem 3.1 (v)}}
+\\Let $a,b,c \in \mathbb{R}$. Since $c \neq 0$, M4 guarantees the existence of $c^{-1}$. Thus,
+\begin{align*}
+ac &= bc \\
+\implies (ac)c^{-1} &= (bc)c^{-1} &\text{by multiplying both sides by } c^{-1}\\
+\implies a(cc^{-1}) &= b(cc^{-1}) &\text{by M1 on both sides of the equation}\\
+\implies a \cdot 1 &= b \cdot 1 &\text{by M4 on both sides of the equations}\\
+\implies a &= b &\text{by M3}
+\end{align*}
+
+\end{proof}
+
+\section*{3.4}
+\begin{question*}{$ $}
+\\Prove (v) and (vii) of Theorem 3.2.
+
+\begin{proof}{\textbf{Theorem 3.2 (v)}}
+\\We must prove, individually, that $0 \leq 1$ and that $0 \neq 1$. First, let $a \in \mathbb{R}$. By Theorem 3.2 (iv), we know that $0 \leq a^2$. If we choose $a = 1$, then we immediately get $0 \leq 1$ since $1^2 = 1 \cdot 1 = 1$ by M3. Thus, we only need to show that $0 \neq 1$. I will do so using a proof by contradiction:
+\\
+\\First, assume that $0 = 1$ and let $b$ be any element of $\mathbb{R}$. Then we get,
+\begin{align*}
+0 &= 1\\
+\implies b \cdot 0 &= b \cdot 1 &\text{by multiplying both sides by b}\\
+\implies 0 &= b &\text{by Theorem 3.1 (ii) on the LHS and M3 on the RHS}
+\end{align*}
+Since $b$ is any arbitrary element of $\mathbb{R}$ and we have shown that $b$ must be 0, this means all elements in $\mathbb{R}$ must be 0. Thus, $\mathbb{R}$ only has one element. However, this is nonsense, since $\mathbb{R}$ clearly has more than one element. Thus, our original claim that $0 = 1$ must have been false. Therefore, the negation of that statement must be true, i.e. $0 \neq 1$. 
+\\
+\\Since we've shown that $0 \leq 1$ and $0 \neq 1$, we have shown that $0 < 1$. 
+\end{proof}
+
+\begin{proof}{\textbf{Theorem 3.2 (vii)}}
+\\Assume $0 < a < b$, i.e $0 < a$ and $a < b$. From this it follows that $0 \neq a$, $a \neq b$, and $0 \neq b$. Additionally, it tells us that $0 \leq a$ and $a \leq b$. From O3, it follows that $0 \leq b$. Since $0 \neq b$ and $0 \neq a$, we know that $0 < b$ and $0 < a$, so from Theorem 3.2 (vi), we can conclude that $0 < b^{-1}$ and $0 < a^{-1}$. Therefore, $0 \leq b^{-1}$, $0 \leq a^{-1}$, $0 \neq b^{-1}$, and $0 \neq a^{-1}$. Next, we will show that $b^{-1} < a^{-1}$. I will use the fact that we know $a \leq b$ to show this. 
+\begin{align*}
+a &\leq b\\
+\implies aa^{-1} &\leq ba^{-1} &\text{by O5 and the fact that } 0 \leq a^{-1}\\
+\implies 1 &\leq ba^{-1} &\text{by M4}\\
+\implies 1 \cdot b^{-1} &\leq (ba^{-1})b^{-1} &\text{by O5 and the fact that } 0 \leq b^{-1}\\
+\implies b^{-1} \cdot 1 &\leq b^{-1}(ba^{-1}) &\text{by M2}\\
+\implies b^{-1} &\leq (b^{-1}b)a^{-1} &\text{by M3 on the left and M1 on the right}\\
+&= (bb^{-1})a^{-1} &\text{by M2}\\
+&= 1 \cdot a^{-1} &\text{by M4}\\
+&= a^{-1} \cdot 1 &\text{by M2}\\
+&= a^{-1} &\text{by M3}
+\end{align*}
+Thus, we've shown that $b^{-1} \leq a^{-1}$. To show $b^{-1} < a^{-1}$, we need to show $b^{-1} \neq a^{-1}$. I will prove this using a proof by contradiction:
+\\
+\\Assume that $b^{-1} = a^{-1}$. Then, we know that $aa^{-1} = 1$ by M4. Additionally, we know that:
+\begin{align*}
+ba^{-1} &= bb^{-1} &\text{by our assumption}\\
+&= 1 &\text{by M4}
+\end{align*}
+Thus,
+\begin{align*}
+aa^{-1} &= ba^{-1} &\text{since LHS and RHS both equal 1}\\
+\implies a &= b &\text{by Theorem 3.1 (v) and the fact that } a^{-1} \neq 0
+\end{align*}
+However, this last line is contradiction to the fact that $a \neq b$ as we stated previously. Therefore, our assumption that $b^{-1} = a^{-1}$ must be false, so its negation $b^{-1} \neq a^{-1}$ must be true.
+\\
+\\We have now shown all of the following:
+\begin{itemize}
+\item $0 < b^{-1}$
+\item $b^{-1} \leq a^{-1}$
+\item $b^{-1} \neq a^{-1}$
+\end{itemize}
+Thus, we can finally conclude that $0 < b^{-1} < a^{-1}$.
+\end{proof}
+\end{question*}
+
+\section*{3.5}
+\begin{question*}{\textbf{a.)}}
+\\Show $|b| \leq a$ if and only if $-a \leq b \leq a$.
+\end{question*}
+
+\begin{proof}{\textbf{a.) $\rightarrow$}}
+\\Assume that $|b| \leq a$. First, Theorem 3.5 (i) says that $0 \leq |b|$, so O3 says that $0 \leq a$. By the definition of $| \cdot |$, we have 2 cases: when $0 \leq b$ and when $b \leq 0$.
+\\\underline{Case 1: $0 \leq b$}
+\\If $0 \leq b$, then by the definition of $| \cdot |$ and the fact that $|b| \leq a$, we can see that $b \leq a$. Furthermore, since $0 \leq a$, we can see that $-a \leq -0$ by Theorem 3.2 (i). Lastly, I claim that $-0 = 0$:
+\begin{align*}
+0 + (-0) &= 0 &\text{by A4}\\
+\implies 0 + (-0) &= 0 + 0 &\text{by A3}\\
+\implies -0 + 0 &= 0 + 0 &\text{by A2 on the left}\\
+\implies -0 &= 0 &\text{by Theorem 3.1 (i)}
+\end{align*}
+Thus, we've shown that $-a \leq 0$, so since $0 \leq b$, by O3, we have that $-a \leq b$. This, along with the fact that we already showed $b \leq a$ gives us $-a \leq b \leq a$, proving the statement for this case. 
+{$ $}
+\\\underline{Case 2: $b \leq 0$}
+\\If $b \leq 0$, then by the defintion of $| \cdot |$ and the fact that $|b| \leq a$, we have that $-b \leq a$. From this inequality, we can use Theorem 3.2 (i), so say that $-a \leq -(-b)$. Next, I claim that $-(-b) = b$. First note that by A4, $b + (-b) = 0$. Also,
+\begin{align*}
+-(-b) + (-b) &= (-b) + [-(-b)] &\text{by A2}\\
+&= 0 &\text{by A4 applied to } -b\\
+\implies -(-b) + (-b) &= b + (-b) &\text{since we've shown that LHS and RHS both equal 0}\\
+\implies -(-b) &= b &\text{by Theorem 3.1 (i)}
+\end{align*}
+Thus, we've shown that $-a \leq b$. To show $b \leq a$, we simply note that $b \leq 0$ and $0 \leq a$ which implies that $b \leq a$ by O3. Together this gives that that $-a \leq b \leq a$, proving the statement for this case.
+\\Since we've proven the statement for all possible cases (since O1 states that either $0 \leq b$ or $b \leq 0$), we have sufficiently proven this statement in this direction. 
+\end{proof}
+
+\begin{proof}{\textbf{a.) $\leftarrow$}}
+\\Assume that $-a \leq b \leq a$, i.e. $-a \leq b$ (I will call this the left inequality) and $b \leq a$ (I will call this the right inequality). Again, we will consider 2 cases $0 \leq b$ and $b \leq 0$, by O1 this constitutes all possible cases.
+\\\underline{Case 1: $0 \leq b$}
+\\If $0 \leq b$, then we know that $|b| = b$, so the given (right) inequality can be stated as $|b| \leq a$, proving the statement for this case.
+\\\underline{Case 2: $b \leq 0$}
+\\If $b \leq 0$, then we know that $|b| = -b$. First, I want to show that $-|b| = b$. First, $|b| + (-|b|) = 0$ by A4. Also,
+\begin{align*}
+b + |b| &= b + (-b) &\text{by the given relationship above}\\
+&= 0 &\text{by A4}\\
+\implies |b| + (-|b|) &= b + |b| &\text{since we've shown that the LHS and RHS are equal to 0}\\
+\implies -|b| + |b| &= b + |b| &\text{by A2}\\
+\implies -|b| &= b &\text{by Theorem 3.1 (i)}
+\end{align*}
+From this, the given (left) inequality can be stated as $-a \leq -|b|$. From Theorem 3.2 (i) it follows that $-(-|b|) \leq -(-a)$. We have already shown above that $-(-c) = c \quad \forall \; c$ in the previous proof. Thus, this last inequality is equivalent to $|b| \leq a$ which proves the statement for this case.
+\\Since we've proven the statement for all possible cases, we have sufficiently proven the statement in this direction. 
+\\Furthermore, since we've proven the statement in both directions, we have proven the statement in its entirety. 
+\end{proof}
+
+\begin{question*}{\textbf{b.)}}
+\\Prove $||a| - |b|| \leq |a - b|$ for all $a, b \in \mathbb{R}$.
+\end{question*}
+
+\begin{proof}{\textbf{b.)}}
+\\From part (a) of this question, it suffices to show that $-|a-b| \leq |a| - |b| \leq |a - b|$. In other words, $-|a - b| \leq |a| - |b|$ and $|a| - |b| \leq |a-b|$. I will start with the first of these inequalities:
+\begin{align}
+|b| &= |b + 0| &\text{by A3}\nonumber\\
+&= |b + (a + (-a))| &\text{by A4}\nonumber\\
+&= |b + (-a + a)| &\text{by A2}\nonumber\\
+&= |(b + (-a)) + a| &\text{by A1}\nonumber\\
+&\leq |b + (-a)| + |a| &\text{by Triangle Inequality}\nonumber\\
+\implies |b| + (-|a|) &\leq (|b + (-a)| + |a|) + (-|a|) &\text{by O4}\nonumber\\
+&= |b + (-a)| + (|a| + (-|a|)) &\text{by A1}\nonumber\\
+&= |b + (-a)| + 0 &\text{by A4}\nonumber\\
+\implies -|a| + |b| &\leq |b + (-a)| &\text{by A2 on the left and A3 on the right}\nonumber\\
+\implies -|b + (-a)| &\leq -(-|a| + |b|) &\text{by Theorem 3.2 (i)}
+\end{align}
+Before I proceed, I will need to show that $-c = (-1)c$ for all $c$. We know that $c + (-c) = 0$ because of A4. Also, 
+\begin{align*}
+c + (-1)c &= c(1) + (-1)c &\text{by M3}\\
+&= c(1) + c(-1) &\text{by M2}\\
+&= c(1 + (-1)) &\text{by DL}\\
+&= c \cdot 0 &\text{by A4}\\
+&= 0 &\text{by Theorem 3.1 (ii)}\\
+\implies c + (-c) &= c + (-1)c &\text{since LHS and RHS both equal 0}\\
+\implies (-c) + c &= (-1)c + c &\text{by A2 on both sides}\\
+\implies (-c) &= (-1)c &\text{by Theorem 3.1 (i)}
+\end{align*}
+Now, using this result on line (17) gives:
+\begin{align*}
+-|b + (-a)| &\leq (-1)(-|a| + |b|)\\
+&= (-1)(-|a|) + (-1)(|b|) &\text{by DL}\\
+&= 1\cdot |a| + (-(1\cdot |b|)) &\text{by Theorem 3.1 (iii) and (iv)}\\
+&= |a| \cdot 1 + -(|b| \cdot 1) &\text{by M2}\\
+&= |a| + -|b| &\text{by M3}
+\end{align*}
+The last thing I need to show is that $|b + (-a)| = |a + (-b)|$:
+\begin{align*}
+|b + (-a)| &= |(b + (-a)) \cdot 1| &\text{by M3}\\
+&= |(b + (-a)) \cdot (1 \cdot 1)| &\text{by M3}\\
+&= |(b + (-a)) \cdot [(-1)(-1)]| &\text{by Theorem 3.1 (iv)}\\
+&= |[(b + (-a)) \cdot (-1)] \cdot (-1)| &\text{by M1}\\
+&= |[(-1)(b + (-a))] \cdot (-1)| &\text{by M2}\\
+&= |((-1)b + (-1)(-a)) \cdot (-1)| &\text{by DL}\\
+&= |(-b + a)(-1)| &\text{by Theorem 3.1 (iii) and (iv)}\\
+&= |a + (-b)|\cdot|-1| &\text{by A2 and Theorem 3.5 (ii)}\\
+&= |a + (-b)| \cdot 1 &\text{since -1 $\leq$ 0 by Theorem 3.2 (v) and (i)}\\
+&= |a + (-b)| &\text{by M3}
+\end{align*}
+Therefore, if we use the convention that $c + (-d) = c - d$, we get that $-|a-b| \leq |a| - |b|$ from applying the above results, which is the first inequality. Similarly, to get the second inequality I will do the following:
+\begin{align*}
+|a| &= |a + 0| &\text{by A3}\\
+&= |a + (b + (-b))| &\text{by A4}\\
+&= |a + (-b + b)| &\text{by A2}\\
+&= |(a + (-b)) + b| &\text{by A1}\\
+&\leq |a + (-b)| + |b| &\text{by Triangle Inequality}\\
+\implies |a| + (-|b|) &\leq (|a + (-b)| + |b|) + (-|b|) &\text{by O4}\\
+&= |a + (-b)| + (|b| + (-|b|)) &\text{by A1}\\
+&= |a + (-b)| + 0 &\text{by A4}\\
+&= |a + (-b)| &\text{by A3}
+\end{align*}
+Thus, if we use the convention that $c + (-d) = c - d$, then we get that $|a| - |b| \leq |a - b|$, which is the second inequality. With both inequalities in place, we have shown that $-|a-b| \leq |a| - |b| \leq |a - b|$, which is equivalent to $||a| - |b|| \leq |a - b|$ by part (a) of this question, giving the desired inequality
+\end{proof}
+
+\section*{3.6}
+\begin{question*}{\textbf{a.)}}
+\\Prove $|a + b + c| \leq |a| + |b| + |c|$ for all $a,b,c \in \mathbb{R}$.
+\end{question*}
+
+\begin{proof}{\textbf{a.)}}
+\begin{align*}
+|a + b + c| &= |(a + b) + c| &\text{by A1}\\
+&\leq |a + b| + |c| &\text{by Triangle Inequality}\\
+&\leq |a| + |b| + |c| &\text{by Triangle Inequality}
+\end{align*}
+Thus, we have the desired result.
+\end{proof}
+
+\begin{question*}{\textbf{b.)}}
+\\Use induction to prove
+\[P_n: |a_1 + a_2 + \cdots + a_n| \leq |a_1| + |a_2| + \cdots + |a_n|\]
+is true for any $n$ numbers $a_1, a_2, \ldots, a_n$, for all natural numbers $n$.
+\end{question*}
+
+\begin{proof}{\textbf{b.)}}
+\\\underline{Base case: $n = 1$}
+\\For $n = 1$, $P_n$ says that $|a_1| \leq |a_1|$ which is obviously true by O1. 
+\\\underline{Inductive step}
+\\Assume that $P_k$ is true for some $k \in \mathbb{N}$, i.e. $|a_1 + a_2 + \cdots + a_k| \leq |a_1| + |a_2| + \cdots + |a_k|$. We wish to show that $P_{k+1}$ is also true, i.e., we want to show that $|a_1 + a_2 + \cdots + a_k + a_{k+1}| \leq |a_1| + |a_2| + \cdots + |a_k| + |a_{k+1}|$. We will start with the LHS of the previous inequality and arrive at the desired result:
+
+\begin{align*}
+|a_1 + a_2 + \cdots + a_k + a_{k+1}| &= |(a_1 + a_2 + \cdots + a_k) + a_{k+1}| &\text{by A1}\\
+&\leq |a_1 + a_2 + \cdots + a_k| + |a_{k+1}| &\text{by Triangle Inequality}\\
+&\leq |a_1| + |a_2| + \cdots + |a_k| + |a_{k+1}| &\text{by the Inductive Hypothesis}
+\end{align*}
+Thus, we have shown that if $P_k$ is true, then $P_{k+1}$ must also be true. Additionally, since $P_1$ is true, then by the Principle of Mathematical Induction, we have that $P_n$ must be true for all $n \in \mathbb{N}$.
+\end{proof}
+
+
+\section*{3.7}
+\begin{question*}{\textbf{a.)}}
+\\Show $|b| < a$ if and only if $-a<b<a$.
+\end{question*}
+{$ $}
+\\This statement is equivalent to "$|b| < a$ if and only if $-a < b$ and $b < a$." Which is, in turn, equivalent to "($|b| \leq a$ and $|b| \neq a$) if and only if ($-a \leq b$ and $-a \neq b$, and $b \leq a$ and $b \neq a$)."
+\begin{proof}{\textbf{a.) $\rightarrow$}}
+\\Assume that $|b| \leq a$ and $|b| \neq a$. From Question 3.5 (a), we know that this implies $-a \leq b \leq a$, which means $-a \leq b$ and $b \leq a$. Thus, to prove the statement, we only need to show that $-a \neq b$ and $b \neq a$. I will consider 3 cases, $b = 0$, $0 < b$, and $b < 0$. I will also use the fact that we showed in Question 3.5 (a) that $0 \leq a$. 
+\\\underline{Case 1: $b= 0$}
+\\If $b = 0$, then $0 \neq a$ since $|0| = 0$. If we assume $-a = 0$, then we can conclude that $a - a = a$ by adding $a$ to both sides, but this gives us $0 = a$ by A4, which contradicts that we previously said $0 \neq a$; thus it is not true that $-a = 0$, so $-a \neq 0$. Thus, the statement holds for this case. 
+{$ $}
+\\\underline{Case 2: $0 < b$}
+\\If $0 < b$, then we know that $|b| = b$, so we immediately get that $b \neq a$. We also cannot have $-a = b$ since $0 \leq a$ implies that $-a \leq 0$ by Theorem 3.2 (i) and $0 < b$ means the two can never be equal; thus $-a \neq b$. This proves the statement for this case. 
+{$ $}
+\\\underline{Case 3: $b < 0$}
+\\If $b < 0$, then we know that $|b| = -b$, so we immediately get that $-b \neq a$. This implies $-a \neq b$ since $-a = b$ if and only if $a = -b$ by multiplying both sides by $(-1)$ and using the fact that we proved earlier that $(-1)c = -c$ and $-(-c) = c$ for all $c$. Since $a = -b$ if false, we know that $-a = b$ is false, so $-a \neq b$. Furthermore, since $0 \leq a$ and $b < 0$, the two can never be equal to one another, so $b \neq a$. This proves the statement for this case. 
+\\Thus, the statement is proven in this direction. 
+\end{proof}
+
+\begin{proof}{\textbf{a.) $\leftarrow$}}
+\\Now we assume that $-a<b<a$, i.e. $-a \leq b$, $b\leq a$, $-a \neq b$, and $b\neq a$. We already know that this implies $|b| \leq a$ based off of Question 3.5 (a). We only need to show that $|b| \neq a$. Assume that $|b| = a$. Thus, if $0 \leq b$, we get that $b = a$ which is a contradiction to the fact that $b \neq a$. Next, if $b \leq 0$, we know $-b = a$. However, we already showed above that this would imply that $-a = b$, but that is also a contradiction. Therefore, our assumption that $|b| = a$ must have been false. Thus, $|b| \neq a$ just as we wanted. 
+\\Since we have shown the statement is true in both directions, we have proved it in its entirety. 
+\end{proof}
+
+\begin{question*}{\textbf{b.)}}
+\\Show $|a-b| < c$ if and only if $b-c < a < b + c$.
+\end{question*}
+
+\begin{proof}{\textbf{b.) $\rightarrow$}}
+\\Assume that $|a-b| < c$. We know from part (a) of this question that this implies $-c < a-b < c$, i.e. $-c < a-b$ and $a-b < c$. I will handle these 2 inequalities separately:
+\begin{align*}
+-c &< a-b\\
+\iff -c + b &< (a-b) + b &\text{by O4}\\
+\iff b - c &< a + (-b + b) &\text{by A2 on the left and A1 on the right}\\
+\iff b - c &< a + (b - b) &\text{by A2}\\
+\iff b - c &< a + 0 &\text{by A4}\\
+\iff b - c &< a &\text{by A3}
+\end{align*}
+Thus, $b - c < a$ like desired. For the second inequality we have:
+\begin{align*}
+a - b &< c\\
+\iff (a - b) + b &< b + c &\text{by O4}\\
+\iff a + (-b + b) &< b + c &\text{by A1}\\
+\iff a + (b - b) &< b + c &\text{by A2}\\
+\iff a + 0 &< b + c &\text{by A4}\\
+\iff a &< b + c &\text{by A3}
+\end{align*}
+Thus, we have $a < b + c$ as desired. Together, we have $b - c < a < b + c$ which proves the statement in this direction. 
+\end{proof}
+
+\begin{proof}{\textbf{b.) $\leftarrow$}}
+\\Assume that $b - c < a < b + c$, i.e. $b-c < a$ and $a < b + c$. I will handle these inequalities separately. However, since all of the steps used in the proof in the previous direction are valid in both direction, I can use both of those to show that $b-c < a \implies -c < a- b$ and $a < b + c \implies a -b < c$. Altogether, this gives $-c < a- b < c$ which implies that $|a - b| < c$ by part (a) of this question.
+\\Therefore, we have shown both direction of this statement are true, so we have proven it in its entirety. 
+\end{proof}
+
+\begin{question*}{\textbf{c.)}}
+\\Show $|a-b| \leq c$ if and only if $b-c \leq a \leq b +c$.
+\end{question*}
+
+\begin{proof}{\textbf{c.) $\rightarrow$}}
+\\Assume that $|a - b| \leq c$. From Question 3.5 (a), we can conclude that $-c \leq a - b \leq c$, i.e. $-c \leq a - b$ and $a- b \leq c$. Using the exact same steps used in part (b)$\rightarrow$ of this question, we can arrive at the result that $-c \leq a-b \implies b-c \leq a$ and $a -b \leq c \implies a \leq b + c$. Altogether, this gives $b - c \leq a \leq b +c$, precisely what we wanted to show.
+\end{proof}
+
+\begin{proof}{\textbf{c.) $\leftarrow$}}
+\\Assume that $b - c \leq a \leq b +c$, i.e. $b - c \leq a$ and $a \leq b + c$. Since all of the steps used in part (b)$\rightarrow$ of this question (and by necessity all of the steps used in part (c) $\rightarrow$) are valid in both directions, we can use those same steps in reverse to show that $b - c \leq a \implies -c \leq a - b$ and $a \leq b + c \implies a - b \leq c$. Together, this gives the result that $ -c \leq a -b \leq c$. Thus, by Question 3.5 (a), we can say that $|a -b| \leq c$, proving the statement in this direction. With both directions proven, the statement in its entirety is proven. 
+\end{proof}
+
+\end{document}

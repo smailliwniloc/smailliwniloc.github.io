@@ -1,0 +1,210 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Advanced Calc. Exam 2}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Honor Code}
+\begin{enumerate}[label = (\alph*)]
+\item Which of the following constitute Honor Pledge violations? Mark all that apply?
+	\begin{enumerate}[label = (\roman*)]
+	\item Unauthorized Collaboration: working together with people when you are not supposed to.
+		\begin{itemize}
+		\item Violation
+		\end{itemize}
+	\item Plagiarism: taking someone else's ideas, words or thoughts and using them as your own without any citation, either intentionally or unintentionally. 
+		\begin{itemize}
+		\item Violation
+		\end{itemize}
+	\item Unauthorized Aid: using something in your academic work you are not allowed to use, such as unauthorized calculators, books or notes in an exam.
+		\begin{itemize}
+		\item Violation
+		\end{itemize}
+	\item Falsification: lying about what has occurred.
+		\begin{itemize}
+		\item Violation
+		\end{itemize}
+	\end{enumerate}
+\item According to the K-State Honor and Integrity System, which of the following are true?
+	\begin{enumerate}[label = (\roman*)]
+	\item A grade of XF can result from a breach of academic honesty. The F indicates failure in the course; the X indicates the reason is an Honor Pledge violation. 
+		\begin{itemize}
+		\item True
+		\end{itemize}
+	\item After the 1994 cheating incident, the request for an honor system first came from the faculty and the administration.
+		\begin{itemize}
+		\item False, it came from the students
+		\end{itemize}
+	\item You may be held accountable for an Honor Pledge violation for posting and/or viewing answers in online sites such as chegg, cramster, study soup, study blue, etc.
+		\begin{itemize}
+		\item True
+		\end{itemize}
+	\item If a student has more than one violation during their time at K-State, they're looking at possible suspension or expulsion.
+		\begin{itemize}
+		\item True
+		\end{itemize}			
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+
+
+\section*{Question 1}
+For what values of $p \in \mathbb{R}$ does the series $\displaystyle \sum_{n = 2}^{\infty} \frac{(\ln n)^2}{n^p}$ converge?
+
+\begin{answer*}{$ $}
+\\I claim that this series \boxed{\text{only converges for } p > 1}.
+\end{answer*}
+\begin{proof}{$ $}
+\\First, note that if $p \leq 1$, then we have the following:
+\begin{align*}
+\left|\frac{(\ln n)^2}{n^p}\right| &> \frac{.3}{n^p} &\text{for all $n > 2$ since $\ln(2)^2 \approx .5$ and $\ln(\cdot)$ is an increasing function}
+\end{align*}
+The $.3$ was arbitrary here, but was just used to get the proper inequality for all values of the summation. Furthermore, we also know that $\sum \frac{.3}{n^p} = .3 \sum \frac{1}{n^p}$ diverges for all $p \leq 1$ due to Theorem 15.1. Therefore, by the Comparison Test, our given series also diverges for all $p \leq 1$.
+\\
+\\Now, considering $p > 1$, I will apply the Integral Test, and consider the following integral:
+\begin{align}
+\int_{2}^{\infty} \frac{(\ln x)^2}{x^p} dx &= \lim_{b \to \infty} \int_2^b \frac{(\ln x)^2}{x^p} dx\\
+&= \lim_{b \to \infty}\left( \left[\frac{(\ln x)^2}{(1-p)x^{p - 1}}\right]_{x = 2}^{x = b} - \int_2^b \frac{2\ln x}{(1 - p)x^{p}}dx\right)\\
+&= \lim_{b \to \infty} \left(\frac{1}{1 - p}\left[ \frac{(\ln b)^2}{b^{p - 1}} - \frac{(\ln 2)^2}{2^{p - 1}}\right] - \frac{2}{1 - p}\left[\frac{\ln x}{(1 - p)x^{p - 1}}\right]_{x = 2}^{x = b} + \frac{2}{1 - p}\int_2^b \frac{1}{(1 - p)x^p} \right)\\
+&= \frac{1}{1 - p}\lim_{b \to \infty} \left(\frac{(\ln b)^2}{b^{p - 1}} - \frac{(\ln 2)^2}{2^{p - 1}} - \frac{2}{1 - p}\left[\frac{\ln b}{b^{p - 1}} - \frac{\ln 2}{2^{p - 1}}\right] + \frac{2}{1 - p}\left[\frac{1}{(1-p)x^{p-1}}\right]_{x = 2}^{x = b}\right)\\
+&= \frac{1}{1 - p}\lim_{b \to \infty} \left(\frac{(\ln b)^2}{b^{p - 1}} - \frac{(\ln 2)^2}{2^{p - 1}} - \frac{2}{1 - p}\left[\frac{\ln b}{b^{p - 1}} - \frac{\ln 2}{2^{p - 1}}\right] + \frac{2}{(1 - p)^2}\left[\frac{1}{b^{p - 1}} - \frac{1}{2^{p - 1}}\right] \right)
+\end{align}
+Where I used integration by parts in lines (2) and (3). In this final limit expression, all powers of $(p - 1)$ are strictly positive powers since $p > 1$. Furthermore, we also know that all terms of the form $\frac{\ln b}{b^{p - 1}}$ and $\frac{(\ln b)^2}{b^{p - 1}}$ are monotonically decreasing \textit{after a certain point} since power terms grow faster than logarithmic terms. Additionally, these terms are strictly positive (i.e. bounded below by 0) as long as $b > 1$. Thus, all the above terms do indeed converge to some real number. What this number is is not important, but let's call it $M \in \mathbb{R}$. Therefore, by the Integral Test, we can say:
+\begin{align*}
+\sum_{n = 2}^{\infty} \frac{(\ln n)^2}{n^p} \leq \int_2^{\infty} \frac{(\ln x)^2}{x^p} = M \quad \quad \text{for $p > 1$}
+\end{align*}
+Thus, I have shown that the series does converge for $p > 1$, but does not converge for any $p \leq 1$ which finished the proof. 
+\end{proof}
+
+\newpage
+
+\section*{Question 2}
+Consider a function $f: \mathbb{R} \to \mathbb{R}$ such that the sequence $(f(x_n)) \subset \mathbb{R}$ is Cauchy for every Cauchy sequence $(x_n) \subset \mathbb{R}$. Is $f$ necessarily continuous on $\mathbb{R}$?
+
+\begin{answer*}{$ $}
+\\I claim that \boxed{f \text{ must be continuous on }\mathbb{R}}.
+\end{answer*}
+
+\begin{proof}{$ $}
+\\Let $(x_n)$ be a Cauchy sequence in $\mathbb{R}$. Thus, by assumption, we know that $(f(x_n))$ is Cauchy. This means that for some fixed $\varepsilon > 0$, there exists an $N_1$ such that $|f(x_n) - f(x_m)| < \varepsilon$ for all $n,m > N_1$. Additionally, since $(x_n)$ is Cauchy, this means that for $\delta > 0$ fixed, there exists some $N_2$ such that $|x_n - x_m| < \delta$ for all $n,m > N_2$. Thus, if we fix $m, n > \max\{N_1, N_2\}$, then we can conclude that for $|x_n - x_m| < \delta$, we also have $|f(x_n) - f(x_m)| < \varepsilon$ which means that $f$ is uniformly continuous. In particular, $f$ must be continuous. 
+
+\end{proof}
+
+
+\newpage
+
+\section*{Question 3}
+Suppose that $f: \mathbb{R} \to \mathbb{R}$ is continuous and that the sequence $(f(x_n)) \subset \mathbb{R}$ is Cauchy for every Cauchy sequence $(x_n) \subset \mathbb{R}$. Is $f$ necessarily uniformly continuous on $\mathbb{R}$?
+
+\begin{answer*}{$ $}
+\\I claim that \boxed{f \text{ may not be uniformly continuous on }\mathbb{R}}
+\end{answer*}
+
+\begin{proof}{$ $}
+\\Consider $f(x) = x^2$. Clearly $f$ is continuous and if $(x_n)$ is a Cauchy sequence, then $(x_n)$ is a convergent sequence (say, to $x_0$) by the completeness of $\mathbb{R}$. Furthermore, $f(x_n) = x_n^2$ converges to $x_0^2$ by Limit Theorems. Thus, $(f(x_n))$ is a Cauchy sequence. However, $x^2$ is not uniformly continuous on $\mathbb{R}$ since for $\varepsilon = 1$ and $|x - y| < \delta$, we have $|x^2 - y^2| = |x - y||x + y| > 1$ for $|x + y|$ sufficiently large. Thus, $f$ is not uniformly continuous on $\mathbb{R}$
+\end{proof}
+
+\newpage
+
+\section*{Question 4}
+Consider an arbitrary function $f: \mathbb{N} \to \mathbb{R}$, is $f$ necessarily continuous on $\mathbb{N}$?
+
+\begin{answer*}{$ $}
+\\I claim that \boxed{f \text{ must be continuous}}.
+\end{answer*}
+
+\begin{proof}{$ $}
+\\I will use the $\varepsilon$--$\delta$ definition of continuity. Let $x_0 \in \mathbb{N}$ be arbitrary, and fix $\varepsilon > 0$. Then, if we choose $\delta = 1$, we obtain $|x - x_0| < \delta = 1$. However, since $x,x_0$ must both be in the domain of $f$, they must both be natural numbers. Furthermore, the only way for the difference of two natural numbers to be less than 1 is if they are the same number. Thus, $|f(x) - f(x_0)| = |f(x_0) - f(x_0)| = 0 < \varepsilon$. Therefore, $|x - x_0| < 1$ implies $|f(x) - f(x_0)| < \varepsilon$ which means $f$ is continuous. 
+\end{proof}
+
+\newpage
+
+\section*{Question 5}
+Given a continuous function $f: \mathbb{N} \to \mathbb{R}$, is $f$ necessarily uniformly continuous on $\mathbb{N}$?
+
+\begin{answer*}{$ $}
+\\I claim that \boxed{f \text{ must be uniformly continuous}}.
+\end{answer*}
+
+\begin{proof}{$ $}
+\\Using the definition of uniform continuity, for $x,y \in \mathbb{N}$ if we choose $\delta = 1$, then we obtain $|x - y| < 1$. However, as discussed in the last problem, this is only possible when $x = y$. Thus, given some fixed $\varepsilon > 0$ and $|x - y| < 1$ we can conclude that $|f(x) - f(y)| = |f(x) - f(x)| = 0 < \varepsilon$. Therefore, $f$ is uniformly continuous. 
+\end{proof}
+
+\newpage
+
+\section*{Question 6}
+Let us call a set $B \subset \mathbb{R}$ a \textit{Schumann set} if every sequence $(x_n) \subset B$ has a subsequence that converges to some point in $B$. Is the set $[0,1] \cup [3,5]$ a Schumann set?
+
+\begin{answer*}{$ $}
+\\I claim that \boxed{[0,1] \cup [3,5] \text{ is a Schumann set}}.
+\end{answer*}
+
+\begin{proof}{$ $}
+\\Let's say $S := [0,1] \cup [3,5]$. First, I claim that any sequence $(x_n) \subset S$ must be bounded. This is clear to see since $|x_n| \leq 5$ and for all $n \in \mathbb{N}$ for any sequence $(x_n) \subset S$. Thus, the Bolzano-Weierstrass Theorem guarantees that every sequence $(x_n) \subset S$ has a convergent subsequence. I will fix some subsequence $(s_n) \subset (x_n) \subset S$ and I claim that $\lim s_n \in S$. This is clear to see by contradiction. 
+\\
+\\If $\lim s_n < 0$ then we have a contradiction because this tells us that for some some $N$, $s_n < 0$ for all $n > N$ which contradicts $(s_n) \subset S$.
+\\
+\\Likewise, if $1 < \lim s_n < 3$ we get a similar contradiction because this tells us that for some $N$, $1 < s_n < 3$ for all $n > N$ which again contradicts $(s_n) \subset S$.
+\\
+\\Lastly, if $\lim s_n > 5$ we know that for some $N$, $ s_n > 5$ for all $n > N$ which contradicts $(s_n) \subset S$.
+\\
+\\Therefore, we must have that $\lim s_n \in S$ which proves the result.
+\end{proof}
+
+\newpage
+
+\section*{Question 7}
+Fix a Schumann set $A \subset \mathbb{R}$ and let $f: A \to \mathbb{R}$ be a continuous function. Is it true that the image of $A$ under $f$, that is, the set $f(A) := \{y \in \mathbb{R}: y = f(x)$ for some $x \in A \}$ is necessarily a Schumann set?
+
+
+\begin{proof}{$ $}
+\\Let $(x_n)$ be some sequence in $A$ with a subsequence $(s_n)$ that converges to $s_0 \in A$ (this is possible since $A$ is a Schumann set). Then since $x_n \in A$ for all $n \in \mathbb{N}$, we know that $s_n \in A$ for all $n$ which means $f(x_n) \in f(A)$ for all $n$ and $f(s_n) \in f(A)$ for all $n$. Thus, for every sequence $(x_n) \subset A$ with a converging subsequence $(s_n)$ we have a corresponding sequence $(f(x_n))$ and its subsequence $(f(s_n))$ both in $f(A)$. Thus, by the continuity of $f$, we know that $\lim_n f(s_n) = f(s_0)$ and since $s_0 \in A$, $f(s_0) \in f(A)$ which means that $f(A)$ is a Schumann set. 
+\end{proof}
+
+\newpage
+
+\section*{Question 8}
+Does the series $\displaystyle \sum_{n = 1}^{\infty} \frac{\sqrt{n + 1} - \sqrt{n}}{\sqrt{n + 2}}$ converge?
+
+\begin{answer*}{$ $}
+\\This series \boxed{\text{does not converge}}
+\end{answer*}
+
+\begin{proof}{$ $}
+\\First note the following:
+\begin{align*}
+\frac{\sqrt{n + 1} - \sqrt{n}}{\sqrt{n + 2}} &= \frac{\sqrt{n + 1} - \sqrt{n}}{\sqrt{n + 2}} \cdot \frac{\sqrt{n + 1} + \sqrt{n}}{\sqrt{n + 1} + \sqrt{n}}\\
+&= \frac{(n + 1) + \sqrt{n}\sqrt{n + 1} - \sqrt{n}\sqrt{n + 1} - (n)}{\sqrt{n + 2}(\sqrt{n + 1} + \sqrt{n})}\\
+&= \frac{1}{\sqrt{n^2 + 3n + 2} + \sqrt{n^2 + 2n}}\\
+&> \frac{1}{\sqrt{n^2} + \sqrt{n^2}}\\
+&= \frac{1}{2n}
+\end{align*}
+However, we know that $\sum \frac{1}{2n} = \frac{1}{2} \sum \frac{1}{n}$ diverges by Theorem 15.1. Thus, by the Comparison Test, our original series also diverges. 
+\end{proof}
+
+\end{document}
