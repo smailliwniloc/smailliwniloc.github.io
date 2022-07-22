@@ -1,0 +1,72 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 6}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 4}
+Write down an expression of the form $\displaystyle \sum_{n = 0}^{\infty} a_nz^n$ for 
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \frac{1}{1 + z^4}$
+\item $\displaystyle \frac{1}{2z + 5}$
+\end{enumerate}
+In each case, specify where the expansion is valid.
+\\
+\\To find these expansions, I will use the geometric series given by 
+$\displaystyle \sum_{n = 0}^{\infty}w^n = \frac{1}{1 - w}$
+for all $|w| < 1$.
+
+\begin{answer*}{\textbf{(a)}}
+\begin{align*}
+\frac{1}{1 + z^4} &= \frac{1}{1 - (-z^4)}\\
+&= \sum_{n = 0}^{\infty} (-z^4)^n\\
+&= \boxed{\sum_{n = 0}^{\infty} (-1)^nz^{4n}}
+\end{align*}
+Since our $w$ in this case was equal to $-z^4$, this is valid whenever $|-z^4| < 1 \implies \boxed{|z| < 1}$
+\\
+\\Note, this is not quite in the form we desire since the exponent of $z$ is $4n$ instead of just $n$. However, if we re-define $a_n$ as the following:
+\[
+\begin{cases}
+	a_n = 0 &\text{ if } n = 4k + m,\; m \in \{1,2,3\}\\
+	a_n = (-1)^{k} &\text{ if } n = 4k
+\end{cases}k \in \mathbb{Z}
+\]
+Then we get $\displaystyle \frac{1}{1 + z^4} = \sum_{n = 0}^{\infty} a_n z^n$ just as desired. However, I think the first answer is easier to work with.
+\end{answer*}
+
+\begin{answer*}{\textbf{(b)}}
+\begin{align*}
+\frac{1}{2z + 5} &= \frac{1}{5}\cdot \frac{1}{\displaystyle 1 + \frac{2z}{5}}\\
+&= \frac{1}{5} \cdot \frac{1}{\displaystyle 1 - \left(-\frac{2z}{5}\right)}\\
+&= \frac{1}{5}\sum_{n = 0}^{\infty} \left(-\frac{2z}{5}\right)^n\\
+&= \boxed{\sum_{n = 0}^{\infty} \frac{(-2)^n}{5^{n+1}}z^n}
+\end{align*}
+Since our $w$ in this case was equal to $-\frac{2z}{5}$, this is valid whenever $\left|-\frac{2z}{5}\right| < 1 \implies \boxed{|z| < \frac{5}{2}}$
+\\
+\\Note this is the form we desired with $\displaystyle a_n = \frac{(-2)^n}{5^{n+1}}$.
+\end{answer*}
+\end{document}

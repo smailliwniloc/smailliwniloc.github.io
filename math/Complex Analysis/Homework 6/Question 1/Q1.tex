@@ -1,0 +1,77 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 6}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+With the aid of the equalities (for $z = x + iy$),
+\begin{align*}
+|\sin(z)|^2 = \sin^2(x) + \sinh^2(y), && |\cos(z)|^2 = \cos^2(x) + \sinh^2(y)
+\end{align*}
+show that
+\begin{enumerate}[label = (\alph*)]
+\item $|\sinh(y)| \leq |\sin(z)| \leq \cosh(y)$
+\item $|\sinh(y)| \leq |\cos(z)| \leq \cosh(y)$
+\end{enumerate}
+
+\begin{answer*}{\textbf{(a)}}
+\\It is clear from the first equality that $\sinh^2(y) = |\sin(z)|^2 - \sin^2(x)$. Since $\sin(x) \in [-1, 1] \implies \sin^2(x) \in [0,1]$. Thus, $\sin^2(x) \geq 0$ for all $x \in \mathbb{R} \implies -\sin^2(x) \leq 0$ for all $x \in \mathbb{R}$. Thus, using the equality I just found, we get
+\begin{align*}
+\sinh^2(y) &= |\sin(z)|^2 - \sin^2(x)\\
+&\leq |\sin(z)|^2 - 0\\
+&= |\sin(z)|^2\\
+\implies |\sinh(y)| &\leq |\sin(z)| \quad \text{the first of the two inequalities we need to show}
+\end{align*}
+Likewise, if we use the fact that $\sinh^2(y) = \cosh^2(y) - 1$, then we get from the first equality that \\$|\sin(z)|^2 = \sin^2(x) + \cosh^2(y) - 1$. Furthermore, using the same analysis on $\sin(x)$ as above, we can determine that $\sin^2(x) \leq 1$ for all $x \in \mathbb{R}$. Thus, putting this together, we get:
+\begin{align*}
+|\sin(z)|^2 &= \sin^2(x) + \cosh^2(y) - 1\\
+&\leq 1 + \cosh^2(y) - 1\\
+&= \cosh^2(y)\\
+\implies |\sin(z)| &\leq \cosh(y) \quad \text{the second of the two inequalities we need to show}
+\end{align*}
+Thus, we have now shown that $|\sinh(y)| \leq |\sin(z)| \leq \cosh(y)$, exactly as desired. 
+\end{answer*}
+
+\begin{answer*}{\textbf{(b)}}
+\\It is clear from the second equality that $\sinh^2(y) = |\cos(z)|^2 - \cos^2(x)$. Since $\cos(x) \in [-1, 1] \implies \cos^2(x) \in [0,1]$. Thus, $\cos^2(x) \geq 0$ for all $x \in \mathbb{R} \implies -\cos^2(x) \leq 0$ for all $x \in \mathbb{R}$. Thus, using the equality I just found, we get
+\begin{align*}
+\sinh^2(y) &= |\cos(z)|^2 - \cos^2(x)\\
+&\leq |\cos(z)|^2 - 0\\
+&= |\cos(z)|^2\\
+\implies |\sinh(y)| &\leq |\cos(z)| \quad \text{the first of the two inequalities we need to show}
+\end{align*}
+Likewise, if we use the fact that $\sinh^2(y) = \cosh^2(y) - 1$, then we get from the second equality that \\$|\cos(z)|^2 = \cos^2(x) + \cosh^2(y) - 1$. Furthermore, using the same analysis on $\cos(x)$ as above, we can determine that $\cos^2(x) \leq 1$ for all $x \in \mathbb{R}$. Thus, putting this together, we get:
+\begin{align*}
+|\cos(z)|^2 &= \cos^2(x) + \cosh^2(y) - 1\\
+&\leq 1 + \cosh^2(y) - 1\\
+&= \cosh^2(y)\\
+\implies |\cos(z)| &\leq \cosh(y) \quad \text{the second of the two inequalities we need to show}
+\end{align*}
+Thus, we have now shown that $|\sinh(y)| \leq |\cos(z)| \leq \cosh(y)$, exactly as desired. 
+\end{answer*}
+\end{document}

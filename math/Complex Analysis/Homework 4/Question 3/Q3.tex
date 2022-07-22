@@ -1,0 +1,82 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 4}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 3}
+
+Evaluate $\displaystyle \int_{\gamma} f(z)dz$ when:
+\begin{enumerate}[label = (\alph*)]
+\item $f(z) = \frac{1}{z}, \gamma(t) = e^{-it}, t \in [0, 8\pi]$
+\item $f(z) = $ Re$(z), \gamma(t) = t + it^2, t \in [0,1]$
+\item $f(z) = |z|^4, \gamma$ is the line segment $[-1+i, 1 +i]$
+\end{enumerate}
+$ $
+\\First, note the definition of the path integral for a path $\gamma : [a,b] \to \mathbb{C}$ of a function $f: \gamma^* \to \mathbb{C}$:
+\begin{equation}
+\int_{\gamma}f(z)dz := \int_a^b f(\gamma(t))\gamma '(t)dt
+\end{equation}
+This makes the calculations pretty straightforward:
+\begin{answer*}{\textbf{(a)}}
+\\Before we begin, note that $f(\gamma(t)) = e^{it}$ and $\gamma '(t) = -ie^{-it}$; thus, we have
+\begin{align*}
+\int_{\gamma} f(z)dz &= \int_a^b f(\gamma(t))\gamma '(t)dt &\text{by (1)}\\
+&= \int_0^{8\pi} [e^{it}]\cdot[-ie^{-it}]dt &\text{by above comments}\\
+&= \int_0^{8\pi} (-i) dt\\
+&= -it \Big|_{t = 0}^{t = 8\pi}\\
+&= -i(8\pi) - (-i(0))\\
+&= \boxed{-8\pi i}
+\end{align*}
+\end{answer*}
+
+\begin{answer*}{\textbf{(b)}}
+\\Before we begin, note that $f(\gamma(t)) = t$ and $\gamma '(t) = 1 + 2it$. Therefore,
+\begin{align*}
+\int_{\gamma} f(z)dz &= \int_a^b f(\gamma(t))\gamma '(t)dt &\text{by (1)}\\
+&= \int_0^1 [t]\cdot[1 + 2it]dt &\text{by the above comments}\\
+&= \int_0^1 (t + 2it^2)dt\\
+&= \left(\frac{t^2}{2} + \frac{2it^3}{3}\right) \bigg|_{t = 0}^{t = 1}\\
+&= \left(\frac{1}{2} + \frac{2i}{3}\right) - (0 + 0)\\
+&= \boxed{\frac{1}{2} + \frac{2i}{3}}
+\end{align*}
+\end{answer*}
+
+\begin{answer*}{\textbf{(c)}}
+\\First, let's parameterize $\gamma$ in the following manner: $\gamma(t) = t + i, t \in [-1,1]$. Now, we can see that $\displaystyle f(\gamma(t)) = |\gamma(t)|^4 = \left(\sqrt{t^2 + 1}\right)^4 = (t^2 + 1)^2 = t^4 + 2t^2 + 1$. Furthermore, $\gamma '(t) = 1$, so we can compute the integral as follows:
+\begin{align*}
+\int_{\gamma} f(z)dz &= \int_a^b f(\gamma(t))\gamma '(t)dt &\text{by (1)}\\
+&= \int_{-1}^1 [t^4 + 2t^2 + 1]\cdot[1] dt &\text{by the above comments}\\
+&= \int_{-1}^1 (t^4 + 2t^2 + 1) dt\\
+&= \left(\frac{t^5}{5} + \frac{2t^3}{3} + t\right) \bigg|_{t = -1}^{t = 1}\\
+&= \left(\frac{1}{5} + \frac{2}{3} + 1\right) - \left(\frac{-1}{5} + \frac{-2}{3} - 1\right)\\
+&= \frac{2}{5} + \frac{4}{3} + 2\\
+&= \boxed{\frac{56}{15}}
+\end{align*}
+\end{answer*}
+
+\end{document}

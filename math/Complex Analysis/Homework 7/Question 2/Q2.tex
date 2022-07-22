@@ -1,0 +1,102 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+\newtheorem{lemma}{Lemma}
+
+
+
+\title{Complex Analysis Homework 7}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 2}
+Let $p(z)$ be a polynomial of degree $k > 0$. Prove that the series $\displaystyle \sum_{n = 0}^{\infty} p(n)z^n$ has a radius of convergence equal to 1 and that there exists a polynomial $q(z)$ of degree $k$ such that 
+\[\sum_{n = 0}^{\infty} p(n)z^n = q(z)(1 - z)^{-(k + 1)}, \quad |z| < 1.\]
+
+\begin{proof}
+Recall that the radius of convergence of a power series $\sum a_n z^n$ is $\displaystyle R = \frac{1}{\lim \sup \sqrt[n]{|a_n|}}$. Also, note that if the limit $\lim_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right|$ exists, then it is equal to $\lim \sup \sqrt[n]{|a_n|}$. Thus, if the limit exists, then $R = \lim_{n \to \infty} \left|\frac{a_n}{a_{n+1}}\right|$. In our case here, $a_n = p(n)$. Since $p(n)$ is a polynomial of degree $k$ say that $p(n) = a_0 + a_1n + a_2n^2 + \cdots + a_kn^k$. Therefore, we have the following:
+
+\begin{align*}
+R &= \lim_{n \to \infty} \left|\frac{p(n)}{p(n + 1)}\right|\\
+&= \lim_{n \to \infty} \left|\frac{a_0 + a_1n + a_2n^2 + \cdots + a_kn^k}{a_0 + a_1(n + 1) + a_2(n + 1)^2 + \cdots + a_k(n + 1)^k}\right|\\
+&= \lim_{n \to \infty} \left|\frac{1/n^k}{1/n^k}\cdot \frac{a_0 + a_1n + a_2n^2 + \cdots + a_kn^k}{a_0 + a_1(n + 1) + a_2(n + 1)^2 + \cdots + a_k(n + 1)^k}\right|\\
+&= \lim_{n \to \infty} \left|\frac{a_0n^{-k} + a_1n^{1-k} + a_2n^{2-k} + \cdots + a_k}{a_0n^{-k} + a_1\cdot\frac{n + 1}{n^k} + a_2\cdot\frac{(n + 1)^2}{n^k} + \cdots + a_k\left(\frac{n + 1}{n}\right)^k}\right|\\
+&= \frac{\displaystyle \lim_{n \to \infty} \left| a_0n^{-k} + a_1n^{1-k} + a_2n^{2-k} + \cdots + a_k \right|}{\displaystyle \lim_{n \to \infty} \left| a_0n^{-k} + a_1\cdot\frac{n + 1}{n^k} + a_2\cdot\frac{(n + 1)^2}{n^k} + \cdots + a_k\left(\frac{n + 1}{n}\right)^k \right|}\\
+&= \frac{|a_0(0) + a_1(0) + a_2(0) + \cdots + a_k|}{|a_0(0) + a_1(0) + a_2(0) + \cdots + a_k(1)^k|}\\
+&= \frac{|a_k|}{|a_k|} = 1
+\end{align*}
+This finishes the proof that the radius of convergence is 1. I will now use an inductive proof on $k$ to show the existence of the polynomial $q$. However, before I begin, I will make the following remarks
+\begin{lemma}{$ $}
+For $k  \in \mathbb{N}$, we have:
+\begin{enumerate}[label = (\alph*)]
+\item For $\displaystyle f(z) = \frac{1}{1 - z}$, we have that $\displaystyle f^{(k)}(z) = \frac{k!}{(1 - z)^{k +1}}$.
+\item For $\displaystyle f(z) = z^n$, we have that $\displaystyle f^{(k)}(z) = n(n - 1)(n - 2)\cdots(n - (k - 1))z^{n - k}$
+\end{enumerate}
+\end{lemma}
+\begin{proof}{$ $}
+\\(a) is easily shown for $k = 1$ and then inductively shown for $k + 1$ by differentiating the last equation to get $\displaystyle f^{(k+1)} = \frac{(k + 1)!}{(1 - z)^{k + 2}}$. (b) is also very easy to see for $k = 1$ and then for $k + 1$ we have $f^{(k+1)}(z) = n(n - 1)(n - 2)\cdots(n - (k - 1))(n - k)z^{n - (k + 1)}$. This proves both of these results for all $k \in \mathbb{N}$. Note in (b) if $k > n$, then at some point in our product, we multiply by $(n-n) = 0$ which makes the whole function zero. This is fine, however, since any derivative of a polynomial of higher order than the polynomial itself, must be zero. 
+\end{proof}
+
+\begin{lemma}{$ $}
+\\For any $k \in \mathbb{N}$, we can rewrite $n^k$ as $n^k = n(n-1)(n-2)\cdots(n-(k - 1)) + b(n)$ for $b(n)$ some polynomial of order $k - 1$.
+\end{lemma}
+\begin{proof}{$ $}
+\\I will again show this inductively. It is obvious for $k = 1$, so I will start with $k = 2$ to show $n^k = n^2 = n(n - 1) + n$. Thus, $b(n) = n$ is a polynomial of order $k - 1 = 1$. For $k + 1$ we have $n^{k + 1} = (n - k)(n^k) + kn^k = (n - k)[n(n-1)(n-2)\cdots(n - (k-1)) + \tilde{b}(n)] + kn^k$ by the inductive Hypothesis. In turn this is equal to $n(n-1)(n -2)\cdots(n - (k-1))(n - k) + \tilde{b}(n)(n - k) + kn^k$ where $b(n) = \tilde{b}(n)(n - k) + kn^k$ is our polynomial of degree $(k + 1) - 1  =k$ since $\tilde{b}(n)$ was a polynomial of degree $k - 1$ by the inductive hypothesis. Thus, we have shown this lemma to be true for all $k \in \mathbb{N}$.
+\end{proof}
+I will now proceed with the inductive proof for the existence of the polynomial $q$:
+\\\underline{Base Case: $k = 1$}
+\\For $k = 1$, we have the following:
+\begin{align*}
+\sum_{n = 0}^{\infty} p(n)z^n &= \sum_{n = 0}^{\infty} (a_0 + a_1n)z^n\\
+&= a_0 \sum_{n = 0}^{\infty}z^n + a_1\sum_{n = 0}^{\infty} nz^n\\
+&= a_0 \sum_{n = 0}^{\infty}z^n + a_1z \sum_{n = 0}^{\infty} nz^{n-1}\\
+&= a_0 \sum_{n = 0}^{\infty}z^n + a_1z \sum_{n = 0}^{\infty} \frac{d}{dz}(z^n) &\text{by Lemma 1}\\
+&= a_0 \sum_{n = 0}^{\infty}z^n + a_1z \frac{d}{dz}\left(\sum_{n = 0}^{\infty} z^n \right) &\text{by Lemma 1(b)}\\
+&= a_0 \left(\frac{1}{1-z}\right) + a_1z \frac{d}{dz}\left(\frac{1}{1-z}\right)\\
+&= \left(\frac{a_0}{1-z}\right) + a_1z \left(\frac{1}{(1-z)^2}\right) &\text{by Lemma 1(a)}\\
+&= \frac{a_0(1- z) + a_1z}{(1 - z)^2}\\
+&= \frac{(a_1 - a_0)z + a_0}{(1 - z)^2}
+\end{align*}
+Thus, we have shown that for $k = 1$, our polynomial $q$ of order 1 is equal to $(a_1 - a_0)z + a_0$.
+\\\underline{Inductive step: Assume true for some natural number $k$}
+\\We are now assuming the statement is true for some natural number $k$ and we will be examining the statement for $k + 1$. I will first bring in the following notation, any function written below in the form $t_m(n)$ will be a polynomial in $n$ of order $m$. For example, $s_7(w)$ is a polynomial of order 7 in the variable $w$. Therefore, we now have the following:
+\begin{align*}
+\sum_{n = 0}^{\infty} p(n)z^n &= \sum_{n = 0}^{\infty} (a_0 + a_1n + a_2n^2 + \cdots + a_kn^k + a_{k + 1}n^{k + 1})z^n\\
+&= \sum_{n = 0}^{\infty} (a_0 + a_1n + a_2n^2 + \cdots + a_kn^k)z^n + \sum_{n = 0}^{\infty} a_{k + 1}n^{k + 1}z^n\\
+&= q_k(z)\frac{1}{(1 - z)^{k + 1}} + a_{k +1}\sum_{n = 0}^{\infty} n^{k + 1}z^n &\text{by Inductive Hypothesis}\\
+&= q_k(z)\frac{1}{(1 - z)^{k + 1}} + a_{k + 1}\sum_{n = 0}^{\infty} [n(n - 1)(n - 2)\cdots(n - (k - 1))(n - k) + b_k(n)]z^n &\text{by Lemma 2}\\
+&= q_k(z)\frac{1}{(1 - z)^{k + 1}} + a_{k + 1}\sum_{n = 0}^{\infty}[n(n - 1)(n - 2)\cdots(n - k)]z^n + a_{k + 1}\sum_{n = 0}^{\infty}b_k(n)z^n\\
+&= \frac{q_k(z)}{(1 - z)^{k + 1}} + \frac{a_{k + 1}\tilde{q_k}(z)}{(1 - z)^{k + 1}} + a_{k + 1}z^{k+1}\sum_{n = 0}^{\infty}[n(n - 1)(n - 2)\cdots(n - k)]z^{n - (k+1)} &\text{by the Inductive Hypothesis}\\
+\end{align*}
+\begin{align*}
+&= \frac{q_k(z) + a_{k + 1}\tilde{q_k}(z)}{(1 - z)^{k+1}} + a_{k + 1}z^{k+1}\sum_{n = 0}^{\infty} \frac{d^{k+1}}{dz^{k+1}}(z^n) &\text{by Lemma 1(b)}\\
+&= \frac{q_k(z) + a_{k + 1}\tilde{q_k}(z)}{(1 - z)^{k+1}} + a_{k + 1}z^{k+1}\frac{d^{k+1}}{dz^{k+1}}\left(\sum_{n = 0}^{\infty} z^n \right)\\
+&= \frac{q_k(z) + a_{k + 1}\tilde{q_k}(z)}{(1 - z)^{k+1}} + a_{k + 1}z^{k+1} \frac{d^{k + 1}}{dz^{k +1}} \left(\frac{1}{1 - z}\right)\\
+&= \frac{q_k(z) + a_{k + 1}\tilde{q_k}(z)}{(1 - z)^{k+1}} + a_{k + 1} z^{k+1}\left(\frac{(k + 1)!}{(1 - z)^{k + 2}}\right) &\text{by Lemma 1(a)}\\
+&= \frac{[q_k(z) + a_{k + 1}\tilde{q_k}(z)][1 - z] + a_{k +1}z^{k+1}(k + 1)!}{(1 - z)^{k + 2}}
+\end{align*}
+Thus, we can see our $q$ exists for the case of $k + 1$ as well. In fact, we have that $q_{k + 1} = [q_k(z) + a_{k + 1}\tilde{q_k}(z)][1 - z] + a_{k +1}z^{k+1}(k + 1)!$. Where the $q_k$ and $\tilde{q_k}$ came from the inductive hypothesis of the existence of $q$ for a lower degree problem. Thus, by the principle of mathematical induction, we have shown that $q$ exists for all values of $k \in \mathbb{N}$ which means the statement is true for all polynomials $p$. Also note that in this process, I used only the geometric series $\displaystyle \sum_{n = 0}^{\infty} z^n = \frac{1}{1 - z}$ and its derivatives which all converge for all $|z| < 1$. Thus, this would have been another approach to prove that the radius of convergence for the initial series is also equal to 1. 
+\end{proof}
+
+
+\end{document}

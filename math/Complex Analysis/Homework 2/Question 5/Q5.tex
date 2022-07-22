@@ -1,0 +1,128 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+\title{Complex Analysis Homework 2}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{Question 5}
+\begin{question*}{$ $}
+\\For each of the following subsets of $\mathbb{C}$, determine if they are closed, open, or neither:
+\begin{enumerate}[label = \alph*.)]
+\item $|z - i| < |z - 1|$
+\item $|z + 2i| \geq 2$
+\item $1 < Re(z) \leq 2$
+\item $Re(z) \neq 0$.
+\end{enumerate}
+ For the non-closed sets, find the closure.
+\end{question*}
+
+\begin{answer*}{\textbf{a.)}}
+\\I claim that this set is open.
+\begin{proof}{$ $}
+\\Let's call the above set of points $S = \{z \in \mathbb{C} : |z - i| < |z - 1|\}$. As shown in Question $4a.)$, if we let $z = x + iy$, this is the set of all points above the line $y = x$.\\
+\\
+If we choose an arbitrary point $z_0 \in S$, then the distance from $z_0$ to the line $y = x$ is given by the length of the perpendicular line segment from the line $y = x$ to the point $z_0$. This line would have slope $-1$; thus, is of the form $y = -x + c$ for some constant c. If we plug in the $(x,y)$ coordinates of $z_0 = x_0 + iy_0$, then we get $y_0 = -x_0 + c \implies c = y_0 + x_0$.\\
+\\
+Therefore, we can find the intersection of the line $y = x$ and $y = -x + (y_0 + x_0)$. The $x$-coordinate can be found by equating the two lines: 
+\begin{align*}
+x &= -x + (y_0 + x_0)\\
+2x &= y_0 + x_0\\
+x & = \frac{y_0 + x_0}{2}\\
+\end{align*}
+It immediately follows that the $y$-coordinate is given by $y = \frac{y_0 + x_0}{2}$. Therefore, the distance between $z_0$ and the line $y = x$ is given by:
+\begin{align*}
+d(z_0, y = x) &= \sqrt{\left(x_0 - \frac{y_0 + x_0}{2}\right)^2 + \left(y_0 - \frac{y_0 + x_0}{2}\right)^2}\\
+&= \sqrt{\left(\frac{x_0 - y_0}{2}\right)^2 + \left(\frac{y_0 - x_0}{2}\right)^2}\\
+&= \sqrt{\left(\frac{x_0 - y_0}{2}\right)^2 + \left(\frac{x_0 - y_0}{2}\right)^2}\\
+&= \sqrt{2\left(\frac{x_0 - y_0}{2}\right)^2}\\
+&= \frac{|x_0 - y_0|}{\sqrt{2}}\\
+&= \frac{y_0 - x_0}{\sqrt{2}} \quad \quad \text{since} \quad y_0 > x_0
+\end{align*}
+
+Therefore, we can find an open disk $D(z_0, r) \subset S$ with $r > 0$ given by
+\[r < \frac{y_0 - x_0}{\sqrt{2}}\]
+Thus, $S$ is, by definition, an open set. 
+\end{proof}
+
+Since $S$ is non-closed, we want to find its closure as well. First, we need to find all of the limit points of $S$. I claim that all of the limit points of $S$ are given by the set $T = \{z = x + iy \in \mathbb{C} : y \geq x\}$.
+
+\begin{proof}{$ $}
+\\First, note that any point $w = u + iv$ with $v < u$ (i.e. $w \notin T$) is not a limit point since $\exists$ $r > 0$ such that $D'(w,r) \cap S = \emptyset$. Namely, any $r < \frac{u - v}{\sqrt{2}}$ by the same procedure used before to show $S$ is open. 
+\\
+\\Next, note that for any point $z_0 = x_0 + iy_0 \in T$, we have that $D'(z_0,r) \cap S \neq \emptyset$ since, for example, $z_1 = x_0 + i(y_0 + \frac{r}{2}) \in D'(z_0, r) \cap S$. Thus, $T$ is, indeed, the set of all limit points. 
+\end{proof}
+Thus, the closure of $S$, $\overline{S} = S \cup T = \{z = x + iy \in \mathbb{C} : y \geq x\}$.
+\end{answer*}
+
+\begin{answer*}{\textbf{b.)}}
+\\I claim that this set is closed.
+\begin{proof}{$ $}
+\\Let's call the above set of points $S = \{z \in \mathbb{C} : |z + 2i| \geq 2\}$. I will show that $S$ is closed by showing that $S$ contains all of its limit points. Note that for any point $w \notin S$, we can find an $r > 0$ such that $D'(w,r) \cap S = \emptyset$. For convenience, let's express $w$ as a polar point centered at $0 - 2i$, say $w = \rho e^{i\phi} - 2i$ for $0 \leq \rho < 2$ the distance from $0 - 2i$ and $-\pi < \phi \leq \pi$ the argument of the point when measured from the right side of the line $Im(z) = -2$. Therefore, if we choose $r < 2 - \rho$, then $D'(w,r) \cap S = \emptyset$. This means all points not in $S$ are not limit points.\\
+\\
+To show that all points in $S$ are limit points, we take some arbitrary point $z_0 \in S$, and we show that it must be a limit point. Just as before, we can express it as the distance from $0 - 2i$, say $z_0 = r_0 e^{i\theta_0} - 2i$, but this time $r_0 \geq 2$ and $-\pi < \theta_0 \leq \pi$. For any $r > 0$, we know that $D'(z_0,r) \cap S \neq \emptyset$ since, for example, $z_1 = (r_0 + \frac{r}{2})e^{i\theta_0} \in D'(z_0,r) \cap S$.\\
+Thus, $S$ contains all of its limit points, so $S$ must be closed. 
+\end{proof}
+\end{answer*}
+
+\begin{answer*}{\textbf{c.)}}
+\\I claim that this set is neither closed nor open.
+\begin{proof}{$ $}
+\\Let's call the above set of points $S = \{z \in \mathbb{C} : 1 < Re(z) \leq 2\}$.
+\\
+\\First, I will show that $S$ is not open. Let $z_0$ be a point along the line $Re(z) = 2$, i.e. $z_0 = 2 + iy_0$. However, if we look at $D(z_0, r)$, we cannot find an $r>0$ such that $D(z_0, r) \subset S$ because for any $r$, we have $z_1 = (2 + \frac{r}{2}) + iy_0 \in D(z_0, r)$ but $z_1 \notin S$, so $D(z_0, r) \not\subset S$. Therefore, $S$ is not open. 
+\\
+\\Next, I will show that $S$ is not closed. To do this I will find a point that is not in $S$, but is a limit point of $S$. Take $w_0$ to be on the line $Re(z) = 1$, i.e. $w_0 = 1 + iv_0$. For any $r > 0$, we know that $D'(w_0,r) \cap S \neq \emptyset$ since, for example if we let $r_1 = \min\{r/2, 1\}$, then $w_1 = (1 + r_1) + iv_0 \in D'(w_0,r) \cap S$. Thus, $D'(w_0,r) \cap S \neq \emptyset$ for all choices of $r$, so $w_0$ is a limit point of $S$. However, $w_0 \notin S$, so $S$ does not contain all of its limit points, so $S$ is not closed.
+\\
+\\Thus, $S$ is not closed nor open, proving my claim.
+\end{proof}
+
+Since $S$ is non-closed, we want to find its closure as well. We have already shown that points along the line $Re(z) = 1$ are limit points. I claim that these, along with $S$ itself are all of the limit points of $S$.
+
+\begin{proof}{$ $}
+\\To prove my claim above, I  need to show that all points in $S$ are actually limit points, and that all points not in $S$ or along the line $Re(z) = 1$ are not limit points.\\
+\\First, let $z_0 = x_0 + iy_0 \in S$, i.e. $1 < x_0 \leq 2$. For any $r>0$, we have that $D'(z_0, r) \cap S \neq \emptyset$ since, for example, $z_1 = x_0 + i(y_0 + \frac{r}{2}) \in D'(z_0, r) \cap S$. Thus, $D'(z_0, r) \cap S \neq \emptyset$ for any choice of $r$, so all points in $S$ are limit points. 
+\\
+\\Next, take $w_1, w_2 \notin S \cup \{z \in \mathbb{C} : Re(z) = 1\}$. Let $w_1 = u_1 + iv_1$ and $w_2 = u_2 + iv_2$ for $u_1 < 1$, $u_2 > 2$, and $v_1, v_2 \in \mathbb{R}$. Now, note that $D'(w_1, r_1) \cap S = \emptyset$ for $r_1 < 1 - u_1$ and that $D'(w_2, r_2) \cap S = \emptyset$ for $r_2 < u_2 - 2$. Since $w_1$ and $w_2$ describe all possibles numbers not in S or on the line $Re(z) = 1$ and we have shown that neither $w_1$ nor $w_2$ could be limit points, we have shown that all points not in $S$ or along the line $Re(z) = 1$ are not limit points; thus, proving the claim. 
+\end{proof}
+
+Thus, the closure of $S$, $\overline{S} = S \cup \{z \in \mathbb{C} : Re(z) = 1\} = \{z \in \mathbb{C} : 1 \leq Re(z) \leq 2\}$
+\end{answer*}
+
+\begin{answer*}{\textbf{d.)}}
+\\I claim that this set is open
+\begin{proof}{$ $}
+\\Let's call the above set of points $S = \{z \in \mathbb{C} : Re(z) \neq 0\}$.
+\\
+\\Let $z_0$ be a point in $S$, i.e. $z_0 = x_0 + iy_0$ for $x_0 \neq 0$. No matter what $z_0$ is, we can find the distance from $z_0$ to the line $Re(z) = 0$ easily as $d(z_0, Re(z) = 0) = |x_0|$. In fact, we can find an open disk $D(z_0, r) \subset S$ if we let $0< r < |x_0|$. This means, by definition, $S$ is open. 
+\end{proof}
+
+Since $S$ is non-closed, we want to find its closure as well. I claim that $S$, along with the line $Re(z) = 0$ represent all of $S$'s limit points. 
+
+\begin{proof}
+First, for any point $z_0 = x_0 + iy_0 \in S$, notice that $D'(z_0, r) \cap S \neq \emptyset$ for any value of $r>0$. This is because, for example, $z_1 = x_0 + i(y_0 + \frac{r}{2}) \in D'(z_0, r) \cap S$. Thus, all points in $S$ are limits points of $S$.
+\\
+\\Next, take any point $w_0 = 0 + iy_0 \notin S$. Again, we can see that $D'(w_0, r) \cap S \neq \emptyset$ for any $r>0$ since we can find $w_1 = \frac{r}{2} + iy_0 \in D'(w_0, r) \cap S$. Therefore, all points on the line $Re(z) = 0$ are also limit points. 
+\end{proof}
+
+Thus, the closure of $S$, $\overline{S} = S \cup \{z \in \mathbb{C} : Re(z) = 0\} = \mathbb{C}$
+\end{answer*}
+
+\end{document}

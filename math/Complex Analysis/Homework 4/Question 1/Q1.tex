@@ -1,0 +1,76 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 4}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+
+Show in two ways that that the function $\displaystyle f(z) = e^{z^2}$ is entire. What is its derivative $f'(z)$?
+
+\begin{answer*}{$ $}
+\\\underline{Method 1}
+\\First, note that we can write $f(z)$ as $g(h(z))$ for $g(z) = e^z$ and $h(z) = z^2$. Thus, since we know that the compositions of two entire functions is entire, we merely need to show that $g(z)$ and $h(z)$ are entire. I will start by showing that $g(z)$ is entire.
+\\
+\\First, let $z = x + iy$ and write $g(z) = g(x + iy) = e^{x + iy} = e^xe^{iy} = e^x(\cos(y) + i\sin(y))$ by Euler's Formula. Thus, we can see that writing $g(z)$ as $u(x,y) + iv(x,y)$ gives us $u(x,y) = e^x\cos(y)$ and $v(x,y) = e^x\sin(y)$. Therefore, we have the following:
+\begin{align*}
+u_x(x,y) = e^x\cos(y) && u_y(x,y) = -e^x\sin(y) && v_x(x,y) = e^x\sin(y) && v_y(x,y) = e^x\cos(y)
+\end{align*}
+So it is clear that the Cauchy-Riemann Equations are satisfied since $u_x = v_y$ and $u_y = -v_x$. Additionally, all of the previous first-order partial derivatives being continuous everywhere is sufficient to prove that $g(z)$ is differentiable everywhere, i.e., is entire.
+\\Next, I will again let $z = x + iy$ and examine $h(z) = h(x + iy) = (x + iy)^2 = x^2 - y^2 + 2ixy$. Therefore, writing $h(z)$ as $u(x,y) + iv(x,y)$ gives us $u(x,y) = x^2 - y^2$ and $v(x,y) = 2xy$. Thus, we have the following:
+\begin{align*}
+u_x(x,y) = 2x && u_y(x,y)= -2y && v_x(x,y) = 2y && v_y(x,y) = 2x
+\end{align*}
+So it is clear that the Cauchy-Riemann Equations are satisfied since $u_x = v_y$ and $u_y = -v_x$. Additionally, all of the previous first-order partial derivatives being continuous everywhere is sufficient to prove that $h(z)$ is differentiable everywhere, i.e., is entire.
+\\
+\\Since we have proven that $g(z)$ and $h(z)$ are both entire functions, then we have also proven that $f(z) = g(h(z))$ is an entire function. $\square$
+\\
+\\\underline{Method 2}
+\\To prove that $f(z)$ is entire, I will now look at the Cauchy-Riemann equations on $f(z)$ itself. Again, to do this I will need to consider $z = x + iy$ to give us $\displaystyle f(z) = f(x + iy) = e^{(x + iy)^2} = e^{x^2 - y^2 + 2ixy} = e^{x^2 - y^2}e^{i(2xy)} = e^{x^2 - y^2}(\cos(2xy) + i\sin(2xy))$. Thus, writing $f(z)$ as $u(x,y) = iv(x,y)$ give us $u(x,y) = e^{x^2 - y^2}\cos(2xy)$ and $v(x,y) = e^{x^2 - y^2}\sin(2xy)$. Therefore, we have the following:
+\begin{align*}
+u_x(x,y) = 2xe^{x^2 - y^2}\cos(2xy) - 2ye^{x^2 - y^2}\sin(2xy) &= 2e^{x^2 - y^2}(x\cos(2xy) - y\sin(2xy))\\
+u_y(x,y) = -2ye^{x^2 - y^2}\cos(2xy) - 2xe^{x^2 - y^2}\sin(2xy) &= -2e^{x^2 - y^2}(y\cos(2xy) + x\sin(2xy))\\
+v_x(x,y) = 2xe^{x^2 - y^2}\sin(2xy) + 2ye^{x^2 - y^2}\cos(2xy) &= 2e^{x^2 - y^2}(y\cos(2xy) + x\sin(2xy))\\
+v_y(x,y) = -2ye^{x^2 - y^2}\sin(2xy) + 2xe^{x^2 - y^2}\cos(2xy) &= 2e^{x^2 - y^2}(x\cos(2xy) - y\sin(2xy))
+\end{align*}
+So it is clear that the Cauchy-Riemann Equations are satisfied since $u_x = v_y$ and $u_y = -v_x$. Additionally, all of the previous first-order partial derivatives being continuous everywhere is sufficient to prove that $f(z)$ is differentiable everywhere, i.e., is entire. $\square$
+\\
+\\\underline{Calculating the Derivative}
+\\By the previous calculation and the fact that $f'(z) = u_x(x,y) + iv_x(x,y)$, we can easily see that
+\begin{align*}
+u_x + iv_x &= 2e^{x^2 - y^2}(x\cos(2xy) - y\sin(2xy)) + i[2e^{x^2 - y^2}(y\cos(2xy) + x\sin(2xy))]\\
+&= 2e^{x^2 - y^2}(x\cos(2xy) - y\sin(2xy) + iy\cos(2xy) + ix\sin(2xy))\\
+&= 2e^{x^2 - y^2}((x + iy)\cos(2xy) + i(x + iy)\sin(2xy))\\
+&= 2(x + iy)e^{x^2 - y^2}(\cos(2xy) + i\sin(2xy))\\
+&= 2(x + iy)e^{x^2 - y^2}e^{2ixy}\\
+&= 2(x + iy)e^{x^2 - y^2 + 2ixy}\\
+&= 2(x + iy)e^{(x + iy)^2}
+\end{align*}
+Thus, using the fact that $z = x + iy$, we get the familiar result that \boxed{f'(z) = 2ze^{z^2}}
+\end{answer*}
+
+\end{document}

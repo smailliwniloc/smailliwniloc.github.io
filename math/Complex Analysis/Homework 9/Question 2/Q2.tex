@@ -1,0 +1,73 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 9}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 2}
+Locate and classify the singularities in $\mathbb{C}$ for $f(z)$ equal to the following functions.
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \frac{z}{z^2 - 1}$
+	\begin{itemize}
+	\item Note that the denominator can be written as $z^2 - 1 = (z - 1)(z + 1)$. Then it is clear that $z = 1$ and $z = -1$ are both isolated singularities of $f$ since $f \in H(D'(1,1))$ and $f \in H(D'(-1, 1))$ where $D'(a,r)$ is the punctured disk centered at $a$ with radius $r$. Furthermore, if we notice that
+	\begin{align*}
+	\lim_{z \to 1}|f(z)| = \lim_{z \to 1}\left|\frac{z}{(z + 1)(z - 1)}\right| = \frac{1}{2}\lim_{z \to 1} \left|\frac{1}{z - 1}\right| &= \infty &\text{and}\\
+	\lim_{z \to -1}|f(z)| = \lim_{z \to -1}\left|\frac{z}{(z - 1)(z + 1)}\right| = \frac{1}{2} \lim_{z \to -1}\left|\frac{1}{z + 1}\right| &= \infty,
+	\end{align*}
+	\item then we can deduce that \boxed{z = 1 \text{ and } z = -1 \text{ are both poles for } f(z).} In particular, they would both be poles of order 1 since if we consider them as zeroes of the denominator, $g(z) = z^2 - 1$, then clearly $g(\pm 1) = 0$, but $g'(\pm 1) = \pm 2 \neq 0$.
+	\end{itemize}
+\item $\tan^2(z)$
+	\begin{itemize}
+	\item First, recall the definition of $\tan(w) = \frac{\sin(w)}{\cos(w)}$. Thus, $\tan^2(z) = \frac{\sin^2(z)}{\cos^2(z)}$ and we have singularities precisely when $\cos^2(z) = 0$. Furthermore, we know that $\cos(z) = 0$ if and only if $z = \frac{\pi}{2} + \pi k$ for $k \in \mathbb{Z}$. Let $z_k = \frac{\pi}{2} + \pi k$ for some $k \in \mathbb{Z}$, then we can see
+	\begin{align*}
+	\lim_{z \to z_k}\left|f(z)\right| = \lim_{z \to z_k}\left|\frac{\sin^2(z)}{\cos^2(z)}\right| = \lim_{z \to z_k} \left|\frac{1}{\cos^2(z)}\right| = \infty
+	\end{align*}
+	\item so we can see that these singularities are actually poles. Thus \boxed{z = \frac{\pi}{2} + \pi k $ for $ k \in \mathbb{Z} $ are all poles for $ f(z)}. We can determine the order of these poles by considering them as zeroes of the denominator and finding the order of them as zeroes. Consider $g(z) = \cos^2(z)$ and let $z_k = \frac{\pi}{2} + \pi k$. We have already seen that $g(z_k) = 0$ for all $k$. Now consider $g'(z) = -2\cos(z)\sin(z)$, we also have that $g'(z_k) = 0$ for all $k$. Going further, we find $g''(z) = 2\sin^2(z) - 2\cos^2(z)$. However, $g''(z_k) = 2 \neq 0$ for all $k$. From this, we conclude that all $z_k$'s are actually poles of order 2.
+	\end{itemize}
+\item $\displaystyle \frac{z}{1 - e^z}$
+	\begin{itemize}
+	\item Notice at $z = 0$, the denominator is equal to $1 - e^0 = 0$ which means $z = 0$ is a singularity for $f$. If we replace $e^z$ with its Taylor Expansion centered at 0, we can observe the following:
+	\begin{align*}
+	f(z) = \frac{z}{1 - e^z} &= \frac{z}{\displaystyle 1 - \sum_{n = 0}^{\infty}\frac{z^n}{n!}}\\
+	&= \frac{z}{\displaystyle 1 - \left(1 + z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots\right)}\\
+	&= \frac{-z}{\displaystyle z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots}\\
+	&= -\left(\sum_{n = 1}^{\infty} \frac{z^{n-1}}{n!}\right)^{-1} &\text{for all $z \neq 0$}
+	\end{align*}
+	\item Thus, we have found a suitable extension function for $f$. Since $f(z)$ is equal to that last series at all points $z \neq 0$, then we can simply extend $f$ to have the value of that series at $z = 0$. This means we're extending $f$ to satisfy $f(0) = -1$ since this series is equal to $-1$ at 0. Lastly, we can notice that this is the negative reciprocal of a power series which converges in all of $\mathbb{C}$ and is never equal to zero; thus, it is analytic in all of $\mathbb{C}$. This leads us to the conclusion that \boxed{z = 0 $ is a removable singularity for $ f}
+	\end{itemize}
+\item $e^{-1/z^4}$
+	\begin{itemize}
+	\item Since the function $\frac{1}{z^4}$ is not defined at $z = 0$, we have that $z = 0$ is a singularity for $f$. I will consider the series expansion of $f$ centered around $z = 0$. To do this, recall that 
+	\begin{align*}
+	e^w &= \sum_{n = 0}^{\infty} \frac{w^n}{n!}\\
+	\implies e^{-1/z^4} &= \sum_{n = 0}^{\infty} \frac{(-1/z^4)^n}{n!} = \sum_{n =0}^{\infty} \frac{(-1)^n}{z^{4n}n!}
+	\end{align*}
+	\item Thus, we can see that $a_{-n} \neq 0$ for infinitely many $n \in \mathbb{N}$ in the Laurent Series expansion of $f$ which indicates that \boxed{z = 0 \text{ is an essential singularity for } f}
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

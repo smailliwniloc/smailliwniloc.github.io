@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 7}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 3}
+Use the definition to show that the sequence of functions $\displaystyle f_n(z) = \frac{1}{nz}$ is pointwise convergent, but not uniformly convergent, to $f(z) = 0$ on the domain $\Omega = D(0,1)\backslash \{0\}$.
+
+\begin{proof}
+I will first show that $f_n(z)$ is pointwise convergent. Let $z \in D(0,1) \backslash \{0\}$ and $\varepsilon > 0$ be fixed. Let us examine $|f_n(z) - f(z)| = |f_n(z)|$:
+\begin{align*}
+|f_n(z)| &= \left|\frac{1}{nz}\right|\\
+&= \frac{1}{n|z|}
+\end{align*}
+Thus, if we define $N_{\varepsilon}(z) := \frac{1}{\varepsilon |z|}$, then for $n > N_{\varepsilon}(z)$ we have the following:
+\begin{align*}
+|f_n(z) - f(z)| = |f_n(z)| &= \frac{1}{n|z|}\\
+&< \frac{1}{N_{\varepsilon}(z)|z|}\\
+&= \frac{1}{|z|/(\varepsilon |z|)}\\
+&= \varepsilon
+\end{align*}
+This shows that $f_n$ is pointwise convergent to $f(z) = 0$. However, if we look at our choice for $N_{\varepsilon}(z)$, we see that it has no upper bound because as $|z| \to 0$, then $N_{\varepsilon}(z) \to \infty$. Thus, it is impossible to find an $N_{\varepsilon}$ that does not depend on the specific point $z$, so $f_n$ does not converge uniformly to $f(z) = 0$.
+\end{proof}
+
+
+\end{document}

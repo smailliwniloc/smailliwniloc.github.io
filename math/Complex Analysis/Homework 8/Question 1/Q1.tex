@@ -1,0 +1,69 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 8}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let $\gamma(t) = 2e^{it}, t \in [0,2\pi]$. Evaluate the following integrals:
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \int_{\gamma} \frac{z^3 + 5}{z - i} \; dz$
+	\begin{itemize}
+	\item We cannot use Cauchy's Integral Theorem because this function is discontinuous at $z = i \in D(0,2)$. However, we can use Cauchy's Integral Formula, which tells us that
+	\begin{align*}
+	f(z_0) &= \frac{1}{2\pi i} \int_{\gamma(a,r)} \frac{f(z)}{z - z_0} \; dz &\text{for all $z_0 \in D(a,r)$}
+	\end{align*}
+	\item Using this with $f(z) = z^3 + 5$ and $z_0 = i$, we get
+	\begin{align*}
+	\int_{\gamma} \frac{z^3 + 5}{z - i} \; dz &= 2\pi i (i^3 + 5)\\
+	&= \boxed{2\pi + 10\pi i}
+	\end{align*}
+	\end{itemize}
+\item $\displaystyle \int_{\gamma} \frac{\sin(z)}{z^2 + 1} \; dz$
+	\begin{itemize}
+	\item Recall that 
+	\begin{align*}
+	\frac{1}{z^2 + 1} = \left(\frac{1}{z - i} - \frac{1}{z + i}\right)\cdot \frac{1}{2i}
+	\end{align*}
+	\item by using partial fractions. Thus, the integral becomes
+	\begin{align*}
+	\int_{\gamma} \frac{\sin(z)}{z^2 + 1} \; dz &= \int_{\gamma} \sin(z) \left(\frac{1}{z - i} - \frac{1}{z + i}\right)\cdot \frac{1}{2i} \; dz\\
+	&= \frac{1}{2i}\left( \int_{\gamma} \frac{\sin(z)}{z - i} \; dz - \int_{\gamma} \frac{\sin(z)}{z + i} \; dz \right)
+	\end{align*}
+	\item I can evaluate each of these integrals separately by using Cauchy's Integral Formula as stated in the previous part of this question with $f(z) = \sin(z)$, $z_0 = i$ in the first integral, and $z_0 = -i$ in the second integral. Thus, we get
+	\begin{align*}
+	\int_{\gamma} \frac{\sin(z)}{z^2 + 1} \; dz &= \frac{1}{2i}\left[2\pi i (\sin(i)) - 2\pi i (\sin(-i))\right]\\
+	&= \pi[\sin(i) - \sin(-i)]\\
+	&= \pi\left[\frac{e^{i\cdot i} - e^{-i \cdot i}}{2i} - \frac{e^{i \cdot (-i)} - e^{-i \cdot (-i)}}{2i}\right] &\text{by the definition of the complex sine function}\\
+	&= \pi \left[\frac{e^{-1} - e}{2i} - \frac{e - e^{-1}}{2i}\right]\\
+	&= \frac{\pi}{i}\left[e^{-1} - e\right]\\
+	&= \boxed{\pi i \left[e - e^{-1}\right]}
+	\end{align*}
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

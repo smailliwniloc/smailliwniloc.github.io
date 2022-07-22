@@ -1,0 +1,48 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\title{Complex Analysis Homework 3}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{Question 2}
+\begin{question*}{$ $}
+\\Suppose that $f(z_0) = g(z_0) = 0$ and that $f'(z_0)$ and $g'(z_0)$ exist where $g'(z_0) \neq 0$. Show that
+\[\lim_{z \to z_0}\frac{f(z)}{g(z)} = \frac{f'(z_0)}{g'(z_0)}\]
+\end{question*}
+\begin{proof}{$ $}
+\\First, I will examine the left hand side of this equation without the limit:
+\begin{align*}
+\frac{f(z)}{g(z)} &= \frac{f(z) - f(z_0)}{g(z) - g(z_0)} &\text{since } f(z_0) = g(z_0) = 0\\
+&= \frac{f(z) - f(z_0)}{g(z) - g(z_0)} \cdot \frac{\displaystyle \frac{1}{z - z_0}}{\displaystyle \frac{1}{z - z_0}} &\text{since we can multiply by 1}\\
+&= \frac{\displaystyle \frac{f(z) - f(z_0)}{z - z_0}}{\displaystyle \frac{g(z) - g(z_0)}{z - z_0}}
+\end{align*}
+Next, I will make use of the following theorem:
+\begin{theorem}{$ $}
+\\Suppose that $\displaystyle \lim_{z \to z_0}f(z) = f_0 \text{ and } \lim_{z \to z_0}g(z) = g_0$ with $g_0 \neq 0$, then
+\[\lim_{z \to z_0}\frac{f(z)}{g(z)} = \frac{f_0}{g_0}\]
+\end{theorem}
+I will now take the appropriate limit of $\displaystyle \frac{f(z)}{g(z)}$ as follows:
+\begin{align*}
+\lim_{z \to z_0} \frac{f(z)}{g(z)} &= \lim_{z \to z_0} \frac{\displaystyle \frac{f(z) - f(z_0)}{z - z_0}}{\displaystyle \frac{g(z) - g(z_0)}{z - z_0}} &\text{by the above calculation.}\\
+&= \frac{\displaystyle \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}}{\displaystyle \lim_{z \to z_0} \frac{g(z) - g(z_0)}{z - z_0}} &\text{by Theorem 1 and since } \lim_{z \to z_0}\frac{g(z) - g(z_0)}{z - z_0} = g'(z_0) \neq 0 \text{ by assumption}.\\
+&= \frac{f'(z_0)}{g'(z_0)} &\text{since we assumed that } f'(z_0) \text{ and } g'(z_0) \text{ exist.}
+\end{align*}
+Therefore, we have proven the desired statement.
+\end{proof}
+\end{document}

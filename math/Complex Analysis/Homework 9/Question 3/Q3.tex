@@ -1,0 +1,88 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 9}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 3}
+Find the residues at the singular points in $\mathbb{C}$ for $f(z)$ equal to the following functions
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \frac{z}{z^2 - 1}$
+	\begin{itemize}
+	\item As seen in the last question, the singular points of $f$ occur at $z = 1$ and $z = -1$ and they are both poles of order 1. Thus, using the following formula
+	\begin{align}
+	\underset{z = z_0}{\text{Res}}f(z) = \frac{1}{(m-1)!}\frac{d^{m-1}}{dz^{m-1}}\left((z - z_0)^mf(z)\right)\bigg|_{z = z_0}
+	\end{align}
+	\item where $z_0$ is a pole of $f$ of order at most $m$ for $m \in \mathbb{N}$ [note, I am using the convention that $\frac{d^0}{dz^0}$ represents the \enquote{zeroeth} derivative, or the identity operator]. Thus, we have $m = 1$ and $z_0 = 1$ and $z_0 = -1$ and we can calculate the following:
+	\begin{align*}
+	\underset{z = 1}{\text{Res}}f(z) = \frac{1}{0!}\frac{d^0}{dz^0}\left((z - 1)\cdot \frac{z}{(z + 1)(z - 1)}\right)\bigg|_{z = 1} = \frac{1}{1 + 1} &= \frac{1}{2}\\
+		\underset{z = -1}{\text{Res}}f(z) = \frac{1}{0!}\frac{d^0}{dz^0}\left((z + 1)\cdot \frac{z}{(z + 1)(z - 1)}\right)\bigg|_{z = -1} = \frac{-1}{-1 - 1} &= \frac{1}{2}
+	\end{align*}
+	\item Therefore, \boxed{\underset{z = 1}{\text{Res}}f(z) = \underset{z = -1}{\text{Res}}f(z) = \frac{1}{2}}
+	\end{itemize}
+\item $\displaystyle \frac{3}{(z - 2)^2}$
+	\begin{itemize}
+	\item It is clear to see that $|f(z)| \to \infty$ as $z \to 2$, so $z = 2$ is a singular point and, in fact, a pole for $f$. Additionally, we can see that $z = 2$ is a zero of the denominator of order 2, so it is indeed a pole of order 2. Therefore, by again referring to formula (1) with $m = 2$ and $z_0 = 2$, we can obtain
+	\begin{align*}
+	\underset{z = 2}{\text{Res}}f(z) &= \frac{1}{1!}\frac{d}{dz}\left((z - 2)^2 \cdot \frac{3}{(z - 2)^2}\right)\bigg|_{z = 2}\\
+	&= \frac{d}{dz}\left(3\right)\bigg|_{z = 2} = 0
+	\end{align*}
+	\item Thus, \boxed{\underset{z = 2}{\text{Res}}f(z) = 0}
+	\end{itemize}
+\item $\displaystyle \frac{1}{1 - z + z^2}$
+	\begin{itemize}
+	\item This function will have poles whenever the denominator is equal to zero. To find these points, we can use the quadratic formula to obtain:
+	\begin{align*}
+	z_{1,2} = \frac{1 \pm \sqrt{1 - 4(1)(1)}}{2} = \frac{1 \pm i\sqrt{3}}{2}
+	\end{align*}
+	\item Additionally, by letting $z_1 = \frac{1}{2}\left(1 + i\sqrt{3}\right)$ and $z_2 = \frac{1}{2}\left(1 - i\sqrt{3}\right)$ we can factor the denominator into $(z - z_1)(z - z_2)$, and we can see that $z = z_1$ and $z = z_2$ are both poles of order 1, so we can use formula (1) with $m = 1$ and $z = z_1$ or $z = z_2$ to obtain:
+	\begin{align*}
+	\underset{z = z_1}{\text{Res}}f(z) &= \frac{1}{0!}\frac{d^0}{dz^0}\left((z - z_1)\cdot \frac{1}{(z - z_1)(z - z_2)}\right) \bigg|_{z = z_1}\\
+	&= \frac{1}{z_1 - z_2} = \frac{2}{(1 + i\sqrt{3}) - (1 - i\sqrt{3})} = \frac{1}{i\sqrt{3}} = \frac{-i}{\sqrt{3}}\\
+	\underset{z = z_2}{\text{Res}}f(z) &= \frac{1}{0!}\frac{d^0}{dz^0}\left((z - z_2)\cdot \frac{1}{(z - z_1)(z - z_2)}\right) \bigg|_{z = z_2}\\
+	&= \frac{1}{z_2 - z_1} = \frac{2}{(1 - i\sqrt{3}) - (1 + i\sqrt{3})} = \frac{-1}{i\sqrt{3}} = \frac{i}{\sqrt{3}}
+	\end{align*}
+	\item Thus, \boxed{\underset{z = z_1}{\text{Res}}f(z) = \frac{-i}{\sqrt{3}} \text{ and } \underset{z = z_2}{\text{Res}}f(z) = \frac{i}{\sqrt{3}}}
+	\end{itemize}
+\item $\tan^2(z)$
+	\begin{itemize}
+	\item If we let $z_k = \frac{\pi}{2} + \pi k$, then we have seen in the last question that $z_k$ is a pole of order 2 for all $k \in \mathbb{Z}$. I will directly compute the residue by using the integral definition of the residue, i.e. 
+	\begin{align}
+	\underset{z = z_0}{\text{Res}}f(z) = \frac{1}{2\pi i} \int_{\gamma} f(z) dz
+	\end{align}
+	\item where $\gamma$ is a circle around $z_0$. In our case if we take $\gamma(t) = z_k + e^{it}$ for $t \in [0, 2 \pi]$, we obtain:
+	\begin{align*}
+	\underset{z = z_k}{\text{Res}}\tan^2(z) &= \frac{1}{2\pi i}\int_{\gamma} \tan^2(z) dz\\
+	&= \frac{1}{2\pi i} \int_{\gamma} \frac{\sin^2(z)}{\cos^2(z)} dz\\
+	&= \frac{1}{2\pi i} \int_{\gamma} \frac{1 - \cos^2(z)}{\cos^2(z)} dz\\
+	&= \frac{1}{2\pi i}\left( \int_{\gamma} \sec^2(z) dz - \int_{\gamma} dz \right)
+	\end{align*}
+	\item Notice that the second integral is zero since the identity function is entire and $\gamma$ is closed. Additionally, notice that $\frac{d}{dz}\tan(z) = \sec^2(z)$, and that $\sec^2(z)$ is continuous on some open set containing $\gamma^*$ (say, for example the annulus of inner radius $\frac{1}{2}$ and outer radius $\frac{3}{2}$ centered at $z_k$). This is sufficient to show that the first integral is also equal to zero. Thus, \boxed{\underset{z = z_k}{\text{Res}}f(z) = 0 \text{ for all } k \in \mathbb{Z}}
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

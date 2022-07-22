@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 6}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 5}
+Determine for which values of $z$ the following series converge absolutely:
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \sum_{n = 0}^{\infty} \frac{(z + 1)^n}{2^n}$
+\item $\displaystyle \sum_{n = 0}^{\infty} \left(\frac{z - 1}{z + 1}\right)^n$
+\end{enumerate}
+
+I will use the Root Test to make these determinations. I will denote $\displaystyle L = \limsup_{n \to \infty} \sqrt[n]{|a_n|}$ for $\{a_n\}$ the sequence being summed in the above infinite series. Note that the series converges absolutely whenever $L < 1$, but must be checked separately whenever $L = 1$.
+
+\begin{answer*}{\textbf{(a)}}
+\\In this case, $\displaystyle a_n = \frac{(z + 1)^n}{2^n}$, thus
+\begin{align*}
+\sqrt[n]{|a_n|} &= \sqrt[n]{\left|\frac{(z + 1)^n}{2^n}\right|}\\
+&= \sqrt[n]{\frac{|(z + 1)^n|}{|2^n|}}\\
+&= \frac{|z + 1|}{2}\\
+\implies L = \limsup_{n \to \infty} \sqrt[n]{|a_n|} &= \limsup_{n \to \infty} \frac{|z + 1|}{2} = \frac{|z + 1|}{2}\\
+\implies L < 1 &\iff \frac{|z + 1|}{2} < 1\\
+&\iff |z + 1| < 2
+\end{align*}
+Thus, this series converges for all $z$ inside the disk of radius 2 centered at $-1$. Let's now examine the sum for $z$ along the edge of this disk (when $L = 1$) i.e. $z$ is of the form $z = -1 + 2e^{i\theta}$ for $-\pi < \theta \leq \pi$. Thus, in this case,
+\[a_n = \frac{(z + 1)^n}{2^n} = \frac{(-1 + 2e^{i\theta} + 1)^n}{2^n} = \frac{2^ne^{in\theta}}{2^n} = e^{in\theta}\]
+However, for a series to converge, its underlying sequence must have a limit that converges to $0$. In particular, the absolute value of the underlying sequence must converge to $0$. However, $|a_n| = |e^{in\theta}| = 1 \implies \lim_{n \to \infty}|a_n| = 1 \neq 0$. Thus, the above series does not converge when $z$ is on the boundary of the disk of radius 2 centered at $-1$. Therefore, \boxed{\sum_{n = 0}^{\infty} \frac{(z + 1)^n}{2^n} \text{ converges when } |z + 1| < 2 \text{ or, equivalently, when } z \in D(-1,2)}
+\end{answer*}
+
+\begin{answer*}{\textbf{(b)}}
+\\In this case, $\displaystyle a_n = \left(\frac{z - 1}{z + 1}\right)^n$, thus
+\begin{align*}
+\sqrt[n]{|a_n|} &= \sqrt[n]{\left|\left(\frac{z - 1}{z + 1}\right)^n\right|}\\
+&= \sqrt[n]{\frac{|z - 1|^n}{|z + 1|^n}}\\
+&= \frac{|z - 1|}{|z + 1|}\\
+\implies L = \limsup_{n \to \infty} \sqrt[n]{|a_n|} &= \limsup_{n \to \infty} \frac{|z - 1|}{|z +1|} = \frac{|z - 1|}{|z + 1|}\\
+\implies L < 1 &\iff \frac{|z-1|}{|z+1|} < 1\\
+&\iff |z - 1| < |z + 1|\\
+&\iff |z - 1|^2 < |z + 1|^2\\
+&\iff (x - 1)^2 + y^2 < (x + 1)^2 + y^2 &\text{for $z = x + iy$}\\
+&\iff (x - 1)^2 < (x + 1)^2\\
+&\iff x^2 - 2x + 1 < x^2 + 2x + 1\\
+&\iff 0 < 4x\\
+&\iff x > 0
+\end{align*}
+Thus, this series converges for all $z$ with a positive real part. We now need to examine the case where $z$ has a real part equal to $0$ (when $L = 1$). In this case, $z$ is of the form $z = iy$. Thus,
+\[a_n = \left(\frac{z - 1}{z + 1}\right)^n = \left(\frac{iy - 1}{iy + 1}\right)^n\]
+\begin{align*}
+\implies |a_n| &= \left|\left(\frac{iy - 1}{iy + 1}\right)^n\right| = \left|\frac{iy - 1}{iy + 1}\right|^n = \left(\frac{|iy - 1|}{|iy + 1|}\right)^n = \left(\frac{y^2 + 1}{y^2 + 1}\right)^n = 1^n = 1
+\end{align*}
+Thus, $\lim_{n \to \infty}|a_n| = 1$ which means $\lim_{n \to \infty} a_n \neq 0$, so the series that uses this sequence for its summation term cannot possibly converge. Thus, \boxed{\sum_{n = 0}^{\infty} \left(\frac{z - 1}{z + 1}\right)^n \text{ converges when Re}(z) > 0}
+\end{answer*}
+
+\end{document}

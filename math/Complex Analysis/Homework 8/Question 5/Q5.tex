@@ -1,0 +1,44 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 8}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 5}
+Suppose that $z_n$ is a sequence of distinct points in $D(0,1)$ such that $z_n \to 0$ as $n \to \infty$. Using the Uniqueness Theorem show that:
+\begin{enumerate}[label = (\alph*)]
+\item If $f$ is analytic in $D(0,1)$ and $f(z_n) = \cos(z_n)$ for all $n \in \mathbb{N}$, then $f(z) = \cos(z)$ for all $z \in D(0,1)$.
+	\begin{itemize}
+	\item Since $z_n$ converges to 0 as $n \to \infty$, that means that the point 0 is a limit point of the set $S = \{z_n : n \in \mathbb{N}\}$. However, this set also happens to be the same set for which $z \in S$ implies that $f(z) = \cos(z)$. Therefore, by the Uniqueness Theorem, since the limit point of $S$, 0, is inside $D(0,1)$ and both $f$ and $\cos(\cdot)$ are analytic functions, then we can conclude that $f(z) = \cos(z)$ for all $z \in D(0,1)$.
+	\end{itemize}
+\item There is no analytic function $f$ defined on $D(0,1)$ such that $f(z_n) = 0$ when $n$ is even and such that $f(z_n) = z_n$ when $n$ is odd.
+	\begin{itemize}
+	\item Assume that such a function exists. First, consider the set $S_1 = \{z_n : n \in \mathbb{N}$ and $n$ is odd$\}$. This set still has a limit point of 0 since any subsequence of a convergent sequence has the same limit. Thus, 0 is a limit point of $S_1$. Furthermore, for any $z \in S_1$ we have that $f(z) = z$ by assumption. Thus, since $f$ and the identify function are both analytic and since $0 \in D(0,1)$, we can use the Uniqueness Theorem to conclude that $f(z) = z$ for all $z \in D(0,1)$. In particular, this implies that $f(z_2) = z_2$ and $f(z_4) = z_4$. Furthermore, by assumption, we know that $f(z_n) = 0$ for all even $n$ which means that $z_2 = z_4 = 0$. However, this contradicts the definition of the sequence which states that $z_n$ is a sequence of \underline{distinct} points in $D(0,1)$ which in particular means that $z_2 \neq z_4$. This means our assumption of the existence of such an $f$ was false, so no such $f$ exists. $\qed$
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

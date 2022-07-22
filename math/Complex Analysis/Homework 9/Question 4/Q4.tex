@@ -1,0 +1,68 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 9}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 4}
+Let $\gamma(t) = 2e^{it}$, $t \in [0, 2\pi]$. Use Cauchy's Residue Theorem to evaluate the integrals:
+\begin{enumerate}[label = (\alph*)]
+\item $\displaystyle \int_{\gamma} z^2 e^{1/z} dz$
+	\begin{itemize}
+	\item Notice we have a singularity at $z = 0$ since $1/z$ is not defined at 0. Therefore, we can use Cauchy's Residue Theorem to calculate
+	\begin{align*}
+	\int_{\gamma} z^2e^{1/z} dz = 2\pi i \cdot \underset{z = 0}{\text{Res}}\left(z^2e^{1/z}\right)
+	\end{align*}
+	\item Thus, all that remains is to calculate this residue. To do this, I will find the Laurent Expansion for this function by using the Taylor Expansion for $e^w$ which states that
+	\begin{align*}
+	e^w &= \sum_{n = 0}^{\infty} \frac{w^n}{n!}\\
+	\implies z^2e^{1/z} &= z^2 \sum_{n = 0}^{\infty} \frac{(1/z)^n}{n!}\\
+	&= z^2 \sum_{n = 0}^{\infty} \frac{1}{z^nn!}\\
+	&= \sum_{n = 0}^{\infty} \frac{1}{z^{n - 2}n!}
+	\end{align*}
+	\item From this, we can see that the coefficient for the $z^{-1}$ term occurs when $n = 3$. Thus, is equal to $\frac{1}{3!} = \frac{1}{6}$. Using this we obtain that 
+	\begin{align*}
+	\int_{\gamma} z^2e^{1/z} dz = 2\pi i \cdot \underset{z = 0}{\text{Res}}\left(z^2e^{1/z}\right) = \frac{2\pi i}{6} = \boxed{\frac{i \pi}{3}}
+	\end{align*}
+	\end{itemize}
+\item $\displaystyle \int_{\gamma} \frac{\sin(z)}{z^2 + 1}dz$
+	\begin{itemize}
+	\item Using the same approach as in the last problem, I will first notice that $z = i$ and $z = -i$ are both singularities of this function. In fact, they are both poles of order 1. Thus, I will find the residue of this function at both of those points. Using formula (1) from the last question, we obtain that 
+	\begin{align*}
+	\underset{z = i}{\text{Res}}\frac{\sin(z)}{z^2 + 1} &= \frac{1}{0!}\frac{d^0}{dz^0}\left((z - i)\frac{\sin(z)}{(z + i)(z - i)}\right)\bigg|_{z = i}\\
+	&= \frac{\sin(i)}{2i} = \frac{\displaystyle \frac{e^{i^2} - e^{-i^2}}{2i}}{2i} = \frac{e - e^{-1}}{4}\\
+	\underset{z = -i}{\text{Res}}\frac{\sin(z)}{z^2 + 1} &= \frac{1}{0!}\frac{d^0}{dz^0}\left((z - i)\frac{\sin(z)}{(z + i)(z - i)}\right)\bigg|_{z = -i}\\
+	&= \frac{\sin(-i)}{-2i} = \frac{\displaystyle \frac{e^{i^2} - e^{-i^2}}{2i}}{2i} = \frac{e - e^{-1}}{4}
+	\end{align*}
+	\item Thus, the integral we are interested in is calculated as following,
+	\begin{align*}
+	\displaystyle \int_{\gamma} \frac{\sin(z)}{z^2 + 1}dz = 2\pi i\left( \underset{z = i}{\text{Res}}\frac{\sin(z)}{z^2 + 1} + \underset{z = -i}{\text{Res}}\frac{\sin(z)}{z^2 + 1} \right) = 2\pi i \left( \frac{e - e^{-1}}{2} \right) = \boxed{2 \pi i \sinh(1)}
+	\end{align*}
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

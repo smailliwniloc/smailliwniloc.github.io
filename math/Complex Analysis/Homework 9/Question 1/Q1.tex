@@ -1,0 +1,62 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 9}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Find the Laurent series representation for the function $f(z) = z^3 \sin \left(\frac{1}{z}\right)$ and specify the region in which the representation is valid.
+
+\begin{answer*}{$ $}
+\\I could use the contour integral definition for the coefficients of the Laurent Series, but it would likely be easier to calculate the Taylor Series Expansion of $\sin(w)$, since $\sin(\cdot)$ is an analytic function, and apply that appropriately. Note that the Taylor series for $\sin(\cdot)$ centered at 0 is:
+\[
+\sin(w) = \sum_{k = 0}^{\infty} \frac{\sin^{(k)}(0)}{k!}w^k \quad \forall \; w \in \mathbb{C}
+\]
+To calculate this explicitly, note the following about the derivatives of $\sin(w)$:
+\[
+\sin^{(k)}(w) = \begin{cases}
+\sin(w) &\text{for k = 4m}\\
+\cos(w) &\text{for k = 4m + 1}\\
+-\sin(w) &\text{for k = 4m + 2}\\
+-\cos(w) &\text{for k = 4m + 3}
+\end{cases} \quad \text{ for } m \in \mathbb{N}_0
+\]
+Thus, since $\sin(0) = 0$ and $\cos(0) = 1$, we can see that we only have nonzero coefficients in the Taylor Series whenever $k$ is an odd integer. Thus, assume that $k = 2n + 1$ for $n \in \mathbb{N}_0$, then $\sin^{(k)}(0) = (-1)^n$. Thus, we have
+\begin{equation}
+\sin(w) = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n + 1)!}w^{2n + 1} \quad \forall \; w \in \mathbb{C}
+\end{equation}
+Therefore, by substituting $\frac{1}{z} := w$, we and multiplying the expression by $z^3$, we can obtain:
+\begin{align*}
+f(z) = z^3\sin\left(\frac{1}{z}\right) &= z^3\sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n + 1)!}\left(\frac{1}{z}\right)^{2n + 1}\\
+&= z^3 \sum_{n = 0}^{\infty} \frac{(-1)^n}{z^{2n + 1}(2n + 1)!}\\
+&= \sum_{n = 0}^{\infty} \frac{(-1)^n}{z^{2n - 2}(2n + 1)!}\\
+&= \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n + 1)!}z^{2 - 2n}
+\end{align*}
+This last series represents our Laurent Series with coefficients $a_k = 0$ for all odd $k$ and all $k > 2$ and given as the coefficient in the series for all even $k \leq 2$. Note that in (1) it was valid for all $w \in \mathbb{C}$. However, at $z = 0$, we have $w = \frac{1}{0} \not\in \mathbb{C}$. This is the only problematic point, so this would be the only point we exclude from consideration. Thus, this Laurent Expansion above is valid for all $z$ such that $|z| > 0$.
+\end{answer*}
+
+\end{document}

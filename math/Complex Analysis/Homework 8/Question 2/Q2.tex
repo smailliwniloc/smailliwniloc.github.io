@@ -1,0 +1,100 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 8}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 2}
+Let $\gamma(0,r)$ be the circle centered at 0 with radius $r$, taken counter-clockwise.
+\begin{enumerate}[label = (\alph*)]
+\item Let $a,b \in \mathbb{C}$ with $|a|, |b| \neq 1$. Evaluate the following and distinguish different cases:
+\[\int_{\gamma(0,1)} \left(\frac{z - b}{z - a}\right)^2 \; dz.\]
+	\begin{itemize}
+	\item The first case I will consider is when $a = b$.
+	\item From this, we can simply use the definition of the path integral to get
+	\begin{align*}
+	\int_{\gamma(0,1)}\left(\frac{z - b}{z - a}\right)^2 \; dz &= \int_{\gamma(0,1)}\left(\frac{z - a}{z - a}\right)^2 \; dz\\
+	&= \int_{\gamma(0,1)} 1^2 \; dz\\
+	&= \int_0^{2\pi} ie^{it} \; dt\\
+	&= \frac{i}{i} e^{it} \bigg|_{t =0}^{t = 2\pi}\\
+	&= e^{2\pi i} - e^0 = 1-1  = 0.
+	\end{align*}
+	\item The next case I will consider is when $|a| < 1$ and $a \neq b$.
+	\item In this case, we have $a \in D(0,1)$ and we can recall Cauchy's Integral Formula (for derivatives) that states:
+	\begin{align*}
+	f^{(n)}(z_0) &= \frac{n!}{2\pi i} \int_{\gamma} \frac{f(z)}{(z - z_0)^{n+1}} \; dz &\text{for $z_0 \in D(c, r)$, $\gamma(t) = c + re^{it}$, $f \in H(\Omega)$, $\overline{D}(c, r) \subset \Omega$}
+	\end{align*}
+	\item Therefore, by splitting up the square into the numerator and denominator of the fraction separately, we can see that our \enquote{$n$} is equal to 1, our \enquote{$z_0$} is equal to $a$, and our \enquote{$f(z)$} is equal to $(z - b)^2$ which is holomorphic everywhere. Thus, using this formula, we get:
+	\begin{align*}
+	\int_{\gamma(0,1)} \frac{(z - b)^2}{(z - a)^2} \; dz &= \frac{2\pi i}{1!}f'(a)\\
+	&= 2\pi i \left[(z - b)^2\right]'_{z = a}\\
+	&= 4\pi i (a - b)
+	\end{align*}
+	\item The last case I will consider is when $|a| > 1$ and $a \neq b$.
+	\item In this case, consider the open convex set $\Omega = D(0, |a| - \varepsilon)$ where $\varepsilon > 0$ is fixed and chosen small enough such that $|a| - \varepsilon > 1$. Thus, with $\displaystyle f(z) := \left(\frac{z - b}{z - a}\right)^2$, we know that $f(z)$ is holomorphic in $\Omega$ as $a \not \in \Omega$ and we know that $\gamma(0,1)^* \subset \Omega$. Thus, by Cauchy's Integral Theorem for Convex Sets, we can conclude that 
+	\begin{align*}
+	\int_{\gamma(0,1)} \left(\frac{z - b}{z -a}\right)^2 \; dz = 0
+	\end{align*}
+	\item Finally, notice that our case of $a = b$ was not a special case, as we get the same result of 0 in either of the previous formulas. Thus, we can summarize as:
+	\begin{align*}
+	\boxed{\int_{\gamma(0,1)} \left(\frac{z - b}{z - a}\right)^2 \; dz = \begin{cases}
+	4\pi i(a - b) &\text{when $|a| < 1$}\\
+	0 &\text{when $|a| > 1$}
+	\end{cases}}
+	\end{align*}
+	\end{itemize}
+\item Let $n$ be a positive integer and evaluate 
+\[\int_{\gamma(0,2)} z^{-n}\cos(z) \; dz.\]
+	\begin{itemize}
+	\item Once again, recall Cauchy's Integral Formula (for derivatives) that states:
+	\begin{align*}
+		f^{(k)}(z_0) &= \frac{k!}{2\pi i} \int_{\gamma} \frac{f(z)}{(z - z_0)^{k+1}} \; dz &\text{for $z_0 \in D(c, r)$, $\gamma(t) = c + re^{it}$, $f \in H(\Omega)$, $\overline{D}(c, r) \subset \Omega$}
+	\end{align*}
+	\item Thus, in our case, we can see that our \enquote{$k$} is equal to $n - 1$, our \enquote{$z_0$} is equal to 0, and our \enquote{$f(z)$} is equal to $\cos(z)$. Thus, we can calculate our integral as:
+	\begin{align*}
+	\int_{\gamma(0,2)} \frac{\cos(z)}{z^n} \; dz &= \frac{2\pi i}{(n - 1)!} f^{(n - 1)}(0)
+	\end{align*}
+	\item Note that for the derivatives of $f(z) = \cos(z)$ we have the following relations:
+	\begin{align*}
+	f^{(k)}(z) = \begin{cases}
+	\cos(z) &\text{if $k = 4m$}\\
+	-\sin(z) &\text{if $k = 4m + 1$}\\
+	-\cos(z) &\text{if $k = 4m + 2$}\\
+	\sin(z) &\text{if $k = 4m + 3$}
+	\end{cases} \quad \text{for $m \in \mathbb{N}_0$}
+	\end{align*}
+	\item Furthermore, note that $\cos(0) = 1$ and $\sin(0) = 0$, so our given integral is zero whenever $n - 1$ is odd (i.e. when $n$ is even). Additionally, if $n - 1$ is even (i.e. when $n$ is odd of the form $2p + 1$ for $p \in \mathbb{N}_0$), then we get $f^{(n - 1)}(0) = f^{(2p)}(0) = (-1)^p$. Thus, we can summarize our integral as 
+	\begin{align*}
+	\boxed{\int_{\gamma(0,2)} z^{-n}\cos(z) \; dz = \begin{cases}
+	\displaystyle \frac{2\pi i (-1)^p}{(2p)!} &\text{whenever $n$ is odd of the form $n = 2p + 1, p \in \mathbb{N}_0$}\\
+	0 &\text{whenever $n$ is even}
+	\end{cases}}
+	\end{align*}
+	\end{itemize}
+\end{enumerate}
+
+\end{document}

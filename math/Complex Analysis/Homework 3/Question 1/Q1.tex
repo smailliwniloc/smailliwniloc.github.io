@@ -1,0 +1,90 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\title{Complex Analysis Homework 3}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{Question 1}
+\begin{question*}{$ $}
+\\Define a function $f$ by 
+\[f(z) = \frac{z}{1 + |z|}.\]
+\begin{enumerate}[label = (\alph*)]
+\item Prove that $f$ is continuous on $\mathbb{C}$.
+\item Prove that $f(z_1) = f(z_2)$ implies that $z_1 = z_2$.
+\item Prove that $f$ maps $\mathbb{C}$ onto $D(0,1)$.
+\end{enumerate}
+
+\begin{proof}{\textbf{(a)}}
+\\To prove this function is continuous, I will use that we know the following
+\begin{enumerate}
+\item The sum of continuous function is continuous
+\item The quotient of continuous function is continuous as long as the denominator is not equal to zero. 
+\item A function $f$ is continuous at point $z_0 \in \mathbb{C}$ if for every $\varepsilon > 0$, there exists some $\delta > 0$ such that whenever $|z - z_0| < \delta$, we have $|f(z) - f(z_0)| < \varepsilon$.
+\end{enumerate}
+Thus, to prove that $f(z)$ is continuous, we merely need to show that $z$, $1$, and $|z|$ are continuous and that $1 + |z| \neq 0$. First, since $|z| \geq 0$ for all $z \in \mathbb{C}$, we know that $1 + |z| \geq 1$ for all $z \in \mathbb{C}$; thus, $1 + |z|$ is never equal to zero, so we need not worry about this.\\
+\\Next, I will show that $g(z) = z$ is a continuous function by examining $|g(z) - g(z_0)|$ for some arbitrary $z_0 \in \mathbb{C}$. In fact, it is as simple as:
+\begin{align*}
+|g(z) - g(z_0)| &= |z - z_0|
+\end{align*}
+Thus, $|g(z) - g(z_0)| < \varepsilon$ for any $\varepsilon > 0$ precisely when $|z - z_0| < \delta$ for $\delta$ any number $ \leq \varepsilon$. Since this holds true for any $z_0 \in \mathbb{C}$, it is clear that $g(z) = z$ satisfies the above definition of continuity for all points in $\mathbb{C}$.\\
+\\Similarly, I will show that $g(z) = 1$ is a continuous function by looking at $|g(z) - g(z_0)|$ for some arbitrary $z_0 \in \mathbb{C}$. However, it is clear that $|g(z) - g(z_0)| = |1 - 1| = |0| = 0$. Thus, $|g(z) - g(z_0)| < \varepsilon$ for any $\varepsilon > 0$ no matter how we choose $\delta$. Since $z_0$ can be any point in $\mathbb{C}$, $g(z) = 1$ clearly satisfies the definition of continuity for all points in $\mathbb{C}$.\\
+\\Lastly, I will show that $g(z) = |z|$ is a continuous function. Again, take $z_0$ to be some arbitrary point in $\mathbb{C}$, then examine $|g(z) - g(z_0)|$ as follows:
+\begin{align*}
+|g(z) - g(z_0)| &= ||z| - |z_0||\\
+&= ||z| - |-z_0|| &\text{since } |w| = |-w| \text{ for all } w \in \mathbb{C}\\
+&\leq |z + (-z_0)| &\text{by the "reverse" Triangle Inequality}\\
+&= |z - z_0|
+\end{align*}
+Thus, $|g(z) - g(z_0)| < \varepsilon$ for any $\varepsilon > 0$ precisely when $|z - z_0| < \delta$ for $\delta$ any number $\leq \varepsilon$. Since this is true for any $z_0 \in \mathbb{C}$, it is clear that $g(z) = |z|$ satisfies the above definition of a continuous function for all points in $\mathbb{C}$.\\
+\\Thus, we have shown $z$, $1$, and $|z|$ are all continuous function; therefore, $1 + |z|$ is also a continuous function and since $1 + |z| \neq 0$ for all $z \in \mathbb{C}$, we must have that \[f(z) = \frac{z}{1 + |z|}\] is a continuous function as well. 
+\end{proof}
+
+\begin{proof}{\textbf{(b)}}
+\\Assume that two points $z_1, z_2 \in \mathbb{C}$ satisfy $f(z_1) = f(z_2)$. It will be convenient to express $z_1$ and $z_2$ in polar coordinates (exponential form), say $z_1 = r_1e^{i\theta_1}$ and $z_2 = r_2e^{i\theta_2}$ for $r_1, r_2 > 0$ and $\theta_1, \theta_2$ the argument of $z_1$ and $z_2$ respectively; thus, $f(r_1e^{i\theta_1}) = f(r_2e^{i\theta_2})$. This gives:
+\begin{align*}
+\frac{r_1e^{i\theta_1}}{1 + |r_1e^{i\theta_1}|} &= \frac{r_2e^{i\theta_2}}{1 + |r_2e^{i\theta_2}|}\\
+\implies \frac{r_1e^{i\theta_1}}{1 + r_1} &= \frac{r_2e^{i\theta_2}}{1 + r_2} &\text{since } |re^{i\theta}| = r\\
+\implies \frac{r_1}{1 + r_1}e^{i\theta_1} &= \frac{r_2}{1 + r_2}e^{i\theta_2}\\
+\implies \frac{r_1}{1 + r_1} = \frac{r_2}{1 + r_2} &\text{ and } \theta_1 = \theta_2 + 2k\pi &\text{by definition of equality of complex numbers in polar form}\\
+\end{align*}
+Working with the left equality, we can see that $r_1 + r_1r_2 = r_2 + r_2r_1$ by cross multiplying the fractions. Thus, by subtracting $r_1r_2$, we get $r_1 = r_2$. This, together with $\theta_1 = \theta_2 + 2k\pi$ implies that $z_1 = z_2$ by definition of equality of complex numbers in polar form. Thus, $f(z_1) = f(z_2) \implies z_1 = z_2$ just as desired.
+\end{proof}
+
+\begin{proof}{\textbf{(c)}}
+\\We know that for any $z_0 \in D(0,1)$, we can express $z_0$ in polar form as $z_0 = r_0e^{i\theta_0}$ where $0< r_0 < 1$ and $\theta_0$ is the argument of $z_0$. From part (b), we showed that for any $z = re^{i\theta}$, 
+\begin{equation}
+f(z) = \frac{r}{1 + r}e^{i\theta}
+\end{equation}
+Thus, $f(z) = z_0$ whenever
+\[\frac{r}{1 + r} = r_0 \quad \text{and} \quad \theta = \theta_0 + 2k\pi\]
+For simplicity, we can choose $\theta = \theta_0$, and then we solve the left equality:
+\begin{align*}
+\frac{r}{1 + r} &= r_0\\
+\implies r &= r_0(1 + r)\\
+\implies r &= r_0 + r \cdot r_0\\
+\implies r - r \cdot r_0 &= r_0\\
+\implies r(1 - r_0) &= r_0\\
+\implies r &= \frac{r_0}{1 - r_0}
+\end{align*}
+Thus, we have shown that every $z_0 = r_0e^{i\theta_0} \in D(0,1)$ has a pre-image given by $\displaystyle z_0^* = \frac{r_0}{1 - r_0}e^{i\theta_0}$ such that $f(z_0^*) = z_0$. To complete the picture note that for $f(z)$ defined in (1), the modulus, given by $\displaystyle \frac{r}{1 + r}$, is always between 0 and 1 since $0 < r < 1 + r$. Thus, for every $z \in \mathbb{C}$, $f(z) \in D(0,1)$ and for every $z_0 \in D(0,1)$, we have shown that there exists a $z_0^*$ such that $f(z_0^*) = z_0$. Therefore, we have shown that $f$ does indeed map every element of $\mathbb{C}$ onto $D(0,1)$.
+\end{proof}
+\end{question*}
+
+
+\end{document}

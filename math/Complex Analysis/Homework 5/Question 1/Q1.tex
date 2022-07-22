@@ -1,0 +1,62 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{answer}{Answer}
+\newtheorem*{answer*}{Answer}
+
+
+\title{Complex Analysis Homework 5}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+
+\section*{Question 1}
+Let Log$(z)$ be a principal value of the logarithm, i.e.,
+\begin{align*}
+\text{Log}(z) = \ln(r) + i\theta && \text{for } z = re^{i\theta}, \quad r > 0, \; -\pi < \theta \leq \pi.
+\end{align*}
+Show that for any two nonzero complex numbers $z_1$ and $z_2$, that 
+\begin{align}
+\text{Log}(z_1z_2) = \text{Log}(z_1) + \text{Log}(z_2) + 2N\pi i
+\end{align}
+where $N$ has the value $0$, $1$, or $-1$.
+
+\begin{answer*}{$ $}
+\\First, let $\displaystyle z_1 = r_1e^{i\theta_1}$ and $\displaystyle z_2 = r_2e^{i\theta_2}$ for $r_1, r_2 > 0$ and $-\pi < \theta_1, \theta_2 \leq \pi$. Then we have that 
+\begin{align*}
+z_1z_2 = (r_1e^{i\theta_1})(r_2e^{i\theta_2}) = r_1r_2e^{i(\theta_1 + \theta_2)}
+\end{align*}
+Clearly $r_1r_2 > 0$ since $r_1, r_2 > 0$. However, with $\theta_1 + \theta_2$ we have three different cases:
+\\
+\\\underline{Case 1: $-2\pi < \theta_1 + \theta_2 \leq -\pi$}
+\\Since the argument of $z_1z_2$ is not in the desired interval for Log$(\cdot)$, we have to adjust $z_1z_2$ to be $\displaystyle z_1z_2 = r_1r_2e^{i(\theta_1 + \theta_2 + 2\pi)}$ which now puts the argument of $z_1z_2$ in the interval $(0, \pi]$ which is acceptable. Thus, Log$(z_1z_2) = \ln(r_1r_2) + i(\theta_1 + \theta_2 + 2\pi) = (\ln(r_1) + i\theta_1) + (\ln(r_2) + i\theta_2) + 2\pi i =$ Log$(z_1) +$ Log$(z_2) + 2\pi i$ which satisfies (1) with $N = 1$.
+\\
+\\\underline{Case 2: $-\pi < \theta_1 + \theta_2 \leq \pi$}
+\\Now the argument of $z_1z_2$ is clearly in the desired interval so we need not make any changes and can simply note that Log$(z_1z_2) = \ln(r_1r_2) + i(\theta_1 + \theta_2) = (\ln(r_1) + i\theta_1) + (\ln(r_2) + i\theta_2) =$ Log$(z_1) + $ Log$(z_2)$ which satisfies (1) with $N = 0$.
+\\
+\\\underline{Case 3: $\pi < \theta_1 + \theta_2 \leq 2\pi$}
+\\Once again, the argument of $z_1z_2$ is not in the desired interval, so we must make the adjustment $\displaystyle z_1z_2 = r_1r_2e^{i(\theta_1 + \theta_2 - 2\pi)}$ which now puts the argument of $z_1z_2$ in the interval $(-\pi, 0]$ which is acceptable. Thus, Log$(z_1z_2) = \ln(r_1r_2) + i(\theta_1 + \theta_2 - 2\pi) = (\ln(r_1) + i\theta_1) + (\ln(r_2) + i\theta_2) - 2\pi i = $ Log$(z_1) + $ Log$(z_2) - 2\pi i$ which satisfies (1) with $N = -1$.
+\\
+\\Thus, since these 3 cases determine all possibilities, and we have shown that all three cases relate to (1) with only $N = 1, 0, 1$, we have satisfied the question.
+\end{answer*}
+
+
+\end{document}

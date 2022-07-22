@@ -1,0 +1,82 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\newtheorem{question}{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\title{Complex Analysis Homework 2}
+\author{Colin Williams}
+
+\begin{document}
+\maketitle
+\section*{Question 3}
+\begin{question*}{\textbf{a.)}}
+\\ Prove that $\lim_{z\to0} f(z)$ exists and is equal to 0 for each of the following choices of f(z):
+\begin{enumerate}[label = \roman*.)]
+\item $\frac{|z|^2}{z}$
+\item $\frac{(Re(z))(Im(z))}{|z|}$
+\end{enumerate}
+\end{question*}
+
+For the following proofs, we want to show that $\forall \varepsilon > 0$, we can find a $\delta > 0$ such that:
+\begin{equation}
+|f(z) - 0| < \varepsilon \quad \text{whenever} \quad 0 < |z - 0| < \delta
+\end{equation}
+
+\begin{proof}{\textbf{i.)}}
+\\In this case, $f(z) = \frac{|z|^2}{z}$, so
+\begin{align*}
+|f(z) - 0| = |f(z)| &= \left|\frac{|z|^2}{z}\right|\\
+&= \frac{||z|^2|}{|z|}\\
+&= \frac{|z||z|}{|z|}\\
+&= \frac{|z|}{1} = |z|.
+\end{align*}
+Therefore, $|f(z) - 0| < \varepsilon$ if and only if $|z| < \varepsilon$. So, it is clear that if we choose $\delta \leq \varepsilon$, then the condition (1) is satisfied and the given limit converges to $0$. 
+\end{proof}
+
+\begin{proof}{\textbf{ii.)}}
+\\In this case, $f(z) = \frac{(Re(z))(Im(z))}{|z|}$, so
+\begin{align*}
+|f(z) - 0| = |f(z)| &= \left|\frac{(Re(z))(Im(z))}{|z|}\right|\\
+&= \frac{|Re(z)||Im(z)|}{|z|}\\
+&\leq \frac{|z||z|}{|z|} \quad \text{since} \quad |Re(z)| \leq |z| \quad \text{and} \quad |Im(z)| \leq |z|\\
+&= \frac{|z|}{1} = |z|
+\end{align*}
+Since $|f(z) - 0| \leq |z|$, then if $|z| < \varepsilon$, we know that $|f(z) - 0| < \varepsilon$. Therefore, it is clear that if we choose $\delta \leq \varepsilon$, then the condition (1) is satisfied and the given limit converges to $0$. 
+\end{proof}
+
+\begin{question*}{\textbf{b.)}}
+\\Prove, by letting $z$ approach $0$ along suitable rays, that
+\[\lim_{z \to 0} \frac{\bar{z}}{|z|}\]
+does not exist.
+\end{question*}
+
+\begin{proof}{$ $}
+\\First, let $z$ be a purely-Real, positive, number, i.e. let $z$ lie on the line $Im(z) = 0$. This means $z = x$ for $x \in \mathbb{R}^+$. Applying this to the limit gives:
+\begin{align*}
+\lim_{z \to 0} \frac{\bar{z}}{|z|} &= \lim_{x \to 0^+} \frac{\bar{x}}{|x|}\\
+&= \lim_{x \to 0^+} \frac{x}{x}\\
+&= \lim_{x \to 0^+} 1 = 1.
+\end{align*}
+Thus, along this ray, the limit converges to 1.\\
+Now, let $z$ be a purely-Imaginary number with $Im(z) > 0$, i.e. $z$ lies on the line $Re(z) = 0$. This means $z = iy$ for $y \in \mathbb{R}^+$. Applying this to the limit gives:
+\begin{align*}
+\lim_{z \to 0} \frac{\bar{z}}{|z|} &= \lim_{y \to 0^+} \frac{\overline{iy}}{|iy|}\\
+&= \lim_{y \to 0^+} \frac{-iy}{\sqrt{0^2 + y^2}}\\
+&= \lim_{y \to 0^+} \frac{-iy}{|y|}\\
+&= \lim_{y \to 0^+} \frac{-iy}{y}\\
+&= \lim_{y \to 0^+} -i = -i\\
+\end{align*}
+Thus, along this ray, the limit converges to $-i$.\\
+Since $1 \neq -i$, this limit does not exist. 
+\end{proof}
+\end{document}
