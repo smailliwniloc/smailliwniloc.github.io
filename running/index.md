@@ -1,3 +1,0 @@
-# This is a new page...
-
-Here is some smaller text here
