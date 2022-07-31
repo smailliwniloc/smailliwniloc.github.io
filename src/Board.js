@@ -34,16 +34,21 @@ class Board extends Component {
   constructor(props) {
     super(props);
 
-    // TODO: set initial state
-    this.state = { board : this.createBoard(true), hasWon : false };
+    this.state = { 
+      board : this.createBoard(true), 
+      hasWon : false,
+      difficulty: 0
+    };
     this.flipCellsAround = this.flipCellsAround.bind(this);
     this.createBoard = this.createBoard.bind(this);
     this.handleStart = this.handleStart.bind(this);
+    this.handleQuit = this.handleQuit.bind(this);
+    this.handleDifficulty = this.handleDifficulty.bind(this);
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
 
-  createBoard(initial) {
+  createBoard(initial, difficulty) {
     let {nrows, ncols} = this.props;
     let board;
     if(initial){
@@ -51,15 +56,12 @@ class Board extends Component {
       return board;
     }
     else{
-      for(let i = 0; i < 10; i++){
+      for(let i = 0; i < difficulty; i++){
         let x = Math.floor(Math.random()*ncols)
         let y = Math.floor(Math.random()*nrows)
         this.flipCellsAround([y,x])
       }
     }
-
-    
-    
   }
 
   /** handle changing a cell: update board & determine if winner */
@@ -89,41 +91,65 @@ class Board extends Component {
     for(let i = 0; i < nrows; i++){
       hasWon = hasWon && board[i].every(val => val)
     }
-
-    // TODO: flip this cell and the cells around it
-
-    // win when every cell is turned off
-    // TODO: determine is the game has been won
-
     this.setState({board, hasWon});
   }
 
 
-  handleStart() {
-    this.createBoard(false)
+  handleStart(evt) {
+    let difficulty = evt.target.value
+    this.setState({difficulty})
+    this.createBoard(false, difficulty)
+  }
+
+  handleDifficulty() {
+    let difficulty = -1
+    this.setState({difficulty})
+  }
+
+  handleQuit() {
+    let board = this.createBoard(true)
+    let hasWon = false
+    let difficulty = 0
+    this.setState({board, hasWon, difficulty})
   }
 
   render() {
 
     return(
       <div>
-        {this.state.hasWon ? "You win!" : 
-      <table>
-        <thead>
-          <tr>
-            <Cell isLit={false} handleClick={this.handleStart} />
-          </tr>
-        </thead>
-        <tbody>
-        {this.state.board.map((row, i) => (
-          <tr key={i}>
-          {row.map((isLit, j) => (
-            <Cell isLit={isLit} handleClick={this.flipCellsAround} coord={[i,j]} key={[i,j]}/>
-          ))}
-          </tr>
-        ))}
-        </tbody>
-      </table>
+        {this.state.hasWon ? 
+          <div className="Board-winner">
+            <span className="neon-orange">You</span>
+            <span className="neon-blue">Win!</span>
+            <button className="Board-button" onClick={this.handleQuit}>Play again!</button>
+          </div> : 
+          <>
+          <div className="Board-title">
+            <span className="neon-orange">Lights</span>
+            <span className="neon-blue">Out</span>
+          </div>
+          <div className="Board-buttons">
+            <button className="Board-button" onClick={this.handleDifficulty}>Start</button>
+            <button className="Board-button" onClick={this.handleQuit}>Quit</button>
+          </div>
+          {this.state.difficulty === -1 ? 
+          <div className="Board-buttons">
+            <button className="Board-button" onClick={this.handleStart} value={3} title="Can be won in 3 moves or less">Easy</button>
+            <button className="Board-button" onClick={this.handleStart} value={6} title="Can be won in 6 moves or less">Normal</button>
+            <button className="Board-button" onClick={this.handleStart} value={12} title="Can be won in 12 moves or less">Hard</button>
+          </div> : null}
+          <table className="Board">
+            <tbody>
+            {this.state.board.map((row, i) => (
+              <tr key={i}>
+              {row.map((isLit, j) => (
+                <Cell isLit={isLit} handleClick={this.flipCellsAround} coord={[i,j]} key={[i,j]}/>
+              ))}
+              </tr>
+            ))}
+            </tbody>
+          </table>
+          </>
         }
       </div>
     )

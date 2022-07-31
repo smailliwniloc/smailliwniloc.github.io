@@ -1,9 +1,21 @@
 .Cell {
   height: 100px;
   width: 100px;
-  background-color: darkgray;
+  border-radius: 1px;
+  background-color: #263238;
+  transition: background-color 0.6s ease;
+}
+
+.Cell:hover {
+  background-color: #5e666a;
+  transition: none;
 }
 
 .Cell-lit {
-  background-color: white;
+  background-color: #00bcd4;
+}
+
+.Cell-lit:hover {
+  background-color: #7fbdc5;
+  transition: none;
 }
