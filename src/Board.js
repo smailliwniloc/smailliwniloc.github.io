@@ -37,7 +37,8 @@ class Board extends Component {
     this.state = { 
       board : this.createBoard(true), 
       hasWon : false,
-      difficulty: 0
+      difficulty: 0, 
+      moves: 0
     };
     this.flipCellsAround = this.flipCellsAround.bind(this);
     this.createBoard = this.createBoard.bind(this);
@@ -52,7 +53,7 @@ class Board extends Component {
     let {nrows, ncols} = this.props;
     let board;
     if(initial){
-      board = [...Array(nrows)].map(() => Array(ncols).fill(true));
+      board = [...Array(nrows)].map(() => Array(ncols).fill(false));
       return board;
     }
     else{
@@ -89,16 +90,18 @@ class Board extends Component {
 
     let hasWon = true;
     for(let i = 0; i < nrows; i++){
-      hasWon = hasWon && board[i].every(val => val)
+      hasWon = hasWon && board[i].every(val => !val)
     }
-    this.setState({board, hasWon});
+    let moves = this.state.moves + 1
+    this.setState({board, hasWon, moves});
   }
 
 
   handleStart(evt) {
     let difficulty = evt.target.value
-    this.setState({difficulty})
+    let moves = 0
     this.createBoard(false, difficulty)
+    this.setState({difficulty, moves})
   }
 
   handleDifficulty() {
@@ -110,13 +113,14 @@ class Board extends Component {
     let board = this.createBoard(true)
     let hasWon = false
     let difficulty = 0
-    this.setState({board, hasWon, difficulty})
+    let moves = 0
+    this.setState({board, hasWon, difficulty, moves})
   }
 
   render() {
 
     return(
-      <div>
+      <div className="Top">
         {this.state.hasWon ? 
           <div className="Board-winner">
             <span className="neon-orange">You</span>
@@ -151,6 +155,7 @@ class Board extends Component {
           </table>
           </>
         }
+        <div className="Board-counter">{`Moves: ${this.state.moves}`}</div>
       </div>
     )
 
