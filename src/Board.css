@@ -53,6 +53,15 @@ table tr:last-child td:last-child {
   background-color: white;
 }
 
+.Board-counter {
+  font-family: neon;
+  color: yellow;
+  font-size: 40px;
+  -moz-animation: neon-yellow 3s ease infinite;
+  -webkit-animation: neon-yellow 3s ease infinite;
+  animation: neon-yellow 3s ease infinite;
+}
+
 .neon-orange {
   font-family: neon;
   color: #fb4264;
@@ -104,5 +113,15 @@ table tr:last-child td:last-child {
     text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
       0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
     color: #146c80;
+  }
+}
+
+@keyframes neon-yellow {
+  0%,
+  100% {
+    color: yellow;
+  }
+  50% {
+    color: green;
   }
 }
