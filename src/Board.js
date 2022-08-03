@@ -53,6 +53,7 @@ class Board extends Component {
     let {nrows, ncols} = this.props;
     let board;
     console.log("New board")
+    console.log("Testing the build")
     if(initial){
       board = [...Array(nrows)].map(() => Array(ncols).fill(false));
       return board;
