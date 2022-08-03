@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Board from '../games/lights-out/Board';
-import './games.css';
   
 class Games extends Component {
   render() {

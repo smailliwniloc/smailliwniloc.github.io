@@ -31,10 +31,8 @@ table tr:last-child td:last-child {
 }
 
 .Board-winner {
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
   padding-top: 20vh;
+  text-align: -webkit-center;
 }
 
 .Top {
@@ -69,6 +67,7 @@ table tr:last-child td:last-child {
   -moz-animation: neon-yellow 3s ease infinite;
   -webkit-animation: neon-yellow 3s ease infinite;
   animation: neon-yellow 3s ease infinite;
+  text-align: center;
 }
 
 .neon-orange {

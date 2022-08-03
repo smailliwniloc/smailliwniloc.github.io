@@ -6,7 +6,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
 import Games from './pages/games';
-import AnnualReport from './pages/annual';
+import Library from './pages/library';
 import Teams from './pages/team';
 import Blogs from './pages/blogs';
 import SignUp from './pages/signup';
@@ -19,7 +19,7 @@ function App() {
         <Route path='/' exact element={Home()} />
         <Route path='/about' element={About()} />
         <Route path='/games' element={<Games/>} />
-        <Route path='/annual' element={AnnualReport()} />
+        <Route path='/library' element={Library()} />
         <Route path='/team' element={Teams()} />
         <Route path='/blogs' element={Blogs()} />
         <Route path='/sign-up' element={SignUp()} />

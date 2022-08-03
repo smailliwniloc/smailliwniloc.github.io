@@ -21,8 +21,8 @@ const Navbar = () => {
           <NavLink to='/games' activestyle={{ color:'black' }}>
             Games
           </NavLink>
-          <NavLink to='/annual' activestyle={{ color:'black' }}>
-            Annual Report
+          <NavLink to='/library' activestyle={{ color:'black' }}>
+            Library
           </NavLink>
           <NavLink to='/team' activestyle={{ color:'black' }}>
             Teams
