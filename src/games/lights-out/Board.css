@@ -31,13 +31,22 @@ table tr:last-child td:last-child {
 }
 
 .Board-winner {
-  display: block;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20vh;
+}
+
+.Top {
+  padding-top: 2vh;
 }
 
 .Board-buttons {
   display: flex;
   justify-content: space-between;
   padding-bottom: min(20px, 2vh);
+  padding-left: calc(50vw - min(270px, 30vh));
+  padding-right: calc(50vw - min(270px, 30vh));
 }
 
 .Board-button {

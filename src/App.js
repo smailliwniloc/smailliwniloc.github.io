@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' exact element={Home()} />
         <Route path='/about' element={About()} />
-        <Route path='/games' element={Games()} />
+        <Route path='/games' element={<Games/>} />
         <Route path='/annual' element={AnnualReport()} />
         <Route path='/team' element={Teams()} />
         <Route path='/blogs' element={Blogs()} />
