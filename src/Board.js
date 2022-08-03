@@ -58,9 +58,16 @@ class Board extends Component {
       return board;
     }
     else{
+      let fakeBoard = [...Array(nrows)].map(() => Array(ncols).fill(false));
+      let x;
+      let y;
       for(let i = 0; i < difficulty; i++){
-        let x = Math.floor(Math.random()*ncols)
-        let y = Math.floor(Math.random()*nrows)
+        do{
+          x = Math.floor(Math.random()*ncols)
+          y = Math.floor(Math.random()*nrows)
+        }
+        while(fakeBoard[x][y])
+        fakeBoard[x][y] = !fakeBoard[x][y]
         this.flipCellsAround([y,x])
       }
     }
