@@ -52,6 +52,7 @@ class Board extends Component {
   createBoard(initial, difficulty) {
     let {nrows, ncols} = this.props;
     let board;
+    console.log("New board")
     if(initial){
       board = [...Array(nrows)].map(() => Array(ncols).fill(false));
       return board;
