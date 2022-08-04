@@ -11,7 +11,7 @@ const Events = () => {
         height: '100vh'
       }}
     >
-      <h1>Welcome to GeeksforGeeks Events</h1>
+      <h1>Not sure what's gonna go here</h1>
     </div>
   );
 };

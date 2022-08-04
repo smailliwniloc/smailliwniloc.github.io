@@ -5,8 +5,10 @@ import {
   Bars,
   NavMenu,
   NavBtn,
-  NavBtnLink,
+  //NavBtnLink, //use this for internal links, <a> for external links
 } from './NavbarElements';
+import './index.css';
+import { FaGithub, FaHome, FaGamepad, FaInfoCircle, FaBook, FaPen, FaSmile } from "react-icons/fa";
   
 const Navbar = () => {
   return (
@@ -15,20 +17,23 @@ const Navbar = () => {
         <Bars />
   
         <NavMenu>
+          <NavLink to='/' activestyle={{ color:'black' }}>
+            <FaHome/> Home
+          </NavLink>
           <NavLink to='/about' activestyle={{ color:'black' }}>
-            About
+            <FaInfoCircle/> About
           </NavLink>
           <NavLink to='/games' activestyle={{ color:'black' }}>
-            Games
+            <FaGamepad/> Games
           </NavLink>
           <NavLink to='/library' activestyle={{ color:'black' }}>
-            Library
+            <FaBook/> Library
           </NavLink>
           <NavLink to='/team' activestyle={{ color:'black' }}>
-            Teams
+            <FaSmile/> Teams
           </NavLink>
           <NavLink to='/blogs' activestyle={{ color:'black' }}>
-            Blogs
+            <FaPen/> Blogs
           </NavLink>
           <NavLink to='/sign-up' activestyle={{ color:'black' }}>
             Sign Up
@@ -37,7 +42,7 @@ const Navbar = () => {
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+          <a href='https://github.com/smailliwniloc' className="Navbar-External-Link"  target="_blank" rel="noreferrer"><FaGithub/> My GitHub</a>
         </NavBtn>
       </Nav>
     </>
