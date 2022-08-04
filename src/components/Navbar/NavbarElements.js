@@ -24,6 +24,9 @@ export const NavLink = styled(Link)`
   &.active {
     color: #000000;
   }
+  &:hover {
+    color: #FFFFFF;
+  }
 `;
   
 export const Bars = styled(FaBars)`
