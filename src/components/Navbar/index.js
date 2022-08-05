@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Nav,
   NavLink,
@@ -9,12 +9,21 @@ import {
 } from './NavbarElements';
 import './index.css';
 import { FaGithub, FaHome, FaGamepad, FaInfoCircle, FaBook, FaPen, FaSmile } from "react-icons/fa";
+import Sidebar from '../Sidebar/Sidebar'
+
+
   
 const Navbar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const handleDrawerToggle = () => {
+    setSidebarOpen(!sidebarOpen)
+    console.log(sidebarOpen)
+  }
   return (
     <>
       <Nav>
-        <Bars />
+        <Bars onClick={handleDrawerToggle}/>
+        <Sidebar isOpen={sidebarOpen} handleDrawerToggle={handleDrawerToggle}/>
   
         <NavMenu>
           <NavLink to='/' activestyle={{ color:'black' }}>
@@ -30,7 +39,7 @@ const Navbar = () => {
             <FaBook/> Library
           </NavLink>
           <NavLink to='/team' activestyle={{ color:'black' }}>
-            <FaSmile/> Teams
+            <FaSmile/> Team
           </NavLink>
           <NavLink to='/blogs' activestyle={{ color:'black' }}>
             <FaPen/> Blogs

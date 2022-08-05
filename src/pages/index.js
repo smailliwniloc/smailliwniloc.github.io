@@ -1,17 +1,10 @@
 import React from 'react';
   
+import './library.css';
+
 const Home = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'Right',
-        alignItems: 'Right',
-        height: '100vh'
-      }}
-    >
-      <h1>Welcome to Colin's page</h1>
-    </div>
+    <h1 className="Title">Welcome to Colin's page</h1>
   );
 };
   

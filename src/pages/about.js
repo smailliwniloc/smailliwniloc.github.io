@@ -1,9 +1,8 @@
-
 import React from 'react';
   
 const About = () => {
   return (
-    <h1>I'm Colin</h1>
+    <h1>This will probably be deleted at some point</h1>
   );
 };
   
