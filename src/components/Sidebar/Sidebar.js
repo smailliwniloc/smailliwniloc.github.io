@@ -1,6 +1,7 @@
 import React, { memo, Fragment } from 'react'
 import { Drawer } from "@mui/material"
 import SidebarContent from './SidebarContent'
+import './Sidebar.css'
 
 
 function Sidebar(props) {
@@ -13,8 +14,10 @@ function Sidebar(props) {
             }}
                 sx={{
                     display: {sm: 'block', md: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
-                }}>
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240,  },
+                }}
+                PaperProps={{sx: {backgroundColor: "gray"}}}
+                >
                 <SidebarContent />
             </Drawer>
         </Fragment>

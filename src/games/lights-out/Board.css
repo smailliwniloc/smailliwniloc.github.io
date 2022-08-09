@@ -27,7 +27,7 @@ table tr:last-child td:last-child {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: min(20px, 2vh);
+  padding-bottom: min(15px, 1.5vh);
 }
 
 .Board-winner {
@@ -36,7 +36,7 @@ table tr:last-child td:last-child {
 }
 
 .Top {
-  padding-top: 2vh;
+  padding-top: 1vh;
 }
 
 .Board-buttons {
@@ -50,7 +50,7 @@ table tr:last-child td:last-child {
 .Board-button {
   border-radius: min(10px, 1vw);
   font-family: neon;
-  font-size: min(50px, 5vw);
+  font-size: min(40px, 5vw);
   cursor: pointer;
   background-color: gray;
   display: block;
@@ -63,7 +63,7 @@ table tr:last-child td:last-child {
 .Board-counter {
   font-family: neon;
   color: yellow;
-  font-size: min(40px, 4vw);
+  font-size: max(min(30px, 3vw), 20px);
   -moz-animation: neon-yellow 3s ease infinite;
   -webkit-animation: neon-yellow 3s ease infinite;
   animation: neon-yellow 3s ease infinite;
@@ -73,7 +73,7 @@ table tr:last-child td:last-child {
 .neon-orange {
   font-family: neon;
   color: #fb4264;
-  font-size: min(80px, 8vw);
+  font-size: min(70px, 7vw);
   text-shadow: 0 0 3vw #f40a35;
   -moz-animation: neon-orange 1s ease infinite;
   -webkit-animation: neon-orange 1s ease infinite;
@@ -83,7 +83,7 @@ table tr:last-child td:last-child {
 .neon-blue {
   font-family: neon;
   color: #426dfb;
-  font-size: min(80px, 8vw);
+  font-size: min(70px, 7vw);
   text-shadow: 0 0 3vw #2356ff;
   animation: neon-blue 2s linear infinite;
   -moz-animation: neon-blue 2s linear infinite;
@@ -93,7 +93,7 @@ table tr:last-child td:last-child {
 
 .winner .neon-blue,
 .winner .neon-orange {
-  font-size: min(200px, 15vw);
+  font-size: min(150px, 15vw);
 }
 
 @keyframes neon-orange {
