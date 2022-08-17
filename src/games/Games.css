@@ -1,0 +1,6 @@
+.Games {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
