@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Board from '../games/lights-out/Board';
+import GamesPage from '../games/Games';
   
 class Games extends Component {
   render() {
     return (
         <div>
-            <Board nrows={5} ncols={5}/>
+            <GamesPage/>
         </div>
     )
   } 
