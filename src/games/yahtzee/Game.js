@@ -91,31 +91,39 @@ class Game extends Component {
     this.setState({hasFinished: true})
   }
 
+  displayRollInfo = () => {
+    const messages = [
+      "Set score below", "1 Roll Left", "2 Rolls Left", "Roll Dice"
+    ]
+    return messages[this.state.rollsLeft]
+  }
+
   render() {
+    const {hasFinished, dice, locked, rolling, rollsLeft, scores, hasRolled} = this.state;
     return (
       <div className='Game'>
         <header className='Game-header'>
           <h1 className='App-title'>Yahtzee!</h1>
-          {!this.state.hasFinished ? (
+          {!hasFinished ? (
           <section className='Game-dice-section'>
             <Dice
-              dice={this.state.dice}
-              locked={this.state.locked}
+              dice={dice}
+              locked={locked}
               handleClick={this.toggleLocked}
-              rolling={this.state.rolling}
+              rolling={rolling}
             />
             <div className='Game-button-wrapper'>
               <button
                 className='Game-reroll'
-                disabled={this.state.locked.every(x => x) || this.state.rollsLeft === 0 || this.state.rolling}
+                disabled={locked.every(x => x) || rollsLeft === 0 || rolling}
                 onClick={this.roll}
               >
-                {this.state.rollsLeft} Rerolls Left
+                {this.displayRollInfo()}
               </button>
             </div>
           </section>) : null}
         </header>
-        <ScoreTable doScore={this.doScore} hasFinished = {this.finished} scores={this.state.scores} rolling={this.state.rolling} handleReset={this.reset} hasRolled={this.state.hasRolled}/>
+        <ScoreTable doScore={this.doScore} hasFinished = {this.finished} scores={scores} rolling={rolling} handleReset={this.reset} hasRolled={hasRolled}/>
       </div>
     );
   }
