@@ -21,7 +21,7 @@ const Navbar = () => {
   }
   return (
     <>
-      <Nav>
+      <Nav className='Navbar'>
         <Bars onClick={handleDrawerToggle}/>
         <Sidebar isOpen={sidebarOpen} handleDrawerToggle={handleDrawerToggle}/>
   
@@ -46,6 +46,9 @@ const Navbar = () => {
           </NavLink>
           <NavLink to='/sign-up' activestyle={{ color:'black' }}>
             Sign Up
+          </NavLink>
+          <NavLink to='/singo' activestyle={{ color:'black' }}>
+            Singo
           </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

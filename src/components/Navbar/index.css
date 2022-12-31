@@ -17,3 +17,9 @@
     background: #fff;
     color: #808080;
 }
+
+@media print {
+    .Navbar {
+        visibility: hidden;
+    }
+}

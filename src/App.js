@@ -10,11 +10,12 @@ import Library from './pages/library';
 import Teams from './pages/team';
 import Blogs from './pages/blogs';
 import SignUp from './pages/signup';
+import Singo from './pages/singo';
   
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navbar className='Router'/>
       <Routes>
         <Route path='/' exact element={Home()} />
         <Route path='/about' element={About()} />
@@ -23,6 +24,7 @@ function App() {
         <Route path='/team' element={Teams()} />
         <Route path='/blogs' element={Blogs()} />
         <Route path='/sign-up' element={SignUp()} />
+        <Route path='/singo' element={<Singo/>} />
       </Routes>
     </Router>
   );
