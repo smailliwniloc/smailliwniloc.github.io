@@ -1,0 +1,48 @@
+.Top-Singo {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    min-height: 75vmax;
+    background-color: white;
+    margin-top: -120px;
+}
+
+.Singo-board1 {
+    border-collapse: collapse;
+}
+
+.Singo-board1 td {
+    border-style: solid;
+    border-color: red;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    color: black;
+}
+
+.Singo-board2 {
+    border-collapse: collapse;
+    margin-top: 150px;
+}
+
+.Singo-board2 td {
+    border-style: solid;
+    border-color: rgb(44, 179, 44);
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    color: black;
+}
+
+.Singo-title {
+    text-align: center;
+    break-before: page;
+    background-color: white;
+}
+
+.Singo-title u {
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 200%;
+}
