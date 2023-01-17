@@ -3,9 +3,11 @@ import './singo.css';
 import axios from 'axios';
 
 const CLIENT_ID = "94848050246e4d1e9afd600c52dba933"
-const REDIRECT_URI = "http://localhost:3000/#/singo"
+const REDIRECT_URI = "http://localhost:3000/singo"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
+const PLAYLIST_ID = "2ufAm3ukdQDuX17quR8wzI" // SINGO FUN
+// const PLAYLIST_ID = "08toWOb1Lxrt7578WucmYd" // SINGO FUN PT.2
   
 class Singo extends Component {
 
@@ -14,59 +16,93 @@ class Singo extends Component {
         window.localStorage.removeItem("token")
     }
 
-    searchArtists = async (e) => {
-        let token = this.state.token
-        let searchKey = "Ed Sheeran"
+    findPlaylist = async (e) => {
+        this.logout()
+        console.log("Inside search artists")
+
+        let token = this.getToken()
+        console.log("token is " + token)
+
         e.preventDefault()
-        const {data} = await axios.get("https://api.spotify.com/v1/search", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            params: {
-                q: searchKey,
-                type: "artist"
+
+        let requests = []
+        let i = 0
+        while (true) {
+            let request = await axios.get(`https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                params: {
+                    offset: 100*i
+                }
+            })
+            i += 1
+            requests.push(request)
+            if (!request.data.next) { break }
+        }
+
+        let songs = []
+        for (let i = 0; i < requests.length; i++){
+            songs.push(...requests[i].data.items.map( (item) => item.track.name ))
+        }
+
+        let formattedSongs = []
+
+        for(let i = 0; i < songs.length; i++) {
+            let song = songs[i]
+            if (song.includes(" - ")) {
+                song = song.split(" - ")[0]
             }
-        })
+            if (song.includes("(")) {
+                song = song.split("(")[0]
+            }
+
+            formattedSongs.push(song)
+        }
+
+        console.log(formattedSongs)
+
+        this.setState({songs: formattedSongs})
     
-        console.log(data.artists.items)
     }
 
-    songs = [
-        "Party in the USA", "Tequila", "Dance, Dance", "Sugar, we're going down", "Stick Season", "Cotton-Eyed Joe",
-        "Sexy and I know it", "Bad Guy", "Life is a highway", "Gallway Girl", "Truth hurts", "Call Me Maybe", 
-        "Photograph", "Rockstar", "Bawitdaba", "Happy Birthday", "Pokemon Themesong", "Bang Bang", "It's Time",
-        "Radioactive", "Demons", "Car Radio", "Blurryface", "O'Reilly Autoparts Theme", "Let It Go", "Thnks Fr Th Mmrs",
-        "Hallelujah", "Party Rock Anthem", "Boys are Back in Town", "Back in Black", "We will rock you", "Red Solo Cup"
-            ]
-    cards = [...Array(20)]
+    getToken = () => {
+        const hash = window.location.hash
+        let tokens = window.localStorage.getItem("token")
+
+        if (!tokens && hash) {
+            tokens = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+            window.location.hash = ""
+            window.localStorage.setItem("token", tokens)
+        }
+
+        return tokens
+
+    }
+
+    
+    cards = [...Array(30)]
 
     constructor(props) {
         super(props);
 
         this.state = { 
             // Initialize state values
-            token: ""
+            token: "",
+            songs: [
+                "Party in the USA", "Tequila", "Dance, Dance", "Sugar, we're going down", "Stick Season", "Cotton-Eyed Joe",
+                "Sexy and I know it", "Bad Guy", "Life is a highway", "Gallway Girl", "I Still Haven't Found What I'm Looking For", "Call Me Maybe", 
+                "Photograph", "Rockstar", "FourFiveSeconds", "Happy Birthday", "Pokemon Themesong", "Bang Bang", "It's Time",
+                "Radioactive", "Demons", "Car Radio", "Blurryface", "O'Reilly Autoparts Theme", "Let It Go", "Thnks Fr Th Mmrs",
+                "Hallelujah", "Party Rock Anthem", "Boys are Back in Town", "Back in Black", "We will rock you", "Red Solo Cup"
+                    ]
         };
-
-        const hash = window.location.hash
-        let tokens = window.localStorage.getItem("token")
-
-        if (!tokens && hash) {
-            console.log(hash)
-            tokens = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-            console.log(tokens)
-            window.location.hash = ""
-            window.localStorage.setItem("token", tokens)
-        }
-
-        this.state.token = tokens
-        // this.searchArtists()
         // Notation for defining functions
         this.makeSingo = this.makeSingo.bind(this);
     }
 
     makeSingo(num) {
-        let mixedList = this.songs.sort(() => Math.random() - 0.5).slice(0,25)
+        let mixedList = this.state.songs.sort(() => Math.random() - 0.5).slice(0,25)
         let mixedMatrix = []
         let row = []
         let count = 0
@@ -104,14 +140,11 @@ class Singo extends Component {
                     Login to Spotify
                 </a>
 
-                <form onSubmit={this.searchArtists}>
-                    <input type="text" onChange={e => console.log("idk")}/>
-                    <button type={"submit"}>Search</button>
-                </form>
+                <button type={"submit"} onClick={this.findPlaylist}>Generate Playlist</button>
 
                 {this.cards.map( (num, i) => (
                     <div key={i}>
-                        <h1 className='Singo-title'><u>Stripper's Singo</u></h1>
+                        <h1 className='Singo-title'><u>Stripper's Singo v1</u></h1>
 
                         <div className='Top-Singo'>                 
                             {this.makeSingo(1)}

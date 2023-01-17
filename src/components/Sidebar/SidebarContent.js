@@ -5,13 +5,14 @@ import './Sidebar.css'
 
 function SidebarContent(props) {
     const links = [
-        {URL: '#/', title: "Home", logo: FaHome},
-        {URL: '#/about', title: "About", logo: FaInfoCircle},
-        {URL: '#/games', title: "Games", logo: FaGamepad},
-        {URL: '#/library', title: "Library", logo: FaBook},
-        {URL: '#/team', title: "Team", logo: FaSmile},
-        {URL: '#/blogs', title: "Blog", logo: FaPen},
-        {URL: '#/sign-up', title: "Sign Up", logo: FaRegListAlt},
+        {URL: '/', title: "Home", logo: FaHome},
+        {URL: '/about', title: "About", logo: FaInfoCircle},
+        {URL: '/games', title: "Games", logo: FaGamepad},
+        {URL: '/library', title: "Library", logo: FaBook},
+        {URL: '/team', title: "Team", logo: FaSmile},
+        {URL: '/blogs', title: "Blog", logo: FaPen},
+        {URL: '/sign-up', title: "Sign Up", logo: FaRegListAlt},
+        {URL: '/singo', title: "Singo", logo: FaSmile}
     ]
 
     return (
