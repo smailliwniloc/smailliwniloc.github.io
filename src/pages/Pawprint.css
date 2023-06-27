@@ -1,0 +1,9 @@
+.Pawprint {
+    background-color: red;
+    color: black;
+    min-height: 100vh
+}
+
+.Pawprint h1 {
+    margin: 0;
+}

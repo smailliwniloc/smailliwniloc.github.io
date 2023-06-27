@@ -1,11 +1,14 @@
 import React from 'react';
-import Layout from '../components/Layout';
+import './Pawprint.css';
   
 function Pawprint() {
     return (
-        <Layout>
-            <h1>Pawprint Cabin...</h1>
-        </Layout>
+        <div className='Pawprint'>
+            <a href='/'>Home</a>
+            <h1> Pawprint Cabin...</h1>
+
+
+        </div>
     )
 };
   
