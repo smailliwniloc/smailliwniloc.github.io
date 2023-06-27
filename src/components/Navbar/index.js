@@ -5,10 +5,9 @@ import {
   Bars,
   NavMenu,
   NavBtn,
-  //NavBtnLink, //use this for internal links, <a> for external links
 } from './NavbarElements';
 import './index.css';
-import { FaGithub, FaHome, FaGamepad, FaInfoCircle, FaBook, FaPen, FaSmile } from "react-icons/fa";
+import { FaGithub, FaHome, FaGamepad, FaBook } from "react-icons/fa";
 import Sidebar from '../Sidebar/Sidebar'
 
 
@@ -29,29 +28,18 @@ const Navbar = () => {
           <NavLink to='/' activestyle={{ color:'black' }}>
             <FaHome/> Home
           </NavLink>
-          <NavLink to='/about' activestyle={{ color:'black' }}>
-            <FaInfoCircle/> About
-          </NavLink>
           <NavLink to='/games' activestyle={{ color:'black' }}>
             <FaGamepad/> Games
           </NavLink>
           <NavLink to='/library' activestyle={{ color:'black' }}>
             <FaBook/> Library
           </NavLink>
-          <NavLink to='/team' activestyle={{ color:'black' }}>
-            <FaSmile/> Team
-          </NavLink>
-          <NavLink to='/blogs' activestyle={{ color:'black' }}>
-            <FaPen/> Blogs
-          </NavLink>
-          <NavLink to='/sign-up' activestyle={{ color:'black' }}>
-            Sign Up
-          </NavLink>
           <NavLink to='/singo' activestyle={{ color:'black' }}>
             Singo
           </NavLink>
-          {/* Second Nav */}
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
+          <NavLink to='/pawprint-cabin' activestyle={{ color:'black'}}>
+            Cabin
+          </NavLink>
         </NavMenu>
         <NavBtn>
           <a href='https://github.com/smailliwniloc' className="Navbar-External-Link"  target="_blank" rel="noreferrer"><FaGithub/> My GitHub</a>

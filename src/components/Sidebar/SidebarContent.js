@@ -1,18 +1,15 @@
 import React, { memo } from 'react'
 import {List, ListItemButton, ListItemIcon, ListItemText} from '@mui/material'
-import { FaHome, FaGamepad, FaInfoCircle, FaBook, FaPen, FaSmile, FaRegListAlt } from "react-icons/fa";
+import { FaHome, FaGamepad, FaBook, FaSmile, FaWarehouse } from "react-icons/fa";
 import './Sidebar.css'
 
-function SidebarContent(props) {
+function SidebarContent() {
     const links = [
         {URL: '/', title: "Home", logo: FaHome},
-        {URL: '/about', title: "About", logo: FaInfoCircle},
         {URL: '/games', title: "Games", logo: FaGamepad},
         {URL: '/library', title: "Library", logo: FaBook},
-        {URL: '/team', title: "Team", logo: FaSmile},
-        {URL: '/blogs', title: "Blog", logo: FaPen},
-        {URL: '/sign-up', title: "Sign Up", logo: FaRegListAlt},
-        {URL: '/singo', title: "Singo", logo: FaSmile}
+        {URL: '/singo', title: "Singo", logo: FaSmile},
+        {URL: '/pawprint-cabin', title: "Cabin", logo: FaWarehouse}
     ]
 
     return (
@@ -28,7 +25,5 @@ function SidebarContent(props) {
         </List>
     )
 }
-
-SidebarContent.propTypes = {}
 
 export default memo(SidebarContent)

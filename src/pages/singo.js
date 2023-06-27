@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './singo.css';
 import axios from 'axios';
+import Layout from '../components/Layout';
 
 const CLIENT_ID = "94848050246e4d1e9afd600c52dba933"
 const REDIRECT_URI = "http://localhost:3000/singo"
@@ -133,6 +134,7 @@ class Singo extends Component {
 
     render() {
         return (
+            <Layout>
             <div className='Full-wrapper'>
                 <a 
                 href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
@@ -153,6 +155,7 @@ class Singo extends Component {
                     </div>
                 ))}
             </div>
+            </Layout>
         )
     } 
 };

@@ -1,10 +1,11 @@
 
 import React from 'react';
+import Layout from '../components/Layout';
 import './library.css';
   
 const Library = () => {
   return (
-    <div>
+    <Layout>
       <h1 className="Title">This is a list of games I have played <em>IN PROGRESS</em></h1>
         <h2 id="nintendo-switch">Nintendo Switch</h2>
           <ul>
@@ -66,7 +67,7 @@ const Library = () => {
               Munchkin
             </a></li>
           </ul>
-      </div>
+      </Layout>
   );
 };
   
