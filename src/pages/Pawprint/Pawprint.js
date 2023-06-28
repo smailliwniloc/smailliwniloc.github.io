@@ -1,12 +1,14 @@
 import React from 'react';
 import './Pawprint.css';
+import PawprintLayout from './PawprintLayout';
   
 function Pawprint() {
     return (
+        <PawprintLayout>
         <div className='Pawprint'>
-            <a href='/'>Home</a>
-            <h1> Pawprint Cabin...</h1>
+            <h1> Pawprint Cabin and Owl's Nest Silo</h1>
         </div>
+        </PawprintLayout>
     )
 };
   
