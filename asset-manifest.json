@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.c6ecbd36.css",
-    "main.js": "/static/js/main.3892a593.js",
+    "main.css": "/static/css/main.94170719.css",
+    "main.js": "/static/js/main.353f88ff.js",
+    "static/media/FurNFeathersLogo.png": "/static/media/FurNFeathersLogo.23cf518988649c550113.png",
     "index.html": "/index.html",
-    "main.c6ecbd36.css.map": "/static/css/main.c6ecbd36.css.map",
-    "main.3892a593.js.map": "/static/js/main.3892a593.js.map"
+    "main.94170719.css.map": "/static/css/main.94170719.css.map",
+    "main.353f88ff.js.map": "/static/js/main.353f88ff.js.map"
   },
   "entrypoints": [
-    "static/css/main.c6ecbd36.css",
-    "static/js/main.3892a593.js"
+    "static/css/main.94170719.css",
+    "static/js/main.353f88ff.js"
   ]
 }
