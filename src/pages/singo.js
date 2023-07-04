@@ -7,8 +7,9 @@ const CLIENT_ID = "94848050246e4d1e9afd600c52dba933"
 const REDIRECT_URI = "http://localhost:3000/singo"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
-const PLAYLIST_ID = "2ufAm3ukdQDuX17quR8wzI" // SINGO FUN
+// const PLAYLIST_ID = "2ufAm3ukdQDuX17quR8wzI" // SINGO FUN
 // const PLAYLIST_ID = "08toWOb1Lxrt7578WucmYd" // SINGO FUN PT.2
+const PLAYLIST_ID = "0L9bUjiBKpLQah8N17alz6" // Baby shower Singo
   
 class Singo extends Component {
 
@@ -57,6 +58,9 @@ class Singo extends Component {
             if (song.includes("(")) {
                 song = song.split("(")[0]
             }
+            if (song.includes("_")) {
+                song = song.split("_")[0]
+            }
 
             formattedSongs.push(song)
         }
@@ -82,7 +86,7 @@ class Singo extends Component {
     }
 
     
-    cards = [...Array(30)]
+    cards = [...Array(20)]
 
     constructor(props) {
         super(props);
@@ -146,7 +150,7 @@ class Singo extends Component {
 
                 {this.cards.map( (num, i) => (
                     <div key={i}>
-                        <h1 className='Singo-title'><u>Stripper's Singo v1</u></h1>
+                        <h1 className='Singo-title'><u>Baby Singo</u></h1>
 
                         <div className='Top-Singo'>                 
                             {this.makeSingo(1)}
