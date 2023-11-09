@@ -1,167 +1,210 @@
-import React, {Component} from 'react';
-import './singo.css';
-import axios from 'axios';
-import Layout from '../components/Layout';
+import React, { Component } from "react";
+import "./singo.css";
+import axios from "axios";
+import Layout from "../components/Layout";
 
-const CLIENT_ID = "94848050246e4d1e9afd600c52dba933"
-const REDIRECT_URI = "http://localhost:3000/singo"
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
-const RESPONSE_TYPE = "token"
+const CLIENT_ID = "94848050246e4d1e9afd600c52dba933";
+const REDIRECT_URI = "http://localhost:3000/singo";
+const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const RESPONSE_TYPE = "token";
 // const PLAYLIST_ID = "2ufAm3ukdQDuX17quR8wzI" // SINGO FUN
 // const PLAYLIST_ID = "08toWOb1Lxrt7578WucmYd" // SINGO FUN PT.2
-const PLAYLIST_ID = "0L9bUjiBKpLQah8N17alz6" // Baby shower Singo
-  
+// const PLAYLIST_ID = "0L9bUjiBKpLQah8N17alz6" // Baby shower Singo
+// const PLAYLIST_ID = "2wwAl4EHNHFgU8b0KNBHJt"; // Feels like Fall
+const PLAYLIST_ID = "3A0RJ53794TOwiZ5YPo7Ut"; // 80's Baby
+
+const title = "80's Baby";
+const cardCount = 24;
+
 class Singo extends Component {
+  logout = () => {
+    this.setState({ token: "" });
+    window.localStorage.removeItem("token");
+  };
 
-    logout = () => {
-        this.setState({token: ""})
-        window.localStorage.removeItem("token")
+  findPlaylist = async (e) => {
+    this.logout();
+    console.log("Inside search artists");
+
+    let token = this.getToken();
+    console.log("token is " + token);
+
+    e.preventDefault();
+
+    let requests = [];
+    let i = 0;
+    while (true) {
+      let request = await axios.get(
+        `https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            offset: 100 * i,
+          },
+        }
+      );
+      i += 1;
+      requests.push(request);
+      if (!request.data.next) {
+        break;
+      }
     }
 
-    findPlaylist = async (e) => {
-        this.logout()
-        console.log("Inside search artists")
-
-        let token = this.getToken()
-        console.log("token is " + token)
-
-        e.preventDefault()
-
-        let requests = []
-        let i = 0
-        while (true) {
-            let request = await axios.get(`https://api.spotify.com/v1/playlists/${PLAYLIST_ID}/tracks`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                params: {
-                    offset: 100*i
-                }
-            })
-            i += 1
-            requests.push(request)
-            if (!request.data.next) { break }
-        }
-
-        let songs = []
-        for (let i = 0; i < requests.length; i++){
-            songs.push(...requests[i].data.items.map( (item) => item.track.name ))
-        }
-
-        let formattedSongs = []
-
-        for(let i = 0; i < songs.length; i++) {
-            let song = songs[i]
-            if (song.includes(" - ")) {
-                song = song.split(" - ")[0]
-            }
-            if (song.includes("(")) {
-                song = song.split("(")[0]
-            }
-            if (song.includes("_")) {
-                song = song.split("_")[0]
-            }
-
-            formattedSongs.push(song)
-        }
-
-        console.log(formattedSongs)
-
-        this.setState({songs: formattedSongs})
-    
+    let songs = [];
+    for (let i = 0; i < requests.length; i++) {
+      songs.push(...requests[i].data.items.map((item) => item.track.name));
     }
 
-    getToken = () => {
-        const hash = window.location.hash
-        let tokens = window.localStorage.getItem("token")
+    let formattedSongs = [];
 
-        if (!tokens && hash) {
-            tokens = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-            window.location.hash = ""
-            window.localStorage.setItem("token", tokens)
-        }
+    for (let i = 0; i < songs.length; i++) {
+      let song = songs[i];
+      if (song.includes(" - ")) {
+        song = song.split(" - ")[0];
+      }
+      if (song.includes("(")) {
+        song = song.split("(")[0];
+      }
+      if (song.includes("_")) {
+        song = song.split("_")[0];
+      }
 
-        return tokens
-
+      formattedSongs.push(song);
     }
 
-    
-    cards = [...Array(20)]
+    console.log(formattedSongs);
 
-    constructor(props) {
-        super(props);
+    this.setState({ songs: formattedSongs });
+  };
 
-        this.state = { 
-            // Initialize state values
-            token: "",
-            songs: [
-                "Party in the USA", "Tequila", "Dance, Dance", "Sugar, we're going down", "Stick Season", "Cotton-Eyed Joe",
-                "Sexy and I know it", "Bad Guy", "Life is a highway", "Gallway Girl", "I Still Haven't Found What I'm Looking For", "Call Me Maybe", 
-                "Photograph", "Rockstar", "FourFiveSeconds", "Happy Birthday", "Pokemon Themesong", "Bang Bang", "It's Time",
-                "Radioactive", "Demons", "Car Radio", "Blurryface", "O'Reilly Autoparts Theme", "Let It Go", "Thnks Fr Th Mmrs",
-                "Hallelujah", "Party Rock Anthem", "Boys are Back in Town", "Back in Black", "We will rock you", "Red Solo Cup"
-                    ]
-        };
-        // Notation for defining functions
-        this.makeSingo = this.makeSingo.bind(this);
+  getToken = () => {
+    const hash = window.location.hash;
+    let tokens = window.localStorage.getItem("token");
+
+    if (!tokens && hash) {
+      tokens = hash
+        .substring(1)
+        .split("&")
+        .find((elem) => elem.startsWith("access_token"))
+        .split("=")[1];
+      window.location.hash = "";
+      window.localStorage.setItem("token", tokens);
     }
 
-    makeSingo(num) {
-        let mixedList = this.state.songs.sort(() => Math.random() - 0.5).slice(0,25)
-        let mixedMatrix = []
-        let row = []
-        let count = 0
-        for (const song in mixedList) {
-            row.push(mixedList[song])
-            count += 1
-            if (count === 5) {
-                mixedMatrix.push(row)
-                row = []
-                count = 0
-            }
-        }
+    return tokens;
+  };
 
-        return (
-            <table className={'Singo-board' + num}>
-                <tbody>
-                    {mixedMatrix.map( (row, i) => (
-                        <tr key={[row,i]}>
-                            {row.map( (song, j) => (
-                                <td key={[song,j]}>{song}</td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        )
+  cards = [...Array(cardCount)];
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // Initialize state values
+      token: "",
+      songs: [
+        "Party in the USA",
+        "Tequila",
+        "Dance, Dance",
+        "Sugar, we're going down",
+        "Stick Season",
+        "Cotton-Eyed Joe",
+        "Sexy and I know it",
+        "Bad Guy",
+        "Life is a highway",
+        "Gallway Girl",
+        "I Still Haven't Found What I'm Looking For",
+        "Call Me Maybe",
+        "Photograph",
+        "Rockstar",
+        "FourFiveSeconds",
+        "Happy Birthday",
+        "Pokemon Themesong",
+        "Bang Bang",
+        "It's Time",
+        "Radioactive",
+        "Demons",
+        "Car Radio",
+        "Blurryface",
+        "O'Reilly Autoparts Theme",
+        "Let It Go",
+        "Thnks Fr Th Mmrs",
+        "Hallelujah",
+        "Party Rock Anthem",
+        "Boys are Back in Town",
+        "Back in Black",
+        "We will rock you",
+        "Red Solo Cup",
+      ],
+    };
+    // Notation for defining functions
+    this.makeSingo = this.makeSingo.bind(this);
+  }
+
+  makeSingo(num) {
+    let mixedList = this.state.songs
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 25);
+    let mixedMatrix = [];
+    let row = [];
+    let count = 0;
+    for (const song in mixedList) {
+      row.push(mixedList[song]);
+      count += 1;
+      if (count === 5) {
+        mixedMatrix.push(row);
+        row = [];
+        count = 0;
+      }
     }
 
-    render() {
-        return (
-            <Layout>
-            <div className='Full-wrapper'>
-                <a 
-                href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
-                >
-                    Login to Spotify
-                </a>
+    return (
+      <table className={"Singo-board" + num}>
+        <tbody>
+          {mixedMatrix.map((row, i) => (
+            <tr key={[row, i]}>
+              {row.map((song, j) => (
+                <td key={[song, j]}>{song}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
 
-                <button type={"submit"} onClick={this.findPlaylist}>Generate Playlist</button>
+  render() {
+    return (
+      <Layout>
+        <div className="Full-wrapper">
+          <a
+            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+          >
+            Login to Spotify
+          </a>
 
-                {this.cards.map( (num, i) => (
-                    <div key={i}>
-                        <h1 className='Singo-title'><u>Baby Singo</u></h1>
+          <button type={"submit"} onClick={this.findPlaylist}>
+            Generate Playlist
+          </button>
 
-                        <div className='Top-Singo'>                 
-                            {this.makeSingo(1)}
-                            {this.makeSingo(2)}
-                        </div>
-                    </div>
-                ))}
+          {this.cards.map((num, i) => (
+            <div key={i}>
+              <h1 className="Singo-title">
+                <u>{title}</u>
+              </h1>
+
+              <div className="Top-Singo">
+                {this.makeSingo(1)}
+                {this.makeSingo(2)}
+              </div>
             </div>
-            </Layout>
-        )
-    } 
-};
-  
+          ))}
+        </div>
+      </Layout>
+    );
+  }
+}
+
 export default Singo;
